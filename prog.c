@@ -8,7 +8,7 @@ Author : Syazwan
 //avrdude -c usbasp -p m644p -U flash:w:prog.hex
 
 /*
-Logs :
+Logs : For personal use. Will be deleted in final submission
 27/01/2023  : First day of coding,, revising il matto and avr C.
               Using simple calculation and implementation of adc 
               to read the current and display it at PORTB. (Hoping 
@@ -70,6 +70,20 @@ Logs :
 15/02/2023  : Got the connector needed for the display and got it working 
               port B and C. PWM seems to work based on PuTTY the OCR2A
               value corresponds to the value of load demands that is called.
+16/02/2023  : Started working on display design.
+19/02/2023  : Still working on the display this whole time. Added a load switch
+              responds to the calls.
+              Display is blinking again. Tracked the bug by commenting diifferent
+              lines. Foudn out I cant use both sprintf and dtosrtf or the display
+              blinks. Use sprintf and the display will print '?' for the double 
+              type. Solution is to use only dtostrf. Made a colourful TEAMB 
+              name on the display. Might need to change this so that it works 
+              better with the pixel. Might even delete this if it consume too much 
+              power than neccessary.
+21/02/2023  : Placed this code in Github so my team can help using source control.
+22/02/2023  : in delay function changed i type from int to uint32_t.
+              Need a smoother RGB colour flow. Need to work for the second review
+              report now.
 */
 
 #include "../lcdlib/lcd.h"
@@ -516,7 +530,7 @@ void display_values()
   display_batt((LCDHEIGHT/2) + 15 , display.y , "Batt Status : " , charge_battery , discharge_battery) ;
 }
 
-void display_team_name()
+void display_team_name()//Need to redo this so that it looks nicer
 {
   rectangle shape ;
   /* T */
@@ -707,9 +721,11 @@ void display_line()
   fill_rectangle(line , 0xA514) ; 
 }
 
-void delay_500ms()
+void delay_100ms()
 {
-  int i = counter + 10000 ;
+  /* wait until counter is counts 100ms. i and counter must be
+   the same type so that it still works when counter is overflowing */
+  uint32_t i = counter + 100 ;
   while(i>counter) ;
 }
 
@@ -767,8 +783,8 @@ int main(void)
     /* Display team name */
     display_team_name() ;
 
-    /* Update the screen every 500 ms */
-    //delay_500ms() ;
+    /* Update the screen every 100 ms */
+    delay_100ms() ;
 
     /* Updates graphic */
     update_lines(&busbar_voltage_bar , busbar_voltage*2 , (LCDWIDTH/2) + 20 ) ;
