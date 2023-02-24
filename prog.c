@@ -530,124 +530,146 @@ void display_values()
   display_batt((LCDHEIGHT/2) + 15 , display.y , "Batt Status : " , charge_battery , discharge_battery) ;
 }
 
+void display_pixel_shift(rectangle *shape) 
+{
+  (*shape).top =  display.y ;
+  (*shape).left = display.x ;
+  (*shape).bottom = (*shape).top + 10 ;
+  (*shape).right = (*shape).left + 10 ;
+  fill_rectangle(*shape , teamcolour) ;
+}
+
 void display_team_name()//Need to redo this so that it looks nicer
 {
   rectangle shape ;
+  int i = 0 ;
+  int topmost = 10 ;
+  int leftmost = 10 ;
+  int width = 13 ;
   /* T */
-  shape.top = 10 ;
-  shape.bottom = shape.top + 30 ;
-  shape.left = 30 ;
-  shape.right = shape.left + 5 ;
-  fill_rectangle(shape , teamcolour ) ;
-  shape.top = 10 ;
-  shape.bottom = shape.top + 5 ;
-  shape.left = 20 ;
-  shape.right = shape.left + 25 ;
-  fill_rectangle(shape , teamcolour ) ;
+  display.y = topmost ;
+  display.x = leftmost ;
+  display_pixel_shift(&shape) ;
+  for(i = 0 ; i < 2 ; i++)
+  {
+    display.x += width ;
+    display_pixel_shift(&shape) ;
+  }
+  display.x -= width ;
+  for(i = 1 ; i < 5 ; i ++ )
+  {
+    display.y += width ;
+    display_pixel_shift(&shape) ;
+  }
   /* E */
-  shape.top = 10 ;
-  shape.bottom = shape.top + 30 ;
-  shape.left = 50 ;
-  shape.right = shape.left + 5 ;
-  fill_rectangle(shape , teamcolour ) ;
-  shape.top = 10 ;
-  shape.bottom = shape.top + 5 ;
-  shape.left = 56 ;
-  shape.right = shape.left + 15 ;
-  fill_rectangle(shape , teamcolour  ) ;
-  shape.top = 35 ;
-  shape.bottom = shape.top + 5 ;
-  shape.left = 56 ;
-  shape.right = shape.left + 15 ;
-  fill_rectangle(shape , teamcolour  ) ;
-  shape.top = 22 ;
-  shape.bottom = shape.top + 5 ;
-  shape.left = 56 ;
-  shape.right = shape.left + 10 ;
-  fill_rectangle(shape , teamcolour  ) ;
+  display.y = topmost - width ;
+  display.x += 3*width ;
+  for(i = 0 ; i < 5 ; i++)
+  {
+    display.y += width ;
+    display_pixel_shift(&shape) ;
+  }
+  for(i = 0 ; i < 2 ; i ++)
+  {
+    display.x += width ;
+    display_pixel_shift(&shape) ;
+  }
+  display.y -= 2*width ;
+  display.x -= width ;
+  display_pixel_shift(&shape) ;
+  display.y -= 2*width ;
+  display_pixel_shift(&shape) ;
+  for(i = 0 ; i < 1 ; i++ )
+  {
+    display.x += width ;
+    display_pixel_shift(&shape) ;
+  }
   /* A */
-  shape.top = 15 ;
-  shape.bottom = shape.top + 25 ;
-  shape.left = 76 ;
-  shape.right = shape.left + 5 ;
-  fill_rectangle(shape , teamcolour ) ;
-  shape.top = 10 ;
-  shape.bottom = shape.top + 5 ;
-  shape.left = 81 ;
-  shape.right = shape.left + 15 ;
-  fill_rectangle(shape , teamcolour ) ;
-  shape.top = 15 ;
-  shape.bottom = shape.top + 25 ;
-  shape.left = 96 ;
-  shape.right = shape.left + 5 ;
-  fill_rectangle(shape , teamcolour ) ;
-  shape.top = 22 ;
-  shape.bottom = shape.top + 5 ;
-  shape.left = 81 ;
-  shape.right = shape.left + 13 ;
-  fill_rectangle(shape , teamcolour ) ;
-  shape.top = 22 ;
-  shape.bottom = shape.top + 5 ;
-  shape.left = 92 ;
-  shape.right = shape.left + 9 ;
-  fill_rectangle(shape , teamcolour ) ;
+  display.y  = topmost ;
+  display.x += 2*width ;
+  for(i = 0 ; i < 4 ; i++ )
+  {
+    display.y += width ;
+    display_pixel_shift(&shape) ;
+  }
+  display.y = topmost ;
+  for(i = 0 ; i < 2 ; i++)
+  {
+    display.x += width ;
+    display_pixel_shift(&shape) ;
+  }
+  display.y += 2*width ;
+  display.x += width ;
+  for(i = 0 ; i < 2  ; i++ )
+  {
+    display.x -= width ;
+    display_pixel_shift(&shape) ;
+  }
+  display.y = topmost ;
+  display.x += 2*width ;
+  for(i = 0 ; i < 4 ; i++ )
+  {
+    display.y += width ;
+    display_pixel_shift(&shape) ;
+  }
   /* M */
-  shape.top = 10 ;
-  shape.bottom = shape.top + 30 ;
-  shape.left = 105 ;
-  shape.right = shape.left + 5 ;
-  fill_rectangle(shape , teamcolour ) ;
-  shape.top = 15 ;
-  shape.bottom = shape.top + 5 ;
-  shape.left = 110 ;
-  shape.right = shape.left + 5 ;
-  fill_rectangle(shape , teamcolour ) ;
-  shape.top = 20 ;
-  shape.bottom = shape.top + 5 ;
-  shape.left = 115 ;
-  shape.right = shape.left + 5 ;
-  fill_rectangle(shape , teamcolour ) ;
-  shape.top = 15 ;
-  shape.bottom = shape.top + 5 ;
-  shape.left = 120 ;
-  shape.right = shape.left + 5 ;
-  fill_rectangle(shape , teamcolour ) ;
-  shape.top = 10 ;
-  shape.bottom = shape.top + 30 ;
-  shape.left = 125 ;
-  shape.right = shape.left + 5 ;
-  fill_rectangle(shape , teamcolour ) ;
+  display.y = topmost - width ;
+  display.x += 2*width ;
+  for( i = 0 ; i < 5 ; i++)
+  {
+    display.y += width ;
+    display_pixel_shift(&shape) ;
+  }
+  display.y -= 3*width ;
+  display.x += width ;
+  display_pixel_shift(&shape) ;
+  display.y += width ;
+  display.x += width ;
+  display_pixel_shift(&shape) ;
+  display.y -= width ;
+  display.x += width ;
+  display_pixel_shift(&shape) ;
+  display.y = topmost - width ; 
+  display.x += width ;
+  for( i = 0 ; i < 5 ; i++)
+  {
+    display.y += width ;
+    display_pixel_shift(&shape) ;
+  }
   /* B */
-  shape.top = 10 ;
-  shape.bottom = shape.top + 30 ;
-  shape.left = 135 ;
-  shape.right = shape.left + 5 ;
-  fill_rectangle(shape , teamcolour ) ;
-  shape.top = 10 ;
-  shape.bottom = shape.top + 5 ;
-  shape.left = 140 ;
-  shape.right = shape.left + 13 ;
-  fill_rectangle(shape , teamcolour ) ;
-  shape.top = 35 ;
-  shape.bottom = shape.top + 5 ;
-  shape.left = 140 ;
-  shape.right = shape.left + 13 ;
-  fill_rectangle(shape , teamcolour ) ;
-  shape.top = 22 ;
-  shape.bottom = shape.top + 5 ;
-  shape.left = 140 ;
-  shape.right = shape.left + 13 ;
-  fill_rectangle(shape , teamcolour ) ;
-  shape.top = 16 ;
-  shape.bottom = shape.top + 5 ;
-  shape.left = 153 ;
-  shape.right = shape.left + 4 ;
-  fill_rectangle(shape , teamcolour ) ;
-  shape.top = 29 ;
-  shape.bottom = shape.top + 5 ;
-  shape.left = 153 ;
-  shape.right = shape.left + 4 ;
-  fill_rectangle(shape , teamcolour ) ;
+  display.y = topmost - width ;
+  display.x += 2*width ;
+  for(i = 0 ; i < 5 ; i++)
+  {
+    display.y += width ;
+    display_pixel_shift(&shape) ;
+  }
+  for(i = 0 ; i < 2 ; i++)
+  {
+    display.x += width ;
+    display_pixel_shift(&shape) ;
+  }
+  display.y -= 2*width ;
+  display.x += width ;
+  for(i = 0 ; i < 2 ; i++)
+  {
+    display.x -= width ;
+    display_pixel_shift(&shape) ;
+  }
+  display.y -= 2*width ;
+  display.x -= width ;
+  for(i = 0 ; i < 2 ; i++)
+  {
+    display.x += width ;
+    display_pixel_shift(&shape) ;
+  }
+  display.x += width ;
+  display.y -= width ;
+  for(i = 0 ; i < 2 ; i++)
+  {
+    display.y += 2*width ;
+    display_pixel_shift(&shape) ;
+  }
 }
 
 void update_lines(rectangle *bar, double value , int y_position)
@@ -729,8 +751,24 @@ void delay_100ms()
   while(i>counter) ;
 }
 
+void delay_6000ms()
+{
+  /* Boot up loading time */
+  uint32_t i = counter + 6000 ;
+  while(i>counter) ;
+}
+
 int main(void)
 {
+  /* Start the counter */
+  timer_init() ;
+
+  /* Enable interrupts */
+  sei() ;
+
+  /* Give time for PSU to supply the il matto */
+  delay_6000ms() ;
+
   /* TFT display bootup */
   init_lcd();
 
@@ -746,12 +784,6 @@ int main(void)
 
   /* Setup digital Inouts. */
   digital_init() ;
-
-  /* Start the counter */
-  timer_init() ;
-
-  /* Enable interrupts */
-  sei() ;
 
   /* Display the margin */
   display_line() ;
@@ -784,7 +816,7 @@ int main(void)
     display_team_name() ;
 
     /* Update the screen every 100 ms */
-    delay_100ms() ;
+    //delay_100ms() ;
 
     /* Updates graphic */
     update_lines(&busbar_voltage_bar , busbar_voltage*2 , (LCDWIDTH/2) + 20 ) ;
