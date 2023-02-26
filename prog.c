@@ -83,7 +83,8 @@ Logs : For personal use. Will be deleted in final submission
 21/02/2023  : Placed this code in Github so my team can help using source control.
 22/02/2023  : in delay function changed i type from int to uint32_t.
               Need a smoother RGB colour flow. Need to work for the second review
-              report now.
+              report now. 
+              tests
 */
 
 #include "../lcdlib/lcd.h"
