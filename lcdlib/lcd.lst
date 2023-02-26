@@ -1,0 +1,3139 @@
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 1
+
+
+   1               		.file	"lcd.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.section	.debug_abbrev,"",@progbits
+   9               	.Ldebug_abbrev0:
+  10               		.section	.debug_info,"",@progbits
+  11               	.Ldebug_info0:
+  12               		.section	.debug_line,"",@progbits
+  13               	.Ldebug_line0:
+  14               		.text
+  15               	.Ltext0:
+  16               	.global	set_orientation
+  17               		.type	set_orientation, @function
+  18               	set_orientation:
+  19               	.LFB3:
+  20               	.LM1:
+  21               	.LVL0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24 0000 9C01      		movw r18,r24
+  25               	.LM2:
+  26 0002 9093 0000 		sts (display+4)+1,r25
+  27 0006 8093 0000 		sts display+4,r24
+  28               	.LM3:
+  29 000a 2C98      		cbi 37-32,4
+  30 000c 86E3      		ldi r24,lo8(54)
+  31               	.LVL1:
+  32 000e 88B9      		out 40-32,r24
+  33 0010 2B98      		cbi 37-32,3
+  34 0012 2B9A      		sbi 37-32,3
+  35 0014 2C9A      		sbi 37-32,4
+  36               	.LM4:
+  37 0016 2115      		cp r18,__zero_reg__
+  38 0018 3105      		cpc r19,__zero_reg__
+  39 001a 01F4      		brne .L2
+  40               	.LM5:
+  41 001c 80EF      		ldi r24,lo8(240)
+  42 001e 90E0      		ldi r25,hi8(240)
+  43 0020 9093 0000 		sts (display)+1,r25
+  44 0024 8093 0000 		sts display,r24
+  45               	.LM6:
+  46 0028 80E4      		ldi r24,lo8(320)
+  47 002a 91E0      		ldi r25,hi8(320)
+  48 002c 9093 0000 		sts (display+2)+1,r25
+  49 0030 8093 0000 		sts display+2,r24
+  50               	.LM7:
+  51 0034 88E4      		ldi r24,lo8(72)
+  52 0036 00C0      		rjmp .L7
+  53               	.L2:
+  54               	.LM8:
+  55 0038 2130      		cpi r18,1
+  56 003a 3105      		cpc r19,__zero_reg__
+  57 003c 01F4      		brne .L4
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 2
+
+
+  58               	.LM9:
+  59 003e 80E4      		ldi r24,lo8(320)
+  60 0040 91E0      		ldi r25,hi8(320)
+  61 0042 9093 0000 		sts (display)+1,r25
+  62 0046 8093 0000 		sts display,r24
+  63               	.LM10:
+  64 004a 80EF      		ldi r24,lo8(240)
+  65 004c 90E0      		ldi r25,hi8(240)
+  66 004e 9093 0000 		sts (display+2)+1,r25
+  67 0052 8093 0000 		sts display+2,r24
+  68               	.LM11:
+  69 0056 88EE      		ldi r24,lo8(-24)
+  70 0058 00C0      		rjmp .L7
+  71               	.L4:
+  72               	.LM12:
+  73 005a 2230      		cpi r18,2
+  74 005c 3105      		cpc r19,__zero_reg__
+  75 005e 01F4      		brne .L5
+  76               	.LM13:
+  77 0060 80EF      		ldi r24,lo8(240)
+  78 0062 90E0      		ldi r25,hi8(240)
+  79 0064 9093 0000 		sts (display)+1,r25
+  80 0068 8093 0000 		sts display,r24
+  81               	.LM14:
+  82 006c 80E4      		ldi r24,lo8(320)
+  83 006e 91E0      		ldi r25,hi8(320)
+  84 0070 9093 0000 		sts (display+2)+1,r25
+  85 0074 8093 0000 		sts display+2,r24
+  86               	.LM15:
+  87 0078 88E8      		ldi r24,lo8(-120)
+  88 007a 00C0      		rjmp .L7
+  89               	.L5:
+  90               	.LM16:
+  91 007c 2330      		cpi r18,3
+  92 007e 3105      		cpc r19,__zero_reg__
+  93 0080 01F4      		brne .L3
+  94               	.LM17:
+  95 0082 80E4      		ldi r24,lo8(320)
+  96 0084 91E0      		ldi r25,hi8(320)
+  97 0086 9093 0000 		sts (display)+1,r25
+  98 008a 8093 0000 		sts display,r24
+  99               	.LM18:
+ 100 008e 80EF      		ldi r24,lo8(240)
+ 101 0090 90E0      		ldi r25,hi8(240)
+ 102 0092 9093 0000 		sts (display+2)+1,r25
+ 103 0096 8093 0000 		sts display+2,r24
+ 104               	.LM19:
+ 105 009a 88E2      		ldi r24,lo8(40)
+ 106               	.L7:
+ 107 009c 88B9      		out 40-32,r24
+ 108 009e 2B98      		cbi 37-32,3
+ 109 00a0 2B9A      		sbi 37-32,3
+ 110               	.L3:
+ 111               	.LM20:
+ 112 00a2 2C98      		cbi 37-32,4
+ 113 00a4 8AE2      		ldi r24,lo8(42)
+ 114 00a6 88B9      		out 40-32,r24
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 3
+
+
+ 115 00a8 2B98      		cbi 37-32,3
+ 116 00aa 2B9A      		sbi 37-32,3
+ 117 00ac 2C9A      		sbi 37-32,4
+ 118               	.LM21:
+ 119 00ae 18B8      		out 40-32,__zero_reg__
+ 120 00b0 2B98      		cbi 37-32,3
+ 121 00b2 2B9A      		sbi 37-32,3
+ 122 00b4 18B8      		out 40-32,__zero_reg__
+ 123 00b6 2B98      		cbi 37-32,3
+ 124 00b8 2B9A      		sbi 37-32,3
+ 125               	.LM22:
+ 126 00ba 8091 0000 		lds r24,display
+ 127 00be 9091 0000 		lds r25,(display)+1
+ 128 00c2 0197      		sbiw r24,1
+ 129 00c4 98B9      		out 40-32,r25
+ 130 00c6 0196      		adiw r24,1
+ 131 00c8 2B98      		cbi 37-32,3
+ 132 00ca 2B9A      		sbi 37-32,3
+ 133 00cc 8150      		subi r24,lo8(-(-1))
+ 134 00ce 88B9      		out 40-32,r24
+ 135 00d0 2B98      		cbi 37-32,3
+ 136 00d2 2B9A      		sbi 37-32,3
+ 137               	.LM23:
+ 138 00d4 2C98      		cbi 37-32,4
+ 139 00d6 8BE2      		ldi r24,lo8(43)
+ 140 00d8 88B9      		out 40-32,r24
+ 141 00da 2B98      		cbi 37-32,3
+ 142 00dc 2B9A      		sbi 37-32,3
+ 143 00de 2C9A      		sbi 37-32,4
+ 144               	.LM24:
+ 145 00e0 18B8      		out 40-32,__zero_reg__
+ 146 00e2 2B98      		cbi 37-32,3
+ 147 00e4 2B9A      		sbi 37-32,3
+ 148 00e6 18B8      		out 40-32,__zero_reg__
+ 149 00e8 2B98      		cbi 37-32,3
+ 150 00ea 2B9A      		sbi 37-32,3
+ 151               	.LM25:
+ 152 00ec 8091 0000 		lds r24,display+2
+ 153 00f0 9091 0000 		lds r25,(display+2)+1
+ 154 00f4 0197      		sbiw r24,1
+ 155 00f6 98B9      		out 40-32,r25
+ 156 00f8 0196      		adiw r24,1
+ 157 00fa 2B98      		cbi 37-32,3
+ 158 00fc 2B9A      		sbi 37-32,3
+ 159 00fe 8150      		subi r24,lo8(-(-1))
+ 160 0100 88B9      		out 40-32,r24
+ 161 0102 2B98      		cbi 37-32,3
+ 162 0104 2B9A      		sbi 37-32,3
+ 163               	/* epilogue start */
+ 164               	.LM26:
+ 165 0106 0895      		ret
+ 166               	.LFE3:
+ 167               		.size	set_orientation, .-set_orientation
+ 168               	.global	fill_rectangle
+ 169               		.type	fill_rectangle, @function
+ 170               	fill_rectangle:
+ 171               	.LFB4:
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 4
+
+
+ 172               	.LM27:
+ 173               	.LVL2:
+ 174 0108 EF92      		push r14
+ 175 010a FF92      		push r15
+ 176 010c 0F93      		push r16
+ 177               	.LVL3:
+ 178 010e 1F93      		push r17
+ 179 0110 DF93      		push r29
+ 180 0112 CF93      		push r28
+ 181 0114 CDB7      		in r28,__SP_L__
+ 182 0116 DEB7      		in r29,__SP_H__
+ 183 0118 2897      		sbiw r28,8
+ 184 011a 0FB6      		in __tmp_reg__,__SREG__
+ 185 011c F894      		cli
+ 186 011e DEBF      		out __SP_H__,r29
+ 187 0120 0FBE      		out __SREG__,__tmp_reg__
+ 188 0122 CDBF      		out __SP_L__,r28
+ 189               	/* prologue: function */
+ 190               	/* frame size = 8 */
+ 191 0124 F22F      		mov r31,r18
+ 192 0126 2983      		std Y+1,r18
+ 193 0128 E32F      		mov r30,r19
+ 194 012a 3A83      		std Y+2,r19
+ 195 012c 4B83      		std Y+3,r20
+ 196 012e 5C83      		std Y+4,r21
+ 197 0130 362F      		mov r19,r22
+ 198 0132 6D83      		std Y+5,r22
+ 199 0134 272F      		mov r18,r23
+ 200 0136 7E83      		std Y+6,r23
+ 201 0138 8F83      		std Y+7,r24
+ 202 013a 9887      		std Y+8,r25
+ 203 013c 7801      		movw r14,r16
+ 204               	.LM28:
+ 205 013e AB81      		ldd r26,Y+3
+ 206 0140 BC81      		ldd r27,Y+4
+ 207 0142 062F      		mov r16,r22
+ 208 0144 172F      		mov r17,r23
+ 209 0146 6F81      		ldd r22,Y+7
+ 210 0148 7885      		ldd r23,Y+8
+ 211               	.LM29:
+ 212 014a 2C98      		cbi 37-32,4
+ 213 014c 8AE2      		ldi r24,lo8(42)
+ 214 014e 88B9      		out 40-32,r24
+ 215 0150 2B98      		cbi 37-32,3
+ 216 0152 2B9A      		sbi 37-32,3
+ 217 0154 2C9A      		sbi 37-32,4
+ 218               	.LM30:
+ 219 0156 E8B9      		out 40-32,r30
+ 220 0158 2B98      		cbi 37-32,3
+ 221 015a 2B9A      		sbi 37-32,3
+ 222 015c F8B9      		out 40-32,r31
+ 223 015e 2B98      		cbi 37-32,3
+ 224 0160 2B9A      		sbi 37-32,3
+ 225               	.LM31:
+ 226 0162 B8B9      		out 40-32,r27
+ 227 0164 2B98      		cbi 37-32,3
+ 228 0166 2B9A      		sbi 37-32,3
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 5
+
+
+ 229 0168 A8B9      		out 40-32,r26
+ 230 016a 2B98      		cbi 37-32,3
+ 231 016c 2B9A      		sbi 37-32,3
+ 232               	.LM32:
+ 233 016e 2C98      		cbi 37-32,4
+ 234 0170 8BE2      		ldi r24,lo8(43)
+ 235 0172 88B9      		out 40-32,r24
+ 236 0174 2B98      		cbi 37-32,3
+ 237 0176 2B9A      		sbi 37-32,3
+ 238 0178 2C9A      		sbi 37-32,4
+ 239               	.LM33:
+ 240 017a 28B9      		out 40-32,r18
+ 241 017c 2B98      		cbi 37-32,3
+ 242 017e 2B9A      		sbi 37-32,3
+ 243 0180 38B9      		out 40-32,r19
+ 244 0182 2B98      		cbi 37-32,3
+ 245 0184 2B9A      		sbi 37-32,3
+ 246               	.LM34:
+ 247 0186 78B9      		out 40-32,r23
+ 248 0188 2B98      		cbi 37-32,3
+ 249 018a 2B9A      		sbi 37-32,3
+ 250 018c 68B9      		out 40-32,r22
+ 251 018e 2B98      		cbi 37-32,3
+ 252 0190 2B9A      		sbi 37-32,3
+ 253               	.LM35:
+ 254 0192 2C98      		cbi 37-32,4
+ 255 0194 8CE2      		ldi r24,lo8(44)
+ 256 0196 88B9      		out 40-32,r24
+ 257 0198 2B98      		cbi 37-32,3
+ 258 019a 2B9A      		sbi 37-32,3
+ 259 019c 2C9A      		sbi 37-32,4
+ 260               	.LM36:
+ 261 019e 2F2F      		mov r18,r31
+ 262               	.LVL4:
+ 263 01a0 3E2F      		mov r19,r30
+ 264               	.LVL5:
+ 265 01a2 C901      		movw r24,r18
+ 266               	.LVL6:
+ 267 01a4 AC01      		movw r20,r24
+ 268               	.LVL7:
+ 269 01a6 00C0      		rjmp .L9
+ 270               	.LVL8:
+ 271               	.L10:
+ 272               	.LM37:
+ 273 01a8 F8B8      		out 40-32,r15
+ 274               	.LM38:
+ 275 01aa 2B98      		cbi 37-32,3
+ 276 01ac 2B9A      		sbi 37-32,3
+ 277 01ae E8B8      		out 40-32,r14
+ 278 01b0 2B98      		cbi 37-32,3
+ 279 01b2 2B9A      		sbi 37-32,3
+ 280               	.LM39:
+ 281 01b4 2F5F      		subi r18,lo8(-(1))
+ 282 01b6 3F4F      		sbci r19,hi8(-(1))
+ 283               	.L12:
+ 284 01b8 6217      		cp r22,r18
+ 285 01ba 7307      		cpc r23,r19
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 6
+
+
+ 286 01bc 00F4      		brsh .L10
+ 287               	.LM40:
+ 288 01be 4F5F      		subi r20,lo8(-(1))
+ 289 01c0 5F4F      		sbci r21,hi8(-(1))
+ 290               	.LVL9:
+ 291               	.L9:
+ 292 01c2 A417      		cp r26,r20
+ 293 01c4 B507      		cpc r27,r21
+ 294 01c6 00F0      		brlo .L13
+ 295 01c8 9801      		movw r18,r16
+ 296               	.LVL10:
+ 297 01ca 00C0      		rjmp .L12
+ 298               	.LVL11:
+ 299               	.L13:
+ 300               	/* epilogue start */
+ 301               	.LM41:
+ 302 01cc 2896      		adiw r28,8
+ 303 01ce 0FB6      		in __tmp_reg__,__SREG__
+ 304 01d0 F894      		cli
+ 305 01d2 DEBF      		out __SP_H__,r29
+ 306 01d4 0FBE      		out __SREG__,__tmp_reg__
+ 307 01d6 CDBF      		out __SP_L__,r28
+ 308 01d8 CF91      		pop r28
+ 309 01da DF91      		pop r29
+ 310 01dc 1F91      		pop r17
+ 311 01de 0F91      		pop r16
+ 312 01e0 FF90      		pop r15
+ 313               	.LVL12:
+ 314 01e2 EF90      		pop r14
+ 315               	.LVL13:
+ 316 01e4 0895      		ret
+ 317               	.LFE4:
+ 318               		.size	fill_rectangle, .-fill_rectangle
+ 319               	.global	fill_rectangle_indexed
+ 320               		.type	fill_rectangle_indexed, @function
+ 321               	fill_rectangle_indexed:
+ 322               	.LFB5:
+ 323               	.LM42:
+ 324               	.LVL14:
+ 325 01e6 EF92      		push r14
+ 326 01e8 FF92      		push r15
+ 327 01ea 0F93      		push r16
+ 328               	.LVL15:
+ 329 01ec 1F93      		push r17
+ 330 01ee DF93      		push r29
+ 331 01f0 CF93      		push r28
+ 332 01f2 CDB7      		in r28,__SP_L__
+ 333 01f4 DEB7      		in r29,__SP_H__
+ 334 01f6 2897      		sbiw r28,8
+ 335 01f8 0FB6      		in __tmp_reg__,__SREG__
+ 336 01fa F894      		cli
+ 337 01fc DEBF      		out __SP_H__,r29
+ 338 01fe 0FBE      		out __SREG__,__tmp_reg__
+ 339 0200 CDBF      		out __SP_L__,r28
+ 340               	/* prologue: function */
+ 341               	/* frame size = 8 */
+ 342 0202 F22F      		mov r31,r18
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 7
+
+
+ 343 0204 2983      		std Y+1,r18
+ 344 0206 E32F      		mov r30,r19
+ 345 0208 3A83      		std Y+2,r19
+ 346 020a 4B83      		std Y+3,r20
+ 347 020c 5C83      		std Y+4,r21
+ 348 020e 362F      		mov r19,r22
+ 349 0210 6D83      		std Y+5,r22
+ 350 0212 272F      		mov r18,r23
+ 351 0214 7E83      		std Y+6,r23
+ 352 0216 8F83      		std Y+7,r24
+ 353 0218 9887      		std Y+8,r25
+ 354 021a D801      		movw r26,r16
+ 355               	.LVL16:
+ 356               	.LM43:
+ 357 021c 0B81      		ldd r16,Y+3
+ 358 021e 1C81      		ldd r17,Y+4
+ 359               	.LVL17:
+ 360 0220 E62E      		mov r14,r22
+ 361 0222 F72E      		mov r15,r23
+ 362 0224 6F81      		ldd r22,Y+7
+ 363 0226 7885      		ldd r23,Y+8
+ 364               	.LM44:
+ 365 0228 2C98      		cbi 37-32,4
+ 366 022a 8AE2      		ldi r24,lo8(42)
+ 367 022c 88B9      		out 40-32,r24
+ 368 022e 2B98      		cbi 37-32,3
+ 369 0230 2B9A      		sbi 37-32,3
+ 370 0232 2C9A      		sbi 37-32,4
+ 371               	.LM45:
+ 372 0234 E8B9      		out 40-32,r30
+ 373 0236 2B98      		cbi 37-32,3
+ 374 0238 2B9A      		sbi 37-32,3
+ 375 023a F8B9      		out 40-32,r31
+ 376 023c 2B98      		cbi 37-32,3
+ 377 023e 2B9A      		sbi 37-32,3
+ 378               	.LM46:
+ 379 0240 18B9      		out 40-32,r17
+ 380 0242 2B98      		cbi 37-32,3
+ 381 0244 2B9A      		sbi 37-32,3
+ 382 0246 08B9      		out 40-32,r16
+ 383 0248 2B98      		cbi 37-32,3
+ 384 024a 2B9A      		sbi 37-32,3
+ 385               	.LM47:
+ 386 024c 2C98      		cbi 37-32,4
+ 387 024e 8BE2      		ldi r24,lo8(43)
+ 388 0250 88B9      		out 40-32,r24
+ 389 0252 2B98      		cbi 37-32,3
+ 390 0254 2B9A      		sbi 37-32,3
+ 391 0256 2C9A      		sbi 37-32,4
+ 392               	.LM48:
+ 393 0258 28B9      		out 40-32,r18
+ 394 025a 2B98      		cbi 37-32,3
+ 395 025c 2B9A      		sbi 37-32,3
+ 396 025e 38B9      		out 40-32,r19
+ 397 0260 2B98      		cbi 37-32,3
+ 398 0262 2B9A      		sbi 37-32,3
+ 399               	.LM49:
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 8
+
+
+ 400 0264 78B9      		out 40-32,r23
+ 401 0266 2B98      		cbi 37-32,3
+ 402 0268 2B9A      		sbi 37-32,3
+ 403 026a 68B9      		out 40-32,r22
+ 404 026c 2B98      		cbi 37-32,3
+ 405 026e 2B9A      		sbi 37-32,3
+ 406               	.LM50:
+ 407 0270 2C98      		cbi 37-32,4
+ 408 0272 8CE2      		ldi r24,lo8(44)
+ 409 0274 88B9      		out 40-32,r24
+ 410 0276 2B98      		cbi 37-32,3
+ 411 0278 2B9A      		sbi 37-32,3
+ 412 027a 2C9A      		sbi 37-32,4
+ 413 027c 2F2F      		mov r18,r31
+ 414               	.LVL18:
+ 415 027e 3E2F      		mov r19,r30
+ 416               	.LVL19:
+ 417 0280 C901      		movw r24,r18
+ 418               	.LVL20:
+ 419 0282 AC01      		movw r20,r24
+ 420               	.LVL21:
+ 421 0284 00C0      		rjmp .L15
+ 422               	.LVL22:
+ 423               	.L16:
+ 424               	.LM51:
+ 425 0286 1196      		adiw r26,1
+ 426 0288 8C91      		ld r24,X
+ 427 028a 1197      		sbiw r26,1
+ 428 028c 88B9      		out 40-32,r24
+ 429 028e 2B98      		cbi 37-32,3
+ 430 0290 2B9A      		sbi 37-32,3
+ 431 0292 1296      		adiw r26,2
+ 432 0294 8C91      		ld r24,X
+ 433 0296 1297      		sbiw r26,2
+ 434 0298 88B9      		out 40-32,r24
+ 435               	.LM52:
+ 436 029a 1496      		adiw r26,4
+ 437               	.LM53:
+ 438 029c 2B98      		cbi 37-32,3
+ 439 029e 2B9A      		sbi 37-32,3
+ 440               	.LM54:
+ 441 02a0 2F5F      		subi r18,lo8(-(1))
+ 442 02a2 3F4F      		sbci r19,hi8(-(1))
+ 443               	.LVL23:
+ 444               	.L18:
+ 445 02a4 6217      		cp r22,r18
+ 446 02a6 7307      		cpc r23,r19
+ 447 02a8 00F4      		brsh .L16
+ 448               	.LM55:
+ 449 02aa 4F5F      		subi r20,lo8(-(1))
+ 450 02ac 5F4F      		sbci r21,hi8(-(1))
+ 451               	.LVL24:
+ 452               	.L15:
+ 453 02ae 0417      		cp r16,r20
+ 454 02b0 1507      		cpc r17,r21
+ 455 02b2 00F0      		brlo .L19
+ 456 02b4 9701      		movw r18,r14
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 9
+
+
+ 457               	.LVL25:
+ 458 02b6 00C0      		rjmp .L18
+ 459               	.LVL26:
+ 460               	.L19:
+ 461               	/* epilogue start */
+ 462               	.LM56:
+ 463 02b8 2896      		adiw r28,8
+ 464 02ba 0FB6      		in __tmp_reg__,__SREG__
+ 465 02bc F894      		cli
+ 466 02be DEBF      		out __SP_H__,r29
+ 467 02c0 0FBE      		out __SREG__,__tmp_reg__
+ 468 02c2 CDBF      		out __SP_L__,r28
+ 469 02c4 CF91      		pop r28
+ 470 02c6 DF91      		pop r29
+ 471 02c8 1F91      		pop r17
+ 472 02ca 0F91      		pop r16
+ 473 02cc FF90      		pop r15
+ 474 02ce EF90      		pop r14
+ 475 02d0 0895      		ret
+ 476               	.LFE5:
+ 477               		.size	fill_rectangle_indexed, .-fill_rectangle_indexed
+ 478               	.global	clear_screen
+ 479               		.type	clear_screen, @function
+ 480               	clear_screen:
+ 481               	.LFB6:
+ 482               	.LM57:
+ 483 02d2 0F93      		push r16
+ 484 02d4 1F93      		push r17
+ 485 02d6 DF93      		push r29
+ 486 02d8 CF93      		push r28
+ 487 02da CDB7      		in r28,__SP_L__
+ 488 02dc DEB7      		in r29,__SP_H__
+ 489 02de 2897      		sbiw r28,8
+ 490 02e0 0FB6      		in __tmp_reg__,__SREG__
+ 491 02e2 F894      		cli
+ 492 02e4 DEBF      		out __SP_H__,r29
+ 493 02e6 0FBE      		out __SREG__,__tmp_reg__
+ 494 02e8 CDBF      		out __SP_L__,r28
+ 495               	/* prologue: function */
+ 496               	/* frame size = 8 */
+ 497               	.LM58:
+ 498 02ea 1092 0000 		sts (display+6)+1,__zero_reg__
+ 499 02ee 1092 0000 		sts display+6,__zero_reg__
+ 500               	.LM59:
+ 501 02f2 1092 0000 		sts (display+8)+1,__zero_reg__
+ 502 02f6 1092 0000 		sts display+8,__zero_reg__
+ 503               	.LM60:
+ 504 02fa 2091 0000 		lds r18,display
+ 505 02fe 3091 0000 		lds r19,(display)+1
+ 506 0302 2150      		subi r18,lo8(-(-1))
+ 507 0304 3040      		sbci r19,hi8(-(-1))
+ 508 0306 8091 0000 		lds r24,display+2
+ 509 030a 9091 0000 		lds r25,(display+2)+1
+ 510 030e 0197      		sbiw r24,1
+ 511 0310 1A82      		std Y+2,__zero_reg__
+ 512 0312 1982      		std Y+1,__zero_reg__
+ 513 0314 422F      		mov r20,r18
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 10
+
+
+ 514 0316 3C83      		std Y+4,r19
+ 515 0318 2B83      		std Y+3,r18
+ 516 031a 1E82      		std Y+6,__zero_reg__
+ 517 031c 1D82      		std Y+5,__zero_reg__
+ 518 031e 9887      		std Y+8,r25
+ 519 0320 8F83      		std Y+7,r24
+ 520               	.LM61:
+ 521 0322 0091 0000 		lds r16,display+12
+ 522 0326 1091 0000 		lds r17,(display+12)+1
+ 523 032a 2981      		ldd r18,Y+1
+ 524 032c 3A81      		ldd r19,Y+2
+ 525 032e 5C81      		ldd r21,Y+4
+ 526 0330 6D81      		ldd r22,Y+5
+ 527 0332 7E81      		ldd r23,Y+6
+ 528 0334 9885      		ldd r25,Y+8
+ 529 0336 0E94 0000 		call fill_rectangle
+ 530               	/* epilogue start */
+ 531               	.LM62:
+ 532 033a 2896      		adiw r28,8
+ 533 033c 0FB6      		in __tmp_reg__,__SREG__
+ 534 033e F894      		cli
+ 535 0340 DEBF      		out __SP_H__,r29
+ 536 0342 0FBE      		out __SREG__,__tmp_reg__
+ 537 0344 CDBF      		out __SP_L__,r28
+ 538 0346 CF91      		pop r28
+ 539 0348 DF91      		pop r29
+ 540 034a 1F91      		pop r17
+ 541 034c 0F91      		pop r16
+ 542 034e 0895      		ret
+ 543               	.LFE6:
+ 544               		.size	clear_screen, .-clear_screen
+ 545               	.global	display_char
+ 546               		.type	display_char, @function
+ 547               	display_char:
+ 548               	.LFB7:
+ 549               	.LM63:
+ 550               	.LVL27:
+ 551 0350 6F92      		push r6
+ 552 0352 7F92      		push r7
+ 553 0354 8F92      		push r8
+ 554 0356 9F92      		push r9
+ 555 0358 AF92      		push r10
+ 556 035a BF92      		push r11
+ 557 035c CF92      		push r12
+ 558 035e DF92      		push r13
+ 559 0360 EF92      		push r14
+ 560 0362 FF92      		push r15
+ 561 0364 0F93      		push r16
+ 562 0366 1F93      		push r17
+ 563 0368 CF93      		push r28
+ 564 036a DF93      		push r29
+ 565               	/* prologue: function */
+ 566               	/* frame size = 0 */
+ 567 036c 982F      		mov r25,r24
+ 568               	.LM64:
+ 569 036e 0091 0000 		lds r16,display+6
+ 570 0372 1091 0000 		lds r17,(display+6)+1
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 11
+
+
+ 571               	.LVL28:
+ 572 0376 24E0      		ldi r18,lo8(4)
+ 573 0378 E22E      		mov r14,r18
+ 574 037a F12C      		mov r15,__zero_reg__
+ 575               	.LVL29:
+ 576 037c E00E      		add r14,r16
+ 577 037e F11E      		adc r15,r17
+ 578 0380 6090 0000 		lds r6,display+8
+ 579 0384 7090 0000 		lds r7,(display+8)+1
+ 580               	.LVL30:
+ 581               	.LM65:
+ 582 0388 8052      		subi r24,lo8(-(-32))
+ 583               	.LVL31:
+ 584 038a 8F35      		cpi r24,lo8(95)
+ 585 038c 00F0      		brlo .+2
+ 586 038e 00C0      		rjmp .L34
+ 587               	.LM66:
+ 588 0390 E301      		movw r28,r6
+ 589               	.LVL32:
+ 590 0392 2796      		adiw r28,7
+ 591               	.LM67:
+ 592 0394 85E0      		ldi r24,lo8(5)
+ 593 0396 989F      		mul r25,r24
+ 594 0398 9001      		movw r18,r0
+ 595 039a 1124      		clr r1
+ 596               	.LVL33:
+ 597 039c 2050      		subi r18,lo8(-(font5x7-160))
+ 598 039e 3040      		sbci r19,hi8(-(font5x7-160))
+ 599               	.LM68:
+ 600 03a0 2C98      		cbi 37-32,4
+ 601 03a2 8BE2      		ldi r24,lo8(43)
+ 602 03a4 88B9      		out 40-32,r24
+ 603 03a6 2B98      		cbi 37-32,3
+ 604 03a8 2B9A      		sbi 37-32,3
+ 605 03aa 2C9A      		sbi 37-32,4
+ 606               	.LM69:
+ 607 03ac 78B8      		out 40-32,r7
+ 608               	.LVL34:
+ 609 03ae 2B98      		cbi 37-32,3
+ 610 03b0 2B9A      		sbi 37-32,3
+ 611 03b2 68B8      		out 40-32,r6
+ 612 03b4 2B98      		cbi 37-32,3
+ 613 03b6 2B9A      		sbi 37-32,3
+ 614               	.LM70:
+ 615 03b8 D8B9      		out 40-32,r29
+ 616               	.LVL35:
+ 617 03ba 2B98      		cbi 37-32,3
+ 618 03bc 2B9A      		sbi 37-32,3
+ 619 03be C8B9      		out 40-32,r28
+ 620 03c0 2B98      		cbi 37-32,3
+ 621 03c2 2B9A      		sbi 37-32,3
+ 622               	.LM71:
+ 623 03c4 C090 0000 		lds r12,display+10
+ 624 03c8 D090 0000 		lds r13,display+11
+ 625 03cc A090 0000 		lds r10,display+12
+ 626 03d0 B090 0000 		lds r11,display+13
+ 627 03d4 A801      		movw r20,r16
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 12
+
+
+ 628               	.LVL36:
+ 629               	.LM72:
+ 630 03d6 9AE2      		ldi r25,lo8(42)
+ 631 03d8 892E      		mov r8,r25
+ 632               	.LVL37:
+ 633               	.LM73:
+ 634 03da 8CE2      		ldi r24,lo8(44)
+ 635 03dc 982E      		mov r9,r24
+ 636 03de 00C0      		rjmp .L24
+ 637               	.LVL38:
+ 638               	.L31:
+ 639               	.LM74:
+ 640 03e0 2C98      		cbi 37-32,4
+ 641 03e2 88B8      		out 40-32,r8
+ 642 03e4 2B98      		cbi 37-32,3
+ 643 03e6 2B9A      		sbi 37-32,3
+ 644 03e8 2C9A      		sbi 37-32,4
+ 645               	.LM75:
+ 646 03ea 58B9      		out 40-32,r21
+ 647 03ec 2B98      		cbi 37-32,3
+ 648 03ee 2B9A      		sbi 37-32,3
+ 649 03f0 48B9      		out 40-32,r20
+ 650 03f2 2B98      		cbi 37-32,3
+ 651 03f4 2B9A      		sbi 37-32,3
+ 652               	.LM76:
+ 653 03f6 58B9      		out 40-32,r21
+ 654 03f8 2B98      		cbi 37-32,3
+ 655 03fa 2B9A      		sbi 37-32,3
+ 656 03fc 48B9      		out 40-32,r20
+ 657 03fe 2B98      		cbi 37-32,3
+ 658 0400 2B9A      		sbi 37-32,3
+ 659               	.LM77:
+ 660 0402 2C98      		cbi 37-32,4
+ 661 0404 98B8      		out 40-32,r9
+ 662 0406 2B98      		cbi 37-32,3
+ 663 0408 2B9A      		sbi 37-32,3
+ 664 040a 2C9A      		sbi 37-32,4
+ 665               	.LBB2:
+ 666               	.LM78:
+ 667 040c F901      		movw r30,r18
+ 668               	/* #APP */
+ 669               	 ;  115 "lcd.c" 1
+ 670 040e B491      		lpm r27, Z
+ 671               		
+ 672               	 ;  0 "" 2
+ 673               	/* #NOAPP */
+ 674 0410 B301      		movw r22,r6
+ 675 0412 91E0      		ldi r25,lo8(1)
+ 676 0414 00C0      		rjmp .L25
+ 677               	.L30:
+ 678               	.LBE2:
+ 679               	.LM79:
+ 680 0416 A92F      		mov r26,r25
+ 681 0418 AB23      		and r26,r27
+ 682 041a 01F4      		brne .L26
+ 683 041c 8B2D      		mov r24,r11
+ 684 041e 00C0      		rjmp .L27
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 13
+
+
+ 685               	.L26:
+ 686 0420 8D2D      		mov r24,r13
+ 687               	.L27:
+ 688 0422 88B9      		out 40-32,r24
+ 689 0424 2B98      		cbi 37-32,3
+ 690 0426 2B9A      		sbi 37-32,3
+ 691 0428 AA23      		tst r26
+ 692 042a 01F4      		brne .L28
+ 693 042c 8A2D      		mov r24,r10
+ 694 042e 00C0      		rjmp .L29
+ 695               	.L28:
+ 696 0430 8C2D      		mov r24,r12
+ 697               	.L29:
+ 698 0432 88B9      		out 40-32,r24
+ 699 0434 2B98      		cbi 37-32,3
+ 700 0436 2B9A      		sbi 37-32,3
+ 701               	.LM80:
+ 702 0438 6F5F      		subi r22,lo8(-(1))
+ 703 043a 7F4F      		sbci r23,hi8(-(1))
+ 704 043c 990F      		lsl r25
+ 705               	.L25:
+ 706 043e C617      		cp r28,r22
+ 707 0440 D707      		cpc r29,r23
+ 708 0442 00F4      		brsh .L30
+ 709               	.LBB3:
+ 710               	.LM81:
+ 711 0444 2F5F      		subi r18,lo8(-(1))
+ 712 0446 3F4F      		sbci r19,hi8(-(1))
+ 713               	.LBE3:
+ 714               	.LM82:
+ 715 0448 4F5F      		subi r20,lo8(-(1))
+ 716 044a 5F4F      		sbci r21,hi8(-(1))
+ 717               	.L24:
+ 718 044c E416      		cp r14,r20
+ 719 044e F506      		cpc r15,r21
+ 720 0450 00F4      		brsh .L31
+ 721               	.LM83:
+ 722 0452 2C98      		cbi 37-32,4
+ 723 0454 8AE2      		ldi r24,lo8(42)
+ 724 0456 88B9      		out 40-32,r24
+ 725 0458 2B98      		cbi 37-32,3
+ 726 045a 2B9A      		sbi 37-32,3
+ 727 045c 2C9A      		sbi 37-32,4
+ 728               	.LM84:
+ 729 045e 58B9      		out 40-32,r21
+ 730 0460 2B98      		cbi 37-32,3
+ 731 0462 2B9A      		sbi 37-32,3
+ 732 0464 48B9      		out 40-32,r20
+ 733 0466 2B98      		cbi 37-32,3
+ 734 0468 2B9A      		sbi 37-32,3
+ 735               	.LM85:
+ 736 046a 58B9      		out 40-32,r21
+ 737 046c 2B98      		cbi 37-32,3
+ 738 046e 2B9A      		sbi 37-32,3
+ 739 0470 48B9      		out 40-32,r20
+ 740 0472 2B98      		cbi 37-32,3
+ 741 0474 2B9A      		sbi 37-32,3
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 14
+
+
+ 742               	.LM86:
+ 743 0476 2C98      		cbi 37-32,4
+ 744 0478 8CE2      		ldi r24,lo8(44)
+ 745 047a 88B9      		out 40-32,r24
+ 746 047c 2B98      		cbi 37-32,3
+ 747 047e 2B9A      		sbi 37-32,3
+ 748 0480 2C9A      		sbi 37-32,4
+ 749 0482 C301      		movw r24,r6
+ 750               	.LVL39:
+ 751 0484 00C0      		rjmp .L32
+ 752               	.L33:
+ 753               	.LM87:
+ 754 0486 B8B8      		out 40-32,r11
+ 755 0488 2B98      		cbi 37-32,3
+ 756 048a 2B9A      		sbi 37-32,3
+ 757 048c A8B8      		out 40-32,r10
+ 758 048e 2B98      		cbi 37-32,3
+ 759 0490 2B9A      		sbi 37-32,3
+ 760               	.LM88:
+ 761 0492 0196      		adiw r24,1
+ 762               	.L32:
+ 763 0494 C817      		cp r28,r24
+ 764 0496 D907      		cpc r29,r25
+ 765 0498 00F4      		brsh .L33
+ 766               	.LM89:
+ 767 049a 9801      		movw r18,r16
+ 768               	.LVL40:
+ 769 049c 2A5F      		subi r18,lo8(-(6))
+ 770 049e 3F4F      		sbci r19,hi8(-(6))
+ 771 04a0 3093 0000 		sts (display+6)+1,r19
+ 772 04a4 2093 0000 		sts display+6,r18
+ 773               	.LM90:
+ 774 04a8 8091 0000 		lds r24,display
+ 775 04ac 9091 0000 		lds r25,(display)+1
+ 776               	.LVL41:
+ 777 04b0 2817      		cp r18,r24
+ 778 04b2 3907      		cpc r19,r25
+ 779 04b4 00F0      		brlo .L34
+ 780 04b6 1092 0000 		sts (display+6)+1,__zero_reg__
+ 781 04ba 1092 0000 		sts display+6,__zero_reg__
+ 782 04be 88E0      		ldi r24,lo8(8)
+ 783 04c0 90E0      		ldi r25,hi8(8)
+ 784 04c2 680E      		add r6,r24
+ 785 04c4 791E      		adc r7,r25
+ 786 04c6 7092 0000 		sts (display+8)+1,r7
+ 787 04ca 6092 0000 		sts display+8,r6
+ 788               	.LVL42:
+ 789               	.L34:
+ 790               	/* epilogue start */
+ 791               	.LM91:
+ 792 04ce DF91      		pop r29
+ 793               	.LVL43:
+ 794 04d0 CF91      		pop r28
+ 795               	.LVL44:
+ 796 04d2 1F91      		pop r17
+ 797 04d4 0F91      		pop r16
+ 798               	.LVL45:
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 15
+
+
+ 799 04d6 FF90      		pop r15
+ 800 04d8 EF90      		pop r14
+ 801               	.LVL46:
+ 802 04da DF90      		pop r13
+ 803 04dc CF90      		pop r12
+ 804 04de BF90      		pop r11
+ 805 04e0 AF90      		pop r10
+ 806 04e2 9F90      		pop r9
+ 807 04e4 8F90      		pop r8
+ 808 04e6 7F90      		pop r7
+ 809               	.LVL47:
+ 810 04e8 6F90      		pop r6
+ 811               	.LVL48:
+ 812 04ea 0895      		ret
+ 813               	.LFE7:
+ 814               		.size	display_char, .-display_char
+ 815               	.global	display_string
+ 816               		.type	display_string, @function
+ 817               	display_string:
+ 818               	.LFB8:
+ 819               	.LM92:
+ 820               	.LVL49:
+ 821 04ec 1F93      		push r17
+ 822 04ee CF93      		push r28
+ 823 04f0 DF93      		push r29
+ 824               	/* prologue: function */
+ 825               	/* frame size = 0 */
+ 826 04f2 EC01      		movw r28,r24
+ 827               	.LM93:
+ 828 04f4 10E0      		ldi r17,lo8(0)
+ 829               	.LVL50:
+ 830 04f6 00C0      		rjmp .L36
+ 831               	.LVL51:
+ 832               	.L37:
+ 833               	.LM94:
+ 834 04f8 0E94 0000 		call display_char
+ 835               	.LM95:
+ 836 04fc 1F5F      		subi r17,lo8(-(1))
+ 837               	.LVL52:
+ 838               	.L36:
+ 839 04fe FE01      		movw r30,r28
+ 840 0500 E10F      		add r30,r17
+ 841 0502 F11D      		adc r31,__zero_reg__
+ 842 0504 8081      		ld r24,Z
+ 843 0506 8823      		tst r24
+ 844 0508 01F4      		brne .L37
+ 845               	/* epilogue start */
+ 846               	.LM96:
+ 847 050a DF91      		pop r29
+ 848 050c CF91      		pop r28
+ 849               	.LVL53:
+ 850 050e 1F91      		pop r17
+ 851               	.LVL54:
+ 852 0510 0895      		ret
+ 853               	.LFE8:
+ 854               		.size	display_string, .-display_string
+ 855               	.global	init_lcd
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 16
+
+
+ 856               		.type	init_lcd, @function
+ 857               	init_lcd:
+ 858               	.LFB2:
+ 859               	.LM97:
+ 860               	/* prologue: function */
+ 861               	/* frame size = 0 */
+ 862               	.LM98:
+ 863 0512 85B7      		in r24,85-32
+ 864 0514 8068      		ori r24,lo8(-128)
+ 865 0516 85BF      		out 85-32,r24
+ 866               	.LM99:
+ 867 0518 85B7      		in r24,85-32
+ 868 051a 8068      		ori r24,lo8(-128)
+ 869 051c 85BF      		out 85-32,r24
+ 870               	.LM100:
+ 871 051e 8FE7      		ldi r24,lo8(127)
+ 872 0520 84B9      		out 36-32,r24
+ 873               	.LM101:
+ 874 0522 8FEF      		ldi r24,lo8(-1)
+ 875 0524 87B9      		out 39-32,r24
+ 876               	.LM102:
+ 877 0526 0E94 0000 		call init_display_controller
+ 878               	/* epilogue start */
+ 879               	.LM103:
+ 880 052a 0895      		ret
+ 881               	.LFE2:
+ 882               		.size	init_lcd, .-init_lcd
+ 883               	.global	display
+ 884               		.data
+ 885               		.type	display, @object
+ 886               		.size	display, 14
+ 887               	display:
+ 888 0000 F000      		.word	240
+ 889 0002 4001      		.word	320
+ 890 0004 0000      		.word	0
+ 891 0006 0000      		.word	0
+ 892 0008 0000      		.word	0
+ 893 000a 0000      		.word	0
+ 894 000c FFFF      		.word	-1
+ 895               		.section	.debug_frame,"",@progbits
+ 896               	.Lframe0:
+ 897 0000 0C00 0000 		.long	.LECIE0-.LSCIE0
+ 898               	.LSCIE0:
+ 899 0004 FFFF FFFF 		.long	0xffffffff
+ 900 0008 01        		.byte	0x1
+ 901 0009 00        		.string	""
+ 902 000a 01        		.uleb128 0x1
+ 903 000b 7F        		.sleb128 -1
+ 904 000c 24        		.byte	0x24
+ 905 000d 0C        		.byte	0xc
+ 906 000e 20        		.uleb128 0x20
+ 907 000f 00        		.uleb128 0x0
+ 908               		.p2align	2
+ 909               	.LECIE0:
+ 910               	.LSFDE0:
+ 911 0010 0C00 0000 		.long	.LEFDE0-.LASFDE0
+ 912               	.LASFDE0:
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 17
+
+
+ 913 0014 0000 0000 		.long	.Lframe0
+ 914 0018 0000 0000 		.long	.LFB3
+ 915 001c 0801 0000 		.long	.LFE3-.LFB3
+ 916               		.p2align	2
+ 917               	.LEFDE0:
+ 918               	.LSFDE2:
+ 919 0020 0C00 0000 		.long	.LEFDE2-.LASFDE2
+ 920               	.LASFDE2:
+ 921 0024 0000 0000 		.long	.Lframe0
+ 922 0028 0000 0000 		.long	.LFB4
+ 923 002c DE00 0000 		.long	.LFE4-.LFB4
+ 924               		.p2align	2
+ 925               	.LEFDE2:
+ 926               	.LSFDE4:
+ 927 0030 0C00 0000 		.long	.LEFDE4-.LASFDE4
+ 928               	.LASFDE4:
+ 929 0034 0000 0000 		.long	.Lframe0
+ 930 0038 0000 0000 		.long	.LFB5
+ 931 003c EC00 0000 		.long	.LFE5-.LFB5
+ 932               		.p2align	2
+ 933               	.LEFDE4:
+ 934               	.LSFDE6:
+ 935 0040 0C00 0000 		.long	.LEFDE6-.LASFDE6
+ 936               	.LASFDE6:
+ 937 0044 0000 0000 		.long	.Lframe0
+ 938 0048 0000 0000 		.long	.LFB6
+ 939 004c 7E00 0000 		.long	.LFE6-.LFB6
+ 940               		.p2align	2
+ 941               	.LEFDE6:
+ 942               	.LSFDE8:
+ 943 0050 0C00 0000 		.long	.LEFDE8-.LASFDE8
+ 944               	.LASFDE8:
+ 945 0054 0000 0000 		.long	.Lframe0
+ 946 0058 0000 0000 		.long	.LFB7
+ 947 005c 9C01 0000 		.long	.LFE7-.LFB7
+ 948               		.p2align	2
+ 949               	.LEFDE8:
+ 950               	.LSFDE10:
+ 951 0060 0C00 0000 		.long	.LEFDE10-.LASFDE10
+ 952               	.LASFDE10:
+ 953 0064 0000 0000 		.long	.Lframe0
+ 954 0068 0000 0000 		.long	.LFB8
+ 955 006c 2600 0000 		.long	.LFE8-.LFB8
+ 956               		.p2align	2
+ 957               	.LEFDE10:
+ 958               	.LSFDE12:
+ 959 0070 0C00 0000 		.long	.LEFDE12-.LASFDE12
+ 960               	.LASFDE12:
+ 961 0074 0000 0000 		.long	.Lframe0
+ 962 0078 0000 0000 		.long	.LFB2
+ 963 007c 1A00 0000 		.long	.LFE2-.LFB2
+ 964               		.p2align	2
+ 965               	.LEFDE12:
+ 966               		.text
+ 967               	.Letext0:
+ 968               		.section	.debug_loc,"",@progbits
+ 969               	.Ldebug_loc0:
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 18
+
+
+ 970               	.LLST1:
+ 971 0000 0000 0000 		.long	.LVL0-.Ltext0
+ 972 0004 0E00 0000 		.long	.LVL1-.Ltext0
+ 973 0008 0600      		.word	0x6
+ 974 000a 68        		.byte	0x68
+ 975 000b 93        		.byte	0x93
+ 976 000c 01        		.uleb128 0x1
+ 977 000d 69        		.byte	0x69
+ 978 000e 93        		.byte	0x93
+ 979 000f 01        		.uleb128 0x1
+ 980 0010 0E00 0000 		.long	.LVL1-.Ltext0
+ 981 0014 0801 0000 		.long	.LFE3-.Ltext0
+ 982 0018 0600      		.word	0x6
+ 983 001a 62        		.byte	0x62
+ 984 001b 93        		.byte	0x93
+ 985 001c 01        		.uleb128 0x1
+ 986 001d 63        		.byte	0x63
+ 987 001e 93        		.byte	0x93
+ 988 001f 01        		.uleb128 0x1
+ 989 0020 0000 0000 		.long	0x0
+ 990 0024 0000 0000 		.long	0x0
+ 991               	.LLST3:
+ 992 0028 0801 0000 		.long	.LVL2-.Ltext0
+ 993 002c 0E01 0000 		.long	.LVL3-.Ltext0
+ 994 0030 0600      		.word	0x6
+ 995 0032 60        		.byte	0x60
+ 996 0033 93        		.byte	0x93
+ 997 0034 01        		.uleb128 0x1
+ 998 0035 61        		.byte	0x61
+ 999 0036 93        		.byte	0x93
+ 1000 0037 01        		.uleb128 0x1
+ 1001 0038 A801 0000 		.long	.LVL8-.Ltext0
+ 1002 003c E201 0000 		.long	.LVL12-.Ltext0
+ 1003 0040 0600      		.word	0x6
+ 1004 0042 5E        		.byte	0x5e
+ 1005 0043 93        		.byte	0x93
+ 1006 0044 01        		.uleb128 0x1
+ 1007 0045 5F        		.byte	0x5f
+ 1008 0046 93        		.byte	0x93
+ 1009 0047 01        		.uleb128 0x1
+ 1010 0048 0000 0000 		.long	0x0
+ 1011 004c 0000 0000 		.long	0x0
+ 1012               	.LLST4:
+ 1013 0050 A201 0000 		.long	.LVL5-.Ltext0
+ 1014 0054 A401 0000 		.long	.LVL6-.Ltext0
+ 1015 0058 0600      		.word	0x6
+ 1016 005a 62        		.byte	0x62
+ 1017 005b 93        		.byte	0x93
+ 1018 005c 01        		.uleb128 0x1
+ 1019 005d 63        		.byte	0x63
+ 1020 005e 93        		.byte	0x93
+ 1021 005f 01        		.uleb128 0x1
+ 1022 0060 A601 0000 		.long	.LVL7-.Ltext0
+ 1023 0064 A801 0000 		.long	.LVL8-.Ltext0
+ 1024 0068 0600      		.word	0x6
+ 1025 006a 68        		.byte	0x68
+ 1026 006b 93        		.byte	0x93
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 19
+
+
+ 1027 006c 01        		.uleb128 0x1
+ 1028 006d 69        		.byte	0x69
+ 1029 006e 93        		.byte	0x93
+ 1030 006f 01        		.uleb128 0x1
+ 1031 0070 A801 0000 		.long	.LVL8-.Ltext0
+ 1032 0074 E601 0000 		.long	.LFE4-.Ltext0
+ 1033 0078 0600      		.word	0x6
+ 1034 007a 64        		.byte	0x64
+ 1035 007b 93        		.byte	0x93
+ 1036 007c 01        		.uleb128 0x1
+ 1037 007d 65        		.byte	0x65
+ 1038 007e 93        		.byte	0x93
+ 1039 007f 01        		.uleb128 0x1
+ 1040 0080 0000 0000 		.long	0x0
+ 1041 0084 0000 0000 		.long	0x0
+ 1042               	.LLST5:
+ 1043 0088 A801 0000 		.long	.LVL8-.Ltext0
+ 1044 008c CA01 0000 		.long	.LVL10-.Ltext0
+ 1045 0090 0600      		.word	0x6
+ 1046 0092 62        		.byte	0x62
+ 1047 0093 93        		.byte	0x93
+ 1048 0094 01        		.uleb128 0x1
+ 1049 0095 63        		.byte	0x63
+ 1050 0096 93        		.byte	0x93
+ 1051 0097 01        		.uleb128 0x1
+ 1052 0098 CC01 0000 		.long	.LVL11-.Ltext0
+ 1053 009c E601 0000 		.long	.LFE4-.Ltext0
+ 1054 00a0 0600      		.word	0x6
+ 1055 00a2 62        		.byte	0x62
+ 1056 00a3 93        		.byte	0x93
+ 1057 00a4 01        		.uleb128 0x1
+ 1058 00a5 63        		.byte	0x63
+ 1059 00a6 93        		.byte	0x93
+ 1060 00a7 01        		.uleb128 0x1
+ 1061 00a8 0000 0000 		.long	0x0
+ 1062 00ac 0000 0000 		.long	0x0
+ 1063               	.LLST7:
+ 1064 00b0 E601 0000 		.long	.LVL14-.Ltext0
+ 1065 00b4 EC01 0000 		.long	.LVL15-.Ltext0
+ 1066 00b8 0600      		.word	0x6
+ 1067 00ba 60        		.byte	0x60
+ 1068 00bb 93        		.byte	0x93
+ 1069 00bc 01        		.uleb128 0x1
+ 1070 00bd 61        		.byte	0x61
+ 1071 00be 93        		.byte	0x93
+ 1072 00bf 01        		.uleb128 0x1
+ 1073 00c0 1C02 0000 		.long	.LVL16-.Ltext0
+ 1074 00c4 2002 0000 		.long	.LVL17-.Ltext0
+ 1075 00c8 0600      		.word	0x6
+ 1076 00ca 60        		.byte	0x60
+ 1077 00cb 93        		.byte	0x93
+ 1078 00cc 01        		.uleb128 0x1
+ 1079 00cd 61        		.byte	0x61
+ 1080 00ce 93        		.byte	0x93
+ 1081 00cf 01        		.uleb128 0x1
+ 1082 00d0 2002 0000 		.long	.LVL17-.Ltext0
+ 1083 00d4 D202 0000 		.long	.LFE5-.Ltext0
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 20
+
+
+ 1084 00d8 0600      		.word	0x6
+ 1085 00da 6A        		.byte	0x6a
+ 1086 00db 93        		.byte	0x93
+ 1087 00dc 01        		.uleb128 0x1
+ 1088 00dd 6B        		.byte	0x6b
+ 1089 00de 93        		.byte	0x93
+ 1090 00df 01        		.uleb128 0x1
+ 1091 00e0 0000 0000 		.long	0x0
+ 1092 00e4 0000 0000 		.long	0x0
+ 1093               	.LLST8:
+ 1094 00e8 8002 0000 		.long	.LVL19-.Ltext0
+ 1095 00ec 8202 0000 		.long	.LVL20-.Ltext0
+ 1096 00f0 0600      		.word	0x6
+ 1097 00f2 62        		.byte	0x62
+ 1098 00f3 93        		.byte	0x93
+ 1099 00f4 01        		.uleb128 0x1
+ 1100 00f5 63        		.byte	0x63
+ 1101 00f6 93        		.byte	0x93
+ 1102 00f7 01        		.uleb128 0x1
+ 1103 00f8 8402 0000 		.long	.LVL21-.Ltext0
+ 1104 00fc 8602 0000 		.long	.LVL22-.Ltext0
+ 1105 0100 0600      		.word	0x6
+ 1106 0102 68        		.byte	0x68
+ 1107 0103 93        		.byte	0x93
+ 1108 0104 01        		.uleb128 0x1
+ 1109 0105 69        		.byte	0x69
+ 1110 0106 93        		.byte	0x93
+ 1111 0107 01        		.uleb128 0x1
+ 1112 0108 8602 0000 		.long	.LVL22-.Ltext0
+ 1113 010c D202 0000 		.long	.LFE5-.Ltext0
+ 1114 0110 0600      		.word	0x6
+ 1115 0112 64        		.byte	0x64
+ 1116 0113 93        		.byte	0x93
+ 1117 0114 01        		.uleb128 0x1
+ 1118 0115 65        		.byte	0x65
+ 1119 0116 93        		.byte	0x93
+ 1120 0117 01        		.uleb128 0x1
+ 1121 0118 0000 0000 		.long	0x0
+ 1122 011c 0000 0000 		.long	0x0
+ 1123               	.LLST9:
+ 1124 0120 8602 0000 		.long	.LVL22-.Ltext0
+ 1125 0124 B602 0000 		.long	.LVL25-.Ltext0
+ 1126 0128 0600      		.word	0x6
+ 1127 012a 62        		.byte	0x62
+ 1128 012b 93        		.byte	0x93
+ 1129 012c 01        		.uleb128 0x1
+ 1130 012d 63        		.byte	0x63
+ 1131 012e 93        		.byte	0x93
+ 1132 012f 01        		.uleb128 0x1
+ 1133 0130 B802 0000 		.long	.LVL26-.Ltext0
+ 1134 0134 D202 0000 		.long	.LFE5-.Ltext0
+ 1135 0138 0600      		.word	0x6
+ 1136 013a 62        		.byte	0x62
+ 1137 013b 93        		.byte	0x93
+ 1138 013c 01        		.uleb128 0x1
+ 1139 013d 63        		.byte	0x63
+ 1140 013e 93        		.byte	0x93
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 21
+
+
+ 1141 013f 01        		.uleb128 0x1
+ 1142 0140 0000 0000 		.long	0x0
+ 1143 0144 0000 0000 		.long	0x0
+ 1144               	.LLST12:
+ 1145 0148 5003 0000 		.long	.LVL27-.Ltext0
+ 1146 014c 8A03 0000 		.long	.LVL31-.Ltext0
+ 1147 0150 0100      		.word	0x1
+ 1148 0152 68        		.byte	0x68
+ 1149 0153 8A03 0000 		.long	.LVL31-.Ltext0
+ 1150 0157 DA03 0000 		.long	.LVL37-.Ltext0
+ 1151 015b 0100      		.word	0x1
+ 1152 015d 69        		.byte	0x69
+ 1153 015e CE04 0000 		.long	.LVL42-.Ltext0
+ 1154 0162 EC04 0000 		.long	.LFE7-.Ltext0
+ 1155 0166 0100      		.word	0x1
+ 1156 0168 69        		.byte	0x69
+ 1157 0169 0000 0000 		.long	0x0
+ 1158 016d 0000 0000 		.long	0x0
+ 1159               	.LLST13:
+ 1160 0171 E003 0000 		.long	.LVL38-.Ltext0
+ 1161 0175 8404 0000 		.long	.LVL39-.Ltext0
+ 1162 0179 0600      		.word	0x6
+ 1163 017b 66        		.byte	0x66
+ 1164 017c 93        		.byte	0x93
+ 1165 017d 01        		.uleb128 0x1
+ 1166 017e 67        		.byte	0x67
+ 1167 017f 93        		.byte	0x93
+ 1168 0180 01        		.uleb128 0x1
+ 1169 0181 8404 0000 		.long	.LVL39-.Ltext0
+ 1170 0185 B004 0000 		.long	.LVL41-.Ltext0
+ 1171 0189 0600      		.word	0x6
+ 1172 018b 68        		.byte	0x68
+ 1173 018c 93        		.byte	0x93
+ 1174 018d 01        		.uleb128 0x1
+ 1175 018e 69        		.byte	0x69
+ 1176 018f 93        		.byte	0x93
+ 1177 0190 01        		.uleb128 0x1
+ 1178 0191 0000 0000 		.long	0x0
+ 1179 0195 0000 0000 		.long	0x0
+ 1180               	.LLST14:
+ 1181 0199 9C03 0000 		.long	.LVL33-.Ltext0
+ 1182 019d 9C04 0000 		.long	.LVL40-.Ltext0
+ 1183 01a1 0600      		.word	0x6
+ 1184 01a3 62        		.byte	0x62
+ 1185 01a4 93        		.byte	0x93
+ 1186 01a5 01        		.uleb128 0x1
+ 1187 01a6 63        		.byte	0x63
+ 1188 01a7 93        		.byte	0x93
+ 1189 01a8 01        		.uleb128 0x1
+ 1190 01a9 0000 0000 		.long	0x0
+ 1191 01ad 0000 0000 		.long	0x0
+ 1192               	.LLST15:
+ 1193 01b1 7603 0000 		.long	.LVL28-.Ltext0
+ 1194 01b5 D604 0000 		.long	.LVL45-.Ltext0
+ 1195 01b9 0600      		.word	0x6
+ 1196 01bb 60        		.byte	0x60
+ 1197 01bc 93        		.byte	0x93
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 22
+
+
+ 1198 01bd 01        		.uleb128 0x1
+ 1199 01be 61        		.byte	0x61
+ 1200 01bf 93        		.byte	0x93
+ 1201 01c0 01        		.uleb128 0x1
+ 1202 01c1 0000 0000 		.long	0x0
+ 1203 01c5 0000 0000 		.long	0x0
+ 1204               	.LLST16:
+ 1205 01c9 7C03 0000 		.long	.LVL29-.Ltext0
+ 1206 01cd DA04 0000 		.long	.LVL46-.Ltext0
+ 1207 01d1 0600      		.word	0x6
+ 1208 01d3 5E        		.byte	0x5e
+ 1209 01d4 93        		.byte	0x93
+ 1210 01d5 01        		.uleb128 0x1
+ 1211 01d6 5F        		.byte	0x5f
+ 1212 01d7 93        		.byte	0x93
+ 1213 01d8 01        		.uleb128 0x1
+ 1214 01d9 0000 0000 		.long	0x0
+ 1215 01dd 0000 0000 		.long	0x0
+ 1216               	.LLST17:
+ 1217 01e1 8803 0000 		.long	.LVL30-.Ltext0
+ 1218 01e5 EA04 0000 		.long	.LVL48-.Ltext0
+ 1219 01e9 0600      		.word	0x6
+ 1220 01eb 56        		.byte	0x56
+ 1221 01ec 93        		.byte	0x93
+ 1222 01ed 01        		.uleb128 0x1
+ 1223 01ee 57        		.byte	0x57
+ 1224 01ef 93        		.byte	0x93
+ 1225 01f0 01        		.uleb128 0x1
+ 1226 01f1 0000 0000 		.long	0x0
+ 1227 01f5 0000 0000 		.long	0x0
+ 1228               	.LLST18:
+ 1229 01f9 9203 0000 		.long	.LVL32-.Ltext0
+ 1230 01fd D204 0000 		.long	.LVL44-.Ltext0
+ 1231 0201 0600      		.word	0x6
+ 1232 0203 6C        		.byte	0x6c
+ 1233 0204 93        		.byte	0x93
+ 1234 0205 01        		.uleb128 0x1
+ 1235 0206 6D        		.byte	0x6d
+ 1236 0207 93        		.byte	0x93
+ 1237 0208 01        		.uleb128 0x1
+ 1238 0209 0000 0000 		.long	0x0
+ 1239 020d 0000 0000 		.long	0x0
+ 1240               	.LLST20:
+ 1241 0211 EC04 0000 		.long	.LVL49-.Ltext0
+ 1242 0215 F804 0000 		.long	.LVL51-.Ltext0
+ 1243 0219 0600      		.word	0x6
+ 1244 021b 68        		.byte	0x68
+ 1245 021c 93        		.byte	0x93
+ 1246 021d 01        		.uleb128 0x1
+ 1247 021e 69        		.byte	0x69
+ 1248 021f 93        		.byte	0x93
+ 1249 0220 01        		.uleb128 0x1
+ 1250 0221 F804 0000 		.long	.LVL51-.Ltext0
+ 1251 0225 0E05 0000 		.long	.LVL53-.Ltext0
+ 1252 0229 0600      		.word	0x6
+ 1253 022b 6C        		.byte	0x6c
+ 1254 022c 93        		.byte	0x93
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 23
+
+
+ 1255 022d 01        		.uleb128 0x1
+ 1256 022e 6D        		.byte	0x6d
+ 1257 022f 93        		.byte	0x93
+ 1258 0230 01        		.uleb128 0x1
+ 1259 0231 0000 0000 		.long	0x0
+ 1260 0235 0000 0000 		.long	0x0
+ 1261               	.LLST21:
+ 1262 0239 F604 0000 		.long	.LVL50-.Ltext0
+ 1263 023d 1005 0000 		.long	.LVL54-.Ltext0
+ 1264 0241 0100      		.word	0x1
+ 1265 0243 61        		.byte	0x61
+ 1266 0244 0000 0000 		.long	0x0
+ 1267 0248 0000 0000 		.long	0x0
+ 1268               		.section	.debug_info
+ 1269 0000 A303 0000 		.long	0x3a3
+ 1270 0004 0200      		.word	0x2
+ 1271 0006 0000 0000 		.long	.Ldebug_abbrev0
+ 1272 000a 04        		.byte	0x4
+ 1273 000b 01        		.uleb128 0x1
+ 1274 000c 0000 0000 		.long	.LASF37
+ 1275 0010 01        		.byte	0x1
+ 1276 0011 0000 0000 		.long	.LASF38
+ 1277 0015 0000 0000 		.long	.LASF39
+ 1278 0019 0000 0000 		.long	.Ltext0
+ 1279 001d 0000 0000 		.long	.Letext0
+ 1280 0021 0000 0000 		.long	.Ldebug_line0
+ 1281 0025 02        		.uleb128 0x2
+ 1282 0026 01        		.byte	0x1
+ 1283 0027 06        		.byte	0x6
+ 1284 0028 0000 0000 		.long	.LASF0
+ 1285 002c 03        		.uleb128 0x3
+ 1286 002d 0000 0000 		.long	.LASF2
+ 1287 0031 02        		.byte	0x2
+ 1288 0032 7A        		.byte	0x7a
+ 1289 0033 3700 0000 		.long	0x37
+ 1290 0037 02        		.uleb128 0x2
+ 1291 0038 01        		.byte	0x1
+ 1292 0039 08        		.byte	0x8
+ 1293 003a 0000 0000 		.long	.LASF1
+ 1294 003e 04        		.uleb128 0x4
+ 1295 003f 02        		.byte	0x2
+ 1296 0040 05        		.byte	0x5
+ 1297 0041 696E 7400 		.string	"int"
+ 1298 0045 03        		.uleb128 0x3
+ 1299 0046 0000 0000 		.long	.LASF3
+ 1300 004a 02        		.byte	0x2
+ 1301 004b 7C        		.byte	0x7c
+ 1302 004c 5000 0000 		.long	0x50
+ 1303 0050 02        		.uleb128 0x2
+ 1304 0051 02        		.byte	0x2
+ 1305 0052 07        		.byte	0x7
+ 1306 0053 0000 0000 		.long	.LASF4
+ 1307 0057 02        		.uleb128 0x2
+ 1308 0058 04        		.byte	0x4
+ 1309 0059 05        		.byte	0x5
+ 1310 005a 0000 0000 		.long	.LASF5
+ 1311 005e 02        		.uleb128 0x2
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 24
+
+
+ 1312 005f 04        		.byte	0x4
+ 1313 0060 07        		.byte	0x7
+ 1314 0061 0000 0000 		.long	.LASF6
+ 1315 0065 02        		.uleb128 0x2
+ 1316 0066 08        		.byte	0x8
+ 1317 0067 05        		.byte	0x5
+ 1318 0068 0000 0000 		.long	.LASF7
+ 1319 006c 02        		.uleb128 0x2
+ 1320 006d 08        		.byte	0x8
+ 1321 006e 07        		.byte	0x7
+ 1322 006f 0000 0000 		.long	.LASF8
+ 1323 0073 03        		.uleb128 0x3
+ 1324 0074 0000 0000 		.long	.LASF9
+ 1325 0078 03        		.byte	0x3
+ 1326 0079 D4        		.byte	0xd4
+ 1327 007a 7E00 0000 		.long	0x7e
+ 1328 007e 05        		.uleb128 0x5
+ 1329 007f 01        		.byte	0x1
+ 1330 0080 08        		.byte	0x8
+ 1331 0081 06        		.uleb128 0x6
+ 1332 0082 02        		.byte	0x2
+ 1333 0083 04        		.byte	0x4
+ 1334 0084 15        		.byte	0x15
+ 1335 0085 A200 0000 		.long	0xa2
+ 1336 0089 07        		.uleb128 0x7
+ 1337 008a 0000 0000 		.long	.LASF10
+ 1338 008e 00        		.sleb128 0
+ 1339 008f 07        		.uleb128 0x7
+ 1340 0090 0000 0000 		.long	.LASF11
+ 1341 0094 01        		.sleb128 1
+ 1342 0095 07        		.uleb128 0x7
+ 1343 0096 0000 0000 		.long	.LASF12
+ 1344 009a 02        		.sleb128 2
+ 1345 009b 07        		.uleb128 0x7
+ 1346 009c 0000 0000 		.long	.LASF13
+ 1347 00a0 03        		.sleb128 3
+ 1348 00a1 00        		.byte	0x0
+ 1349 00a2 03        		.uleb128 0x3
+ 1350 00a3 0000 0000 		.long	.LASF14
+ 1351 00a7 04        		.byte	0x4
+ 1352 00a8 15        		.byte	0x15
+ 1353 00a9 8100 0000 		.long	0x81
+ 1354 00ad 08        		.uleb128 0x8
+ 1355 00ae 0E        		.byte	0xe
+ 1356 00af 04        		.byte	0x4
+ 1357 00b0 17        		.byte	0x17
+ 1358 00b1 1401 0000 		.long	0x114
+ 1359 00b5 09        		.uleb128 0x9
+ 1360 00b6 0000 0000 		.long	.LASF15
+ 1361 00ba 04        		.byte	0x4
+ 1362 00bb 18        		.byte	0x18
+ 1363 00bc 4500 0000 		.long	0x45
+ 1364 00c0 02        		.byte	0x2
+ 1365 00c1 23        		.byte	0x23
+ 1366 00c2 00        		.uleb128 0x0
+ 1367 00c3 09        		.uleb128 0x9
+ 1368 00c4 0000 0000 		.long	.LASF16
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 25
+
+
+ 1369 00c8 04        		.byte	0x4
+ 1370 00c9 18        		.byte	0x18
+ 1371 00ca 4500 0000 		.long	0x45
+ 1372 00ce 02        		.byte	0x2
+ 1373 00cf 23        		.byte	0x23
+ 1374 00d0 02        		.uleb128 0x2
+ 1375 00d1 09        		.uleb128 0x9
+ 1376 00d2 0000 0000 		.long	.LASF17
+ 1377 00d6 04        		.byte	0x4
+ 1378 00d7 19        		.byte	0x19
+ 1379 00d8 A200 0000 		.long	0xa2
+ 1380 00dc 02        		.byte	0x2
+ 1381 00dd 23        		.byte	0x23
+ 1382 00de 04        		.uleb128 0x4
+ 1383 00df 0A        		.uleb128 0xa
+ 1384 00e0 7800      		.string	"x"
+ 1385 00e2 04        		.byte	0x4
+ 1386 00e3 1A        		.byte	0x1a
+ 1387 00e4 4500 0000 		.long	0x45
+ 1388 00e8 02        		.byte	0x2
+ 1389 00e9 23        		.byte	0x23
+ 1390 00ea 06        		.uleb128 0x6
+ 1391 00eb 0A        		.uleb128 0xa
+ 1392 00ec 7900      		.string	"y"
+ 1393 00ee 04        		.byte	0x4
+ 1394 00ef 1A        		.byte	0x1a
+ 1395 00f0 4500 0000 		.long	0x45
+ 1396 00f4 02        		.byte	0x2
+ 1397 00f5 23        		.byte	0x23
+ 1398 00f6 08        		.uleb128 0x8
+ 1399 00f7 09        		.uleb128 0x9
+ 1400 00f8 0000 0000 		.long	.LASF18
+ 1401 00fc 04        		.byte	0x4
+ 1402 00fd 1B        		.byte	0x1b
+ 1403 00fe 4500 0000 		.long	0x45
+ 1404 0102 02        		.byte	0x2
+ 1405 0103 23        		.byte	0x23
+ 1406 0104 0A        		.uleb128 0xa
+ 1407 0105 09        		.uleb128 0x9
+ 1408 0106 0000 0000 		.long	.LASF19
+ 1409 010a 04        		.byte	0x4
+ 1410 010b 1B        		.byte	0x1b
+ 1411 010c 4500 0000 		.long	0x45
+ 1412 0110 02        		.byte	0x2
+ 1413 0111 23        		.byte	0x23
+ 1414 0112 0C        		.uleb128 0xc
+ 1415 0113 00        		.byte	0x0
+ 1416 0114 0B        		.uleb128 0xb
+ 1417 0115 6C63 6400 		.string	"lcd"
+ 1418 0119 04        		.byte	0x4
+ 1419 011a 1C        		.byte	0x1c
+ 1420 011b AD00 0000 		.long	0xad
+ 1421 011f 08        		.uleb128 0x8
+ 1422 0120 08        		.byte	0x8
+ 1423 0121 04        		.byte	0x4
+ 1424 0122 20        		.byte	0x20
+ 1425 0123 6001 0000 		.long	0x160
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 26
+
+
+ 1426 0127 09        		.uleb128 0x9
+ 1427 0128 0000 0000 		.long	.LASF20
+ 1428 012c 04        		.byte	0x4
+ 1429 012d 21        		.byte	0x21
+ 1430 012e 4500 0000 		.long	0x45
+ 1431 0132 02        		.byte	0x2
+ 1432 0133 23        		.byte	0x23
+ 1433 0134 00        		.uleb128 0x0
+ 1434 0135 09        		.uleb128 0x9
+ 1435 0136 0000 0000 		.long	.LASF21
+ 1436 013a 04        		.byte	0x4
+ 1437 013b 21        		.byte	0x21
+ 1438 013c 4500 0000 		.long	0x45
+ 1439 0140 02        		.byte	0x2
+ 1440 0141 23        		.byte	0x23
+ 1441 0142 02        		.uleb128 0x2
+ 1442 0143 0A        		.uleb128 0xa
+ 1443 0144 746F 7000 		.string	"top"
+ 1444 0148 04        		.byte	0x4
+ 1445 0149 22        		.byte	0x22
+ 1446 014a 4500 0000 		.long	0x45
+ 1447 014e 02        		.byte	0x2
+ 1448 014f 23        		.byte	0x23
+ 1449 0150 04        		.uleb128 0x4
+ 1450 0151 09        		.uleb128 0x9
+ 1451 0152 0000 0000 		.long	.LASF22
+ 1452 0156 04        		.byte	0x4
+ 1453 0157 22        		.byte	0x22
+ 1454 0158 4500 0000 		.long	0x45
+ 1455 015c 02        		.byte	0x2
+ 1456 015d 23        		.byte	0x23
+ 1457 015e 06        		.uleb128 0x6
+ 1458 015f 00        		.byte	0x0
+ 1459 0160 03        		.uleb128 0x3
+ 1460 0161 0000 0000 		.long	.LASF23
+ 1461 0165 04        		.byte	0x4
+ 1462 0166 23        		.byte	0x23
+ 1463 0167 1F01 0000 		.long	0x11f
+ 1464 016b 0C        		.uleb128 0xc
+ 1465 016c 01        		.byte	0x1
+ 1466 016d 0000 0000 		.long	.LASF24
+ 1467 0171 01        		.byte	0x1
+ 1468 0172 1E        		.byte	0x1e
+ 1469 0173 01        		.byte	0x1
+ 1470 0174 0000 0000 		.long	.LFB3
+ 1471 0178 0000 0000 		.long	.LFE3
+ 1472 017c 02        		.byte	0x2
+ 1473 017d 90        		.byte	0x90
+ 1474 017e 20        		.uleb128 0x20
+ 1475 017f 9101 0000 		.long	0x191
+ 1476 0183 0D        		.uleb128 0xd
+ 1477 0184 6F00      		.string	"o"
+ 1478 0186 01        		.byte	0x1
+ 1479 0187 1D        		.byte	0x1d
+ 1480 0188 A200 0000 		.long	0xa2
+ 1481 018c 0000 0000 		.long	.LLST1
+ 1482 0190 00        		.byte	0x0
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 27
+
+
+ 1483 0191 0C        		.uleb128 0xc
+ 1484 0192 01        		.byte	0x1
+ 1485 0193 0000 0000 		.long	.LASF25
+ 1486 0197 01        		.byte	0x1
+ 1487 0198 3E        		.byte	0x3e
+ 1488 0199 01        		.byte	0x1
+ 1489 019a 0000 0000 		.long	.LFB4
+ 1490 019e 0000 0000 		.long	.LFE4
+ 1491 01a2 02        		.byte	0x2
+ 1492 01a3 90        		.byte	0x90
+ 1493 01a4 20        		.uleb128 0x20
+ 1494 01a5 DF01 0000 		.long	0x1df
+ 1495 01a9 0E        		.uleb128 0xe
+ 1496 01aa 7200      		.string	"r"
+ 1497 01ac 01        		.byte	0x1
+ 1498 01ad 3D        		.byte	0x3d
+ 1499 01ae 6001 0000 		.long	0x160
+ 1500 01b2 02        		.byte	0x2
+ 1501 01b3 8C        		.byte	0x8c
+ 1502 01b4 01        		.sleb128 1
+ 1503 01b5 0D        		.uleb128 0xd
+ 1504 01b6 636F 6C00 		.string	"col"
+ 1505 01ba 01        		.byte	0x1
+ 1506 01bb 3D        		.byte	0x3d
+ 1507 01bc 4500 0000 		.long	0x45
+ 1508 01c0 0000 0000 		.long	.LLST3
+ 1509 01c4 0F        		.uleb128 0xf
+ 1510 01c5 7800      		.string	"x"
+ 1511 01c7 01        		.byte	0x1
+ 1512 01c8 3F        		.byte	0x3f
+ 1513 01c9 4500 0000 		.long	0x45
+ 1514 01cd 0000 0000 		.long	.LLST4
+ 1515 01d1 0F        		.uleb128 0xf
+ 1516 01d2 7900      		.string	"y"
+ 1517 01d4 01        		.byte	0x1
+ 1518 01d5 3F        		.byte	0x3f
+ 1519 01d6 4500 0000 		.long	0x45
+ 1520 01da 0000 0000 		.long	.LLST5
+ 1521 01de 00        		.byte	0x0
+ 1522 01df 0C        		.uleb128 0xc
+ 1523 01e0 01        		.byte	0x1
+ 1524 01e1 0000 0000 		.long	.LASF26
+ 1525 01e5 01        		.byte	0x1
+ 1526 01e6 4D        		.byte	0x4d
+ 1527 01e7 01        		.byte	0x1
+ 1528 01e8 0000 0000 		.long	.LFB5
+ 1529 01ec 0000 0000 		.long	.LFE5
+ 1530 01f0 02        		.byte	0x2
+ 1531 01f1 90        		.byte	0x90
+ 1532 01f2 20        		.uleb128 0x20
+ 1533 01f3 2D02 0000 		.long	0x22d
+ 1534 01f7 0E        		.uleb128 0xe
+ 1535 01f8 7200      		.string	"r"
+ 1536 01fa 01        		.byte	0x1
+ 1537 01fb 4C        		.byte	0x4c
+ 1538 01fc 6001 0000 		.long	0x160
+ 1539 0200 02        		.byte	0x2
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 28
+
+
+ 1540 0201 8C        		.byte	0x8c
+ 1541 0202 01        		.sleb128 1
+ 1542 0203 0D        		.uleb128 0xd
+ 1543 0204 636F 6C00 		.string	"col"
+ 1544 0208 01        		.byte	0x1
+ 1545 0209 4C        		.byte	0x4c
+ 1546 020a 2D02 0000 		.long	0x22d
+ 1547 020e 0000 0000 		.long	.LLST7
+ 1548 0212 0F        		.uleb128 0xf
+ 1549 0213 7800      		.string	"x"
+ 1550 0215 01        		.byte	0x1
+ 1551 0216 4E        		.byte	0x4e
+ 1552 0217 4500 0000 		.long	0x45
+ 1553 021b 0000 0000 		.long	.LLST8
+ 1554 021f 0F        		.uleb128 0xf
+ 1555 0220 7900      		.string	"y"
+ 1556 0222 01        		.byte	0x1
+ 1557 0223 4E        		.byte	0x4e
+ 1558 0224 4500 0000 		.long	0x45
+ 1559 0228 0000 0000 		.long	.LLST9
+ 1560 022c 00        		.byte	0x0
+ 1561 022d 10        		.uleb128 0x10
+ 1562 022e 02        		.byte	0x2
+ 1563 022f 4500 0000 		.long	0x45
+ 1564 0233 11        		.uleb128 0x11
+ 1565 0234 01        		.byte	0x1
+ 1566 0235 0000 0000 		.long	.LASF40
+ 1567 0239 01        		.byte	0x1
+ 1568 023a 5C        		.byte	0x5c
+ 1569 023b 0000 0000 		.long	.LFB6
+ 1570 023f 0000 0000 		.long	.LFE6
+ 1571 0243 02        		.byte	0x2
+ 1572 0244 90        		.byte	0x90
+ 1573 0245 20        		.uleb128 0x20
+ 1574 0246 5702 0000 		.long	0x257
+ 1575 024a 12        		.uleb128 0x12
+ 1576 024b 7200      		.string	"r"
+ 1577 024d 01        		.byte	0x1
+ 1578 024e 5F        		.byte	0x5f
+ 1579 024f 6001 0000 		.long	0x160
+ 1580 0253 02        		.byte	0x2
+ 1581 0254 8C        		.byte	0x8c
+ 1582 0255 01        		.sleb128 1
+ 1583 0256 00        		.byte	0x0
+ 1584 0257 0C        		.uleb128 0xc
+ 1585 0258 01        		.byte	0x1
+ 1586 0259 0000 0000 		.long	.LASF27
+ 1587 025d 01        		.byte	0x1
+ 1588 025e 64        		.byte	0x64
+ 1589 025f 01        		.byte	0x1
+ 1590 0260 0000 0000 		.long	.LFB7
+ 1591 0264 0000 0000 		.long	.LFE7
+ 1592 0268 02        		.byte	0x2
+ 1593 0269 90        		.byte	0x90
+ 1594 026a 20        		.uleb128 0x20
+ 1595 026b 1703 0000 		.long	0x317
+ 1596 026f 0D        		.uleb128 0xd
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 29
+
+
+ 1597 0270 6300      		.string	"c"
+ 1598 0272 01        		.byte	0x1
+ 1599 0273 63        		.byte	0x63
+ 1600 0274 1703 0000 		.long	0x317
+ 1601 0278 0000 0000 		.long	.LLST12
+ 1602 027c 12        		.uleb128 0x12
+ 1603 027d 7800      		.string	"x"
+ 1604 027f 01        		.byte	0x1
+ 1605 0280 65        		.byte	0x65
+ 1606 0281 4500 0000 		.long	0x45
+ 1607 0285 06        		.byte	0x6
+ 1608 0286 64        		.byte	0x64
+ 1609 0287 93        		.byte	0x93
+ 1610 0288 01        		.uleb128 0x1
+ 1611 0289 65        		.byte	0x65
+ 1612 028a 93        		.byte	0x93
+ 1613 028b 01        		.uleb128 0x1
+ 1614 028c 0F        		.uleb128 0xf
+ 1615 028d 7900      		.string	"y"
+ 1616 028f 01        		.byte	0x1
+ 1617 0290 65        		.byte	0x65
+ 1618 0291 4500 0000 		.long	0x45
+ 1619 0295 0000 0000 		.long	.LLST13
+ 1620 0299 13        		.uleb128 0x13
+ 1621 029a 0000 0000 		.long	.LASF28
+ 1622 029e 01        		.byte	0x1
+ 1623 029f 66        		.byte	0x66
+ 1624 02a0 1E03 0000 		.long	0x31e
+ 1625 02a4 0000 0000 		.long	.LLST14
+ 1626 02a8 14        		.uleb128 0x14
+ 1627 02a9 0000 0000 		.long	.LASF30
+ 1628 02ad 01        		.byte	0x1
+ 1629 02ae 67        		.byte	0x67
+ 1630 02af 2C00 0000 		.long	0x2c
+ 1631 02b3 15        		.uleb128 0x15
+ 1632 02b4 0000 0000 		.long	.LASF29
+ 1633 02b8 01        		.byte	0x1
+ 1634 02b9 67        		.byte	0x67
+ 1635 02ba 2C00 0000 		.long	0x2c
+ 1636 02be 01        		.byte	0x1
+ 1637 02bf 69        		.byte	0x69
+ 1638 02c0 0F        		.uleb128 0xf
+ 1639 02c1 7363 00   		.string	"sc"
+ 1640 02c4 01        		.byte	0x1
+ 1641 02c5 68        		.byte	0x68
+ 1642 02c6 4500 0000 		.long	0x45
+ 1643 02ca 0000 0000 		.long	.LLST15
+ 1644 02ce 0F        		.uleb128 0xf
+ 1645 02cf 6563 00   		.string	"ec"
+ 1646 02d2 01        		.byte	0x1
+ 1647 02d3 68        		.byte	0x68
+ 1648 02d4 4500 0000 		.long	0x45
+ 1649 02d8 0000 0000 		.long	.LLST16
+ 1650 02dc 0F        		.uleb128 0xf
+ 1651 02dd 7370 00   		.string	"sp"
+ 1652 02e0 01        		.byte	0x1
+ 1653 02e1 68        		.byte	0x68
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 30
+
+
+ 1654 02e2 4500 0000 		.long	0x45
+ 1655 02e6 0000 0000 		.long	.LLST17
+ 1656 02ea 0F        		.uleb128 0xf
+ 1657 02eb 6570 00   		.string	"ep"
+ 1658 02ee 01        		.byte	0x1
+ 1659 02ef 68        		.byte	0x68
+ 1660 02f0 4500 0000 		.long	0x45
+ 1661 02f4 0000 0000 		.long	.LLST18
+ 1662 02f8 16        		.uleb128 0x16
+ 1663 02f9 0000 0000 		.long	.Ldebug_ranges0+0x0
+ 1664 02fd 14        		.uleb128 0x14
+ 1665 02fe 0000 0000 		.long	.LASF31
+ 1666 0302 01        		.byte	0x1
+ 1667 0303 73        		.byte	0x73
+ 1668 0304 4500 0000 		.long	0x45
+ 1669 0308 15        		.uleb128 0x15
+ 1670 0309 0000 0000 		.long	.LASF32
+ 1671 030d 01        		.byte	0x1
+ 1672 030e 73        		.byte	0x73
+ 1673 030f 2C00 0000 		.long	0x2c
+ 1674 0313 01        		.byte	0x1
+ 1675 0314 6B        		.byte	0x6b
+ 1676 0315 00        		.byte	0x0
+ 1677 0316 00        		.byte	0x0
+ 1678 0317 02        		.uleb128 0x2
+ 1679 0318 01        		.byte	0x1
+ 1680 0319 08        		.byte	0x8
+ 1681 031a 0000 0000 		.long	.LASF33
+ 1682 031e 10        		.uleb128 0x10
+ 1683 031f 02        		.byte	0x2
+ 1684 0320 2403 0000 		.long	0x324
+ 1685 0324 17        		.uleb128 0x17
+ 1686 0325 7300 0000 		.long	0x73
+ 1687 0329 0C        		.uleb128 0xc
+ 1688 032a 01        		.byte	0x1
+ 1689 032b 0000 0000 		.long	.LASF34
+ 1690 032f 01        		.byte	0x1
+ 1691 0330 83        		.byte	0x83
+ 1692 0331 01        		.byte	0x1
+ 1693 0332 0000 0000 		.long	.LFB8
+ 1694 0336 0000 0000 		.long	.LFE8
+ 1695 033a 02        		.byte	0x2
+ 1696 033b 90        		.byte	0x90
+ 1697 033c 20        		.uleb128 0x20
+ 1698 033d 5E03 0000 		.long	0x35e
+ 1699 0341 0D        		.uleb128 0xd
+ 1700 0342 7374 7200 		.string	"str"
+ 1701 0346 01        		.byte	0x1
+ 1702 0347 82        		.byte	0x82
+ 1703 0348 5E03 0000 		.long	0x35e
+ 1704 034c 0000 0000 		.long	.LLST20
+ 1705 0350 0F        		.uleb128 0xf
+ 1706 0351 6900      		.string	"i"
+ 1707 0353 01        		.byte	0x1
+ 1708 0354 84        		.byte	0x84
+ 1709 0355 2C00 0000 		.long	0x2c
+ 1710 0359 0000 0000 		.long	.LLST21
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 31
+
+
+ 1711 035d 00        		.byte	0x0
+ 1712 035e 10        		.uleb128 0x10
+ 1713 035f 02        		.byte	0x2
+ 1714 0360 1703 0000 		.long	0x317
+ 1715 0364 18        		.uleb128 0x18
+ 1716 0365 01        		.byte	0x1
+ 1717 0366 0000 0000 		.long	.LASF41
+ 1718 036a 01        		.byte	0x1
+ 1719 036b 0E        		.byte	0xe
+ 1720 036c 0000 0000 		.long	.LFB2
+ 1721 0370 0000 0000 		.long	.LFE2
+ 1722 0374 02        		.byte	0x2
+ 1723 0375 90        		.byte	0x90
+ 1724 0376 20        		.uleb128 0x20
+ 1725 0377 19        		.uleb128 0x19
+ 1726 0378 2C00 0000 		.long	0x2c
+ 1727 037c 8203 0000 		.long	0x382
+ 1728 0380 1A        		.uleb128 0x1a
+ 1729 0381 00        		.byte	0x0
+ 1730 0382 1B        		.uleb128 0x1b
+ 1731 0383 0000 0000 		.long	.LASF35
+ 1732 0387 05        		.byte	0x5
+ 1733 0388 0C        		.byte	0xc
+ 1734 0389 8F03 0000 		.long	0x38f
+ 1735 038d 01        		.byte	0x1
+ 1736 038e 01        		.byte	0x1
+ 1737 038f 17        		.uleb128 0x17
+ 1738 0390 7703 0000 		.long	0x377
+ 1739 0394 1C        		.uleb128 0x1c
+ 1740 0395 0000 0000 		.long	.LASF36
+ 1741 0399 01        		.byte	0x1
+ 1742 039a 0B        		.byte	0xb
+ 1743 039b 1401 0000 		.long	0x114
+ 1744 039f 01        		.byte	0x1
+ 1745 03a0 05        		.byte	0x5
+ 1746 03a1 03        		.byte	0x3
+ 1747 03a2 0000 0000 		.long	display
+ 1748 03a6 00        		.byte	0x0
+ 1749               		.section	.debug_abbrev
+ 1750 0000 01        		.uleb128 0x1
+ 1751 0001 11        		.uleb128 0x11
+ 1752 0002 01        		.byte	0x1
+ 1753 0003 25        		.uleb128 0x25
+ 1754 0004 0E        		.uleb128 0xe
+ 1755 0005 13        		.uleb128 0x13
+ 1756 0006 0B        		.uleb128 0xb
+ 1757 0007 03        		.uleb128 0x3
+ 1758 0008 0E        		.uleb128 0xe
+ 1759 0009 1B        		.uleb128 0x1b
+ 1760 000a 0E        		.uleb128 0xe
+ 1761 000b 11        		.uleb128 0x11
+ 1762 000c 01        		.uleb128 0x1
+ 1763 000d 12        		.uleb128 0x12
+ 1764 000e 01        		.uleb128 0x1
+ 1765 000f 10        		.uleb128 0x10
+ 1766 0010 06        		.uleb128 0x6
+ 1767 0011 00        		.byte	0x0
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 32
+
+
+ 1768 0012 00        		.byte	0x0
+ 1769 0013 02        		.uleb128 0x2
+ 1770 0014 24        		.uleb128 0x24
+ 1771 0015 00        		.byte	0x0
+ 1772 0016 0B        		.uleb128 0xb
+ 1773 0017 0B        		.uleb128 0xb
+ 1774 0018 3E        		.uleb128 0x3e
+ 1775 0019 0B        		.uleb128 0xb
+ 1776 001a 03        		.uleb128 0x3
+ 1777 001b 0E        		.uleb128 0xe
+ 1778 001c 00        		.byte	0x0
+ 1779 001d 00        		.byte	0x0
+ 1780 001e 03        		.uleb128 0x3
+ 1781 001f 16        		.uleb128 0x16
+ 1782 0020 00        		.byte	0x0
+ 1783 0021 03        		.uleb128 0x3
+ 1784 0022 0E        		.uleb128 0xe
+ 1785 0023 3A        		.uleb128 0x3a
+ 1786 0024 0B        		.uleb128 0xb
+ 1787 0025 3B        		.uleb128 0x3b
+ 1788 0026 0B        		.uleb128 0xb
+ 1789 0027 49        		.uleb128 0x49
+ 1790 0028 13        		.uleb128 0x13
+ 1791 0029 00        		.byte	0x0
+ 1792 002a 00        		.byte	0x0
+ 1793 002b 04        		.uleb128 0x4
+ 1794 002c 24        		.uleb128 0x24
+ 1795 002d 00        		.byte	0x0
+ 1796 002e 0B        		.uleb128 0xb
+ 1797 002f 0B        		.uleb128 0xb
+ 1798 0030 3E        		.uleb128 0x3e
+ 1799 0031 0B        		.uleb128 0xb
+ 1800 0032 03        		.uleb128 0x3
+ 1801 0033 08        		.uleb128 0x8
+ 1802 0034 00        		.byte	0x0
+ 1803 0035 00        		.byte	0x0
+ 1804 0036 05        		.uleb128 0x5
+ 1805 0037 24        		.uleb128 0x24
+ 1806 0038 00        		.byte	0x0
+ 1807 0039 0B        		.uleb128 0xb
+ 1808 003a 0B        		.uleb128 0xb
+ 1809 003b 3E        		.uleb128 0x3e
+ 1810 003c 0B        		.uleb128 0xb
+ 1811 003d 00        		.byte	0x0
+ 1812 003e 00        		.byte	0x0
+ 1813 003f 06        		.uleb128 0x6
+ 1814 0040 04        		.uleb128 0x4
+ 1815 0041 01        		.byte	0x1
+ 1816 0042 0B        		.uleb128 0xb
+ 1817 0043 0B        		.uleb128 0xb
+ 1818 0044 3A        		.uleb128 0x3a
+ 1819 0045 0B        		.uleb128 0xb
+ 1820 0046 3B        		.uleb128 0x3b
+ 1821 0047 0B        		.uleb128 0xb
+ 1822 0048 01        		.uleb128 0x1
+ 1823 0049 13        		.uleb128 0x13
+ 1824 004a 00        		.byte	0x0
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 33
+
+
+ 1825 004b 00        		.byte	0x0
+ 1826 004c 07        		.uleb128 0x7
+ 1827 004d 28        		.uleb128 0x28
+ 1828 004e 00        		.byte	0x0
+ 1829 004f 03        		.uleb128 0x3
+ 1830 0050 0E        		.uleb128 0xe
+ 1831 0051 1C        		.uleb128 0x1c
+ 1832 0052 0D        		.uleb128 0xd
+ 1833 0053 00        		.byte	0x0
+ 1834 0054 00        		.byte	0x0
+ 1835 0055 08        		.uleb128 0x8
+ 1836 0056 13        		.uleb128 0x13
+ 1837 0057 01        		.byte	0x1
+ 1838 0058 0B        		.uleb128 0xb
+ 1839 0059 0B        		.uleb128 0xb
+ 1840 005a 3A        		.uleb128 0x3a
+ 1841 005b 0B        		.uleb128 0xb
+ 1842 005c 3B        		.uleb128 0x3b
+ 1843 005d 0B        		.uleb128 0xb
+ 1844 005e 01        		.uleb128 0x1
+ 1845 005f 13        		.uleb128 0x13
+ 1846 0060 00        		.byte	0x0
+ 1847 0061 00        		.byte	0x0
+ 1848 0062 09        		.uleb128 0x9
+ 1849 0063 0D        		.uleb128 0xd
+ 1850 0064 00        		.byte	0x0
+ 1851 0065 03        		.uleb128 0x3
+ 1852 0066 0E        		.uleb128 0xe
+ 1853 0067 3A        		.uleb128 0x3a
+ 1854 0068 0B        		.uleb128 0xb
+ 1855 0069 3B        		.uleb128 0x3b
+ 1856 006a 0B        		.uleb128 0xb
+ 1857 006b 49        		.uleb128 0x49
+ 1858 006c 13        		.uleb128 0x13
+ 1859 006d 38        		.uleb128 0x38
+ 1860 006e 0A        		.uleb128 0xa
+ 1861 006f 00        		.byte	0x0
+ 1862 0070 00        		.byte	0x0
+ 1863 0071 0A        		.uleb128 0xa
+ 1864 0072 0D        		.uleb128 0xd
+ 1865 0073 00        		.byte	0x0
+ 1866 0074 03        		.uleb128 0x3
+ 1867 0075 08        		.uleb128 0x8
+ 1868 0076 3A        		.uleb128 0x3a
+ 1869 0077 0B        		.uleb128 0xb
+ 1870 0078 3B        		.uleb128 0x3b
+ 1871 0079 0B        		.uleb128 0xb
+ 1872 007a 49        		.uleb128 0x49
+ 1873 007b 13        		.uleb128 0x13
+ 1874 007c 38        		.uleb128 0x38
+ 1875 007d 0A        		.uleb128 0xa
+ 1876 007e 00        		.byte	0x0
+ 1877 007f 00        		.byte	0x0
+ 1878 0080 0B        		.uleb128 0xb
+ 1879 0081 16        		.uleb128 0x16
+ 1880 0082 00        		.byte	0x0
+ 1881 0083 03        		.uleb128 0x3
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 34
+
+
+ 1882 0084 08        		.uleb128 0x8
+ 1883 0085 3A        		.uleb128 0x3a
+ 1884 0086 0B        		.uleb128 0xb
+ 1885 0087 3B        		.uleb128 0x3b
+ 1886 0088 0B        		.uleb128 0xb
+ 1887 0089 49        		.uleb128 0x49
+ 1888 008a 13        		.uleb128 0x13
+ 1889 008b 00        		.byte	0x0
+ 1890 008c 00        		.byte	0x0
+ 1891 008d 0C        		.uleb128 0xc
+ 1892 008e 2E        		.uleb128 0x2e
+ 1893 008f 01        		.byte	0x1
+ 1894 0090 3F        		.uleb128 0x3f
+ 1895 0091 0C        		.uleb128 0xc
+ 1896 0092 03        		.uleb128 0x3
+ 1897 0093 0E        		.uleb128 0xe
+ 1898 0094 3A        		.uleb128 0x3a
+ 1899 0095 0B        		.uleb128 0xb
+ 1900 0096 3B        		.uleb128 0x3b
+ 1901 0097 0B        		.uleb128 0xb
+ 1902 0098 27        		.uleb128 0x27
+ 1903 0099 0C        		.uleb128 0xc
+ 1904 009a 11        		.uleb128 0x11
+ 1905 009b 01        		.uleb128 0x1
+ 1906 009c 12        		.uleb128 0x12
+ 1907 009d 01        		.uleb128 0x1
+ 1908 009e 40        		.uleb128 0x40
+ 1909 009f 0A        		.uleb128 0xa
+ 1910 00a0 01        		.uleb128 0x1
+ 1911 00a1 13        		.uleb128 0x13
+ 1912 00a2 00        		.byte	0x0
+ 1913 00a3 00        		.byte	0x0
+ 1914 00a4 0D        		.uleb128 0xd
+ 1915 00a5 05        		.uleb128 0x5
+ 1916 00a6 00        		.byte	0x0
+ 1917 00a7 03        		.uleb128 0x3
+ 1918 00a8 08        		.uleb128 0x8
+ 1919 00a9 3A        		.uleb128 0x3a
+ 1920 00aa 0B        		.uleb128 0xb
+ 1921 00ab 3B        		.uleb128 0x3b
+ 1922 00ac 0B        		.uleb128 0xb
+ 1923 00ad 49        		.uleb128 0x49
+ 1924 00ae 13        		.uleb128 0x13
+ 1925 00af 02        		.uleb128 0x2
+ 1926 00b0 06        		.uleb128 0x6
+ 1927 00b1 00        		.byte	0x0
+ 1928 00b2 00        		.byte	0x0
+ 1929 00b3 0E        		.uleb128 0xe
+ 1930 00b4 05        		.uleb128 0x5
+ 1931 00b5 00        		.byte	0x0
+ 1932 00b6 03        		.uleb128 0x3
+ 1933 00b7 08        		.uleb128 0x8
+ 1934 00b8 3A        		.uleb128 0x3a
+ 1935 00b9 0B        		.uleb128 0xb
+ 1936 00ba 3B        		.uleb128 0x3b
+ 1937 00bb 0B        		.uleb128 0xb
+ 1938 00bc 49        		.uleb128 0x49
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 35
+
+
+ 1939 00bd 13        		.uleb128 0x13
+ 1940 00be 02        		.uleb128 0x2
+ 1941 00bf 0A        		.uleb128 0xa
+ 1942 00c0 00        		.byte	0x0
+ 1943 00c1 00        		.byte	0x0
+ 1944 00c2 0F        		.uleb128 0xf
+ 1945 00c3 34        		.uleb128 0x34
+ 1946 00c4 00        		.byte	0x0
+ 1947 00c5 03        		.uleb128 0x3
+ 1948 00c6 08        		.uleb128 0x8
+ 1949 00c7 3A        		.uleb128 0x3a
+ 1950 00c8 0B        		.uleb128 0xb
+ 1951 00c9 3B        		.uleb128 0x3b
+ 1952 00ca 0B        		.uleb128 0xb
+ 1953 00cb 49        		.uleb128 0x49
+ 1954 00cc 13        		.uleb128 0x13
+ 1955 00cd 02        		.uleb128 0x2
+ 1956 00ce 06        		.uleb128 0x6
+ 1957 00cf 00        		.byte	0x0
+ 1958 00d0 00        		.byte	0x0
+ 1959 00d1 10        		.uleb128 0x10
+ 1960 00d2 0F        		.uleb128 0xf
+ 1961 00d3 00        		.byte	0x0
+ 1962 00d4 0B        		.uleb128 0xb
+ 1963 00d5 0B        		.uleb128 0xb
+ 1964 00d6 49        		.uleb128 0x49
+ 1965 00d7 13        		.uleb128 0x13
+ 1966 00d8 00        		.byte	0x0
+ 1967 00d9 00        		.byte	0x0
+ 1968 00da 11        		.uleb128 0x11
+ 1969 00db 2E        		.uleb128 0x2e
+ 1970 00dc 01        		.byte	0x1
+ 1971 00dd 3F        		.uleb128 0x3f
+ 1972 00de 0C        		.uleb128 0xc
+ 1973 00df 03        		.uleb128 0x3
+ 1974 00e0 0E        		.uleb128 0xe
+ 1975 00e1 3A        		.uleb128 0x3a
+ 1976 00e2 0B        		.uleb128 0xb
+ 1977 00e3 3B        		.uleb128 0x3b
+ 1978 00e4 0B        		.uleb128 0xb
+ 1979 00e5 11        		.uleb128 0x11
+ 1980 00e6 01        		.uleb128 0x1
+ 1981 00e7 12        		.uleb128 0x12
+ 1982 00e8 01        		.uleb128 0x1
+ 1983 00e9 40        		.uleb128 0x40
+ 1984 00ea 0A        		.uleb128 0xa
+ 1985 00eb 01        		.uleb128 0x1
+ 1986 00ec 13        		.uleb128 0x13
+ 1987 00ed 00        		.byte	0x0
+ 1988 00ee 00        		.byte	0x0
+ 1989 00ef 12        		.uleb128 0x12
+ 1990 00f0 34        		.uleb128 0x34
+ 1991 00f1 00        		.byte	0x0
+ 1992 00f2 03        		.uleb128 0x3
+ 1993 00f3 08        		.uleb128 0x8
+ 1994 00f4 3A        		.uleb128 0x3a
+ 1995 00f5 0B        		.uleb128 0xb
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 36
+
+
+ 1996 00f6 3B        		.uleb128 0x3b
+ 1997 00f7 0B        		.uleb128 0xb
+ 1998 00f8 49        		.uleb128 0x49
+ 1999 00f9 13        		.uleb128 0x13
+ 2000 00fa 02        		.uleb128 0x2
+ 2001 00fb 0A        		.uleb128 0xa
+ 2002 00fc 00        		.byte	0x0
+ 2003 00fd 00        		.byte	0x0
+ 2004 00fe 13        		.uleb128 0x13
+ 2005 00ff 34        		.uleb128 0x34
+ 2006 0100 00        		.byte	0x0
+ 2007 0101 03        		.uleb128 0x3
+ 2008 0102 0E        		.uleb128 0xe
+ 2009 0103 3A        		.uleb128 0x3a
+ 2010 0104 0B        		.uleb128 0xb
+ 2011 0105 3B        		.uleb128 0x3b
+ 2012 0106 0B        		.uleb128 0xb
+ 2013 0107 49        		.uleb128 0x49
+ 2014 0108 13        		.uleb128 0x13
+ 2015 0109 02        		.uleb128 0x2
+ 2016 010a 06        		.uleb128 0x6
+ 2017 010b 00        		.byte	0x0
+ 2018 010c 00        		.byte	0x0
+ 2019 010d 14        		.uleb128 0x14
+ 2020 010e 34        		.uleb128 0x34
+ 2021 010f 00        		.byte	0x0
+ 2022 0110 03        		.uleb128 0x3
+ 2023 0111 0E        		.uleb128 0xe
+ 2024 0112 3A        		.uleb128 0x3a
+ 2025 0113 0B        		.uleb128 0xb
+ 2026 0114 3B        		.uleb128 0x3b
+ 2027 0115 0B        		.uleb128 0xb
+ 2028 0116 49        		.uleb128 0x49
+ 2029 0117 13        		.uleb128 0x13
+ 2030 0118 00        		.byte	0x0
+ 2031 0119 00        		.byte	0x0
+ 2032 011a 15        		.uleb128 0x15
+ 2033 011b 34        		.uleb128 0x34
+ 2034 011c 00        		.byte	0x0
+ 2035 011d 03        		.uleb128 0x3
+ 2036 011e 0E        		.uleb128 0xe
+ 2037 011f 3A        		.uleb128 0x3a
+ 2038 0120 0B        		.uleb128 0xb
+ 2039 0121 3B        		.uleb128 0x3b
+ 2040 0122 0B        		.uleb128 0xb
+ 2041 0123 49        		.uleb128 0x49
+ 2042 0124 13        		.uleb128 0x13
+ 2043 0125 02        		.uleb128 0x2
+ 2044 0126 0A        		.uleb128 0xa
+ 2045 0127 00        		.byte	0x0
+ 2046 0128 00        		.byte	0x0
+ 2047 0129 16        		.uleb128 0x16
+ 2048 012a 0B        		.uleb128 0xb
+ 2049 012b 01        		.byte	0x1
+ 2050 012c 55        		.uleb128 0x55
+ 2051 012d 06        		.uleb128 0x6
+ 2052 012e 00        		.byte	0x0
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 37
+
+
+ 2053 012f 00        		.byte	0x0
+ 2054 0130 17        		.uleb128 0x17
+ 2055 0131 26        		.uleb128 0x26
+ 2056 0132 00        		.byte	0x0
+ 2057 0133 49        		.uleb128 0x49
+ 2058 0134 13        		.uleb128 0x13
+ 2059 0135 00        		.byte	0x0
+ 2060 0136 00        		.byte	0x0
+ 2061 0137 18        		.uleb128 0x18
+ 2062 0138 2E        		.uleb128 0x2e
+ 2063 0139 00        		.byte	0x0
+ 2064 013a 3F        		.uleb128 0x3f
+ 2065 013b 0C        		.uleb128 0xc
+ 2066 013c 03        		.uleb128 0x3
+ 2067 013d 0E        		.uleb128 0xe
+ 2068 013e 3A        		.uleb128 0x3a
+ 2069 013f 0B        		.uleb128 0xb
+ 2070 0140 3B        		.uleb128 0x3b
+ 2071 0141 0B        		.uleb128 0xb
+ 2072 0142 11        		.uleb128 0x11
+ 2073 0143 01        		.uleb128 0x1
+ 2074 0144 12        		.uleb128 0x12
+ 2075 0145 01        		.uleb128 0x1
+ 2076 0146 40        		.uleb128 0x40
+ 2077 0147 0A        		.uleb128 0xa
+ 2078 0148 00        		.byte	0x0
+ 2079 0149 00        		.byte	0x0
+ 2080 014a 19        		.uleb128 0x19
+ 2081 014b 01        		.uleb128 0x1
+ 2082 014c 01        		.byte	0x1
+ 2083 014d 49        		.uleb128 0x49
+ 2084 014e 13        		.uleb128 0x13
+ 2085 014f 01        		.uleb128 0x1
+ 2086 0150 13        		.uleb128 0x13
+ 2087 0151 00        		.byte	0x0
+ 2088 0152 00        		.byte	0x0
+ 2089 0153 1A        		.uleb128 0x1a
+ 2090 0154 21        		.uleb128 0x21
+ 2091 0155 00        		.byte	0x0
+ 2092 0156 00        		.byte	0x0
+ 2093 0157 00        		.byte	0x0
+ 2094 0158 1B        		.uleb128 0x1b
+ 2095 0159 34        		.uleb128 0x34
+ 2096 015a 00        		.byte	0x0
+ 2097 015b 03        		.uleb128 0x3
+ 2098 015c 0E        		.uleb128 0xe
+ 2099 015d 3A        		.uleb128 0x3a
+ 2100 015e 0B        		.uleb128 0xb
+ 2101 015f 3B        		.uleb128 0x3b
+ 2102 0160 0B        		.uleb128 0xb
+ 2103 0161 49        		.uleb128 0x49
+ 2104 0162 13        		.uleb128 0x13
+ 2105 0163 3F        		.uleb128 0x3f
+ 2106 0164 0C        		.uleb128 0xc
+ 2107 0165 3C        		.uleb128 0x3c
+ 2108 0166 0C        		.uleb128 0xc
+ 2109 0167 00        		.byte	0x0
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 38
+
+
+ 2110 0168 00        		.byte	0x0
+ 2111 0169 1C        		.uleb128 0x1c
+ 2112 016a 34        		.uleb128 0x34
+ 2113 016b 00        		.byte	0x0
+ 2114 016c 03        		.uleb128 0x3
+ 2115 016d 0E        		.uleb128 0xe
+ 2116 016e 3A        		.uleb128 0x3a
+ 2117 016f 0B        		.uleb128 0xb
+ 2118 0170 3B        		.uleb128 0x3b
+ 2119 0171 0B        		.uleb128 0xb
+ 2120 0172 49        		.uleb128 0x49
+ 2121 0173 13        		.uleb128 0x13
+ 2122 0174 3F        		.uleb128 0x3f
+ 2123 0175 0C        		.uleb128 0xc
+ 2124 0176 02        		.uleb128 0x2
+ 2125 0177 0A        		.uleb128 0xa
+ 2126 0178 00        		.byte	0x0
+ 2127 0179 00        		.byte	0x0
+ 2128 017a 00        		.byte	0x0
+ 2129               		.section	.debug_pubnames,"",@progbits
+ 2130 0000 9E00 0000 		.long	0x9e
+ 2131 0004 0200      		.word	0x2
+ 2132 0006 0000 0000 		.long	.Ldebug_info0
+ 2133 000a A703 0000 		.long	0x3a7
+ 2134 000e 6B01 0000 		.long	0x16b
+ 2135 0012 7365 745F 		.string	"set_orientation"
+ 2135      6F72 6965 
+ 2135      6E74 6174 
+ 2135      696F 6E00 
+ 2136 0022 9101 0000 		.long	0x191
+ 2137 0026 6669 6C6C 		.string	"fill_rectangle"
+ 2137      5F72 6563 
+ 2137      7461 6E67 
+ 2137      6C65 00
+ 2138 0035 DF01 0000 		.long	0x1df
+ 2139 0039 6669 6C6C 		.string	"fill_rectangle_indexed"
+ 2139      5F72 6563 
+ 2139      7461 6E67 
+ 2139      6C65 5F69 
+ 2139      6E64 6578 
+ 2140 0050 3302 0000 		.long	0x233
+ 2141 0054 636C 6561 		.string	"clear_screen"
+ 2141      725F 7363 
+ 2141      7265 656E 
+ 2141      00
+ 2142 0061 5702 0000 		.long	0x257
+ 2143 0065 6469 7370 		.string	"display_char"
+ 2143      6C61 795F 
+ 2143      6368 6172 
+ 2143      00
+ 2144 0072 2903 0000 		.long	0x329
+ 2145 0076 6469 7370 		.string	"display_string"
+ 2145      6C61 795F 
+ 2145      7374 7269 
+ 2145      6E67 00
+ 2146 0085 6403 0000 		.long	0x364
+ 2147 0089 696E 6974 		.string	"init_lcd"
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 39
+
+
+ 2147      5F6C 6364 
+ 2147      00
+ 2148 0092 9403 0000 		.long	0x394
+ 2149 0096 6469 7370 		.string	"display"
+ 2149      6C61 7900 
+ 2150 009e 0000 0000 		.long	0x0
+ 2151               		.section	.debug_aranges,"",@progbits
+ 2152 0000 1C00 0000 		.long	0x1c
+ 2153 0004 0200      		.word	0x2
+ 2154 0006 0000 0000 		.long	.Ldebug_info0
+ 2155 000a 04        		.byte	0x4
+ 2156 000b 00        		.byte	0x0
+ 2157 000c 0000      		.word	0x0
+ 2158 000e 0000      		.word	0x0
+ 2159 0010 0000 0000 		.long	.Ltext0
+ 2160 0014 2C05 0000 		.long	.Letext0-.Ltext0
+ 2161 0018 0000 0000 		.long	0x0
+ 2162 001c 0000 0000 		.long	0x0
+ 2163               		.section	.debug_ranges,"",@progbits
+ 2164               	.Ldebug_ranges0:
+ 2165 0000 0C04 0000 		.long	.LBB2-.Ltext0
+ 2166 0004 1604 0000 		.long	.LBE2-.Ltext0
+ 2167 0008 4404 0000 		.long	.LBB3-.Ltext0
+ 2168 000c 4804 0000 		.long	.LBE3-.Ltext0
+ 2169 0010 0000 0000 		.long	0x0
+ 2170 0014 0000 0000 		.long	0x0
+ 2171               		.section	.debug_line
+ 2172 0000 F503 0000 		.long	.LELT0-.LSLT0
+ 2173               	.LSLT0:
+ 2174 0004 0200      		.word	0x2
+ 2175 0006 A800 0000 		.long	.LELTP0-.LASLTP0
+ 2176               	.LASLTP0:
+ 2177 000a 01        		.byte	0x1
+ 2178 000b 01        		.byte	0x1
+ 2179 000c F6        		.byte	0xf6
+ 2180 000d F5        		.byte	0xf5
+ 2181 000e 0A        		.byte	0xa
+ 2182 000f 00        		.byte	0x0
+ 2183 0010 01        		.byte	0x1
+ 2184 0011 01        		.byte	0x1
+ 2185 0012 01        		.byte	0x1
+ 2186 0013 01        		.byte	0x1
+ 2187 0014 00        		.byte	0x0
+ 2188 0015 00        		.byte	0x0
+ 2189 0016 00        		.byte	0x0
+ 2190 0017 01        		.byte	0x1
+ 2191 0018 633A 2F77 		.ascii	"c:/winavr-20100110/lib/gcc/../../avr/include"
+ 2191      696E 6176 
+ 2191      722D 3230 
+ 2191      3130 3031 
+ 2191      3130 2F6C 
+ 2192 0044 00        		.byte	0
+ 2193 0045 633A 2F77 		.ascii	"c:/winavr-20100110/lib/gcc/../../avr/include/avr"
+ 2193      696E 6176 
+ 2193      722D 3230 
+ 2193      3130 3031 
+ 2193      3130 2F6C 
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 40
+
+
+ 2194 0075 00        		.byte	0
+ 2195 0076 00        		.byte	0x0
+ 2196 0077 6C63 642E 		.string	"lcd.c"
+ 2196      6300 
+ 2197 007d 00        		.uleb128 0x0
+ 2198 007e 00        		.uleb128 0x0
+ 2199 007f 00        		.uleb128 0x0
+ 2200 0080 7374 6469 		.string	"stdint.h"
+ 2200      6E74 2E68 
+ 2200      00
+ 2201 0089 01        		.uleb128 0x1
+ 2202 008a 00        		.uleb128 0x0
+ 2203 008b 00        		.uleb128 0x0
+ 2204 008c 6176 722F 		.string	"avr/pgmspace.h"
+ 2204      7067 6D73 
+ 2204      7061 6365 
+ 2204      2E68 00
+ 2205 009b 01        		.uleb128 0x1
+ 2206 009c 00        		.uleb128 0x0
+ 2207 009d 00        		.uleb128 0x0
+ 2208 009e 6C63 642E 		.string	"lcd.h"
+ 2208      6800 
+ 2209 00a4 00        		.uleb128 0x0
+ 2210 00a5 00        		.uleb128 0x0
+ 2211 00a6 00        		.uleb128 0x0
+ 2212 00a7 666F 6E74 		.string	"font.h"
+ 2212      2E68 00
+ 2213 00ae 00        		.uleb128 0x0
+ 2214 00af 00        		.uleb128 0x0
+ 2215 00b0 00        		.uleb128 0x0
+ 2216 00b1 00        		.byte	0x0
+ 2217               	.LELTP0:
+ 2218 00b2 00        		.byte	0x0
+ 2219 00b3 05        		.uleb128 0x5
+ 2220 00b4 02        		.byte	0x2
+ 2221 00b5 0000 0000 		.long	.LM1
+ 2222 00b9 31        		.byte	0x31
+ 2223 00ba 00        		.byte	0x0
+ 2224 00bb 05        		.uleb128 0x5
+ 2225 00bc 02        		.byte	0x2
+ 2226 00bd 0000 0000 		.long	.LM2
+ 2227 00c1 15        		.byte	0x15
+ 2228 00c2 00        		.byte	0x0
+ 2229 00c3 05        		.uleb128 0x5
+ 2230 00c4 02        		.byte	0x2
+ 2231 00c5 0000 0000 		.long	.LM3
+ 2232 00c9 15        		.byte	0x15
+ 2233 00ca 00        		.byte	0x0
+ 2234 00cb 05        		.uleb128 0x5
+ 2235 00cc 02        		.byte	0x2
+ 2236 00cd 0000 0000 		.long	.LM4
+ 2237 00d1 15        		.byte	0x15
+ 2238 00d2 00        		.byte	0x0
+ 2239 00d3 05        		.uleb128 0x5
+ 2240 00d4 02        		.byte	0x2
+ 2241 00d5 0000 0000 		.long	.LM5
+ 2242 00d9 15        		.byte	0x15
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 41
+
+
+ 2243 00da 00        		.byte	0x0
+ 2244 00db 05        		.uleb128 0x5
+ 2245 00dc 02        		.byte	0x2
+ 2246 00dd 0000 0000 		.long	.LM6
+ 2247 00e1 15        		.byte	0x15
+ 2248 00e2 00        		.byte	0x0
+ 2249 00e3 05        		.uleb128 0x5
+ 2250 00e4 02        		.byte	0x2
+ 2251 00e5 0000 0000 		.long	.LM7
+ 2252 00e9 15        		.byte	0x15
+ 2253 00ea 00        		.byte	0x0
+ 2254 00eb 05        		.uleb128 0x5
+ 2255 00ec 02        		.byte	0x2
+ 2256 00ed 0000 0000 		.long	.LM8
+ 2257 00f1 16        		.byte	0x16
+ 2258 00f2 00        		.byte	0x0
+ 2259 00f3 05        		.uleb128 0x5
+ 2260 00f4 02        		.byte	0x2
+ 2261 00f5 0000 0000 		.long	.LM9
+ 2262 00f9 15        		.byte	0x15
+ 2263 00fa 00        		.byte	0x0
+ 2264 00fb 05        		.uleb128 0x5
+ 2265 00fc 02        		.byte	0x2
+ 2266 00fd 0000 0000 		.long	.LM10
+ 2267 0101 15        		.byte	0x15
+ 2268 0102 00        		.byte	0x0
+ 2269 0103 05        		.uleb128 0x5
+ 2270 0104 02        		.byte	0x2
+ 2271 0105 0000 0000 		.long	.LM11
+ 2272 0109 15        		.byte	0x15
+ 2273 010a 00        		.byte	0x0
+ 2274 010b 05        		.uleb128 0x5
+ 2275 010c 02        		.byte	0x2
+ 2276 010d 0000 0000 		.long	.LM12
+ 2277 0111 16        		.byte	0x16
+ 2278 0112 00        		.byte	0x0
+ 2279 0113 05        		.uleb128 0x5
+ 2280 0114 02        		.byte	0x2
+ 2281 0115 0000 0000 		.long	.LM13
+ 2282 0119 15        		.byte	0x15
+ 2283 011a 00        		.byte	0x0
+ 2284 011b 05        		.uleb128 0x5
+ 2285 011c 02        		.byte	0x2
+ 2286 011d 0000 0000 		.long	.LM14
+ 2287 0121 15        		.byte	0x15
+ 2288 0122 00        		.byte	0x0
+ 2289 0123 05        		.uleb128 0x5
+ 2290 0124 02        		.byte	0x2
+ 2291 0125 0000 0000 		.long	.LM15
+ 2292 0129 15        		.byte	0x15
+ 2293 012a 00        		.byte	0x0
+ 2294 012b 05        		.uleb128 0x5
+ 2295 012c 02        		.byte	0x2
+ 2296 012d 0000 0000 		.long	.LM16
+ 2297 0131 16        		.byte	0x16
+ 2298 0132 00        		.byte	0x0
+ 2299 0133 05        		.uleb128 0x5
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 42
+
+
+ 2300 0134 02        		.byte	0x2
+ 2301 0135 0000 0000 		.long	.LM17
+ 2302 0139 15        		.byte	0x15
+ 2303 013a 00        		.byte	0x0
+ 2304 013b 05        		.uleb128 0x5
+ 2305 013c 02        		.byte	0x2
+ 2306 013d 0000 0000 		.long	.LM18
+ 2307 0141 15        		.byte	0x15
+ 2308 0142 00        		.byte	0x0
+ 2309 0143 05        		.uleb128 0x5
+ 2310 0144 02        		.byte	0x2
+ 2311 0145 0000 0000 		.long	.LM19
+ 2312 0149 15        		.byte	0x15
+ 2313 014a 00        		.byte	0x0
+ 2314 014b 05        		.uleb128 0x5
+ 2315 014c 02        		.byte	0x2
+ 2316 014d 0000 0000 		.long	.LM20
+ 2317 0151 16        		.byte	0x16
+ 2318 0152 00        		.byte	0x0
+ 2319 0153 05        		.uleb128 0x5
+ 2320 0154 02        		.byte	0x2
+ 2321 0155 0000 0000 		.long	.LM21
+ 2322 0159 15        		.byte	0x15
+ 2323 015a 00        		.byte	0x0
+ 2324 015b 05        		.uleb128 0x5
+ 2325 015c 02        		.byte	0x2
+ 2326 015d 0000 0000 		.long	.LM22
+ 2327 0161 15        		.byte	0x15
+ 2328 0162 00        		.byte	0x0
+ 2329 0163 05        		.uleb128 0x5
+ 2330 0164 02        		.byte	0x2
+ 2331 0165 0000 0000 		.long	.LM23
+ 2332 0169 15        		.byte	0x15
+ 2333 016a 00        		.byte	0x0
+ 2334 016b 05        		.uleb128 0x5
+ 2335 016c 02        		.byte	0x2
+ 2336 016d 0000 0000 		.long	.LM24
+ 2337 0171 15        		.byte	0x15
+ 2338 0172 00        		.byte	0x0
+ 2339 0173 05        		.uleb128 0x5
+ 2340 0174 02        		.byte	0x2
+ 2341 0175 0000 0000 		.long	.LM25
+ 2342 0179 15        		.byte	0x15
+ 2343 017a 00        		.byte	0x0
+ 2344 017b 05        		.uleb128 0x5
+ 2345 017c 02        		.byte	0x2
+ 2346 017d 0000 0000 		.long	.LM26
+ 2347 0181 15        		.byte	0x15
+ 2348 0182 00        		.byte	0x0
+ 2349 0183 05        		.uleb128 0x5
+ 2350 0184 02        		.byte	0x2
+ 2351 0185 0000 0000 		.long	.LM27
+ 2352 0189 17        		.byte	0x17
+ 2353 018a 00        		.byte	0x0
+ 2354 018b 05        		.uleb128 0x5
+ 2355 018c 02        		.byte	0x2
+ 2356 018d 0000 0000 		.long	.LM28
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 43
+
+
+ 2357 0191 01        		.byte	0x1
+ 2358 0192 00        		.byte	0x0
+ 2359 0193 05        		.uleb128 0x5
+ 2360 0194 02        		.byte	0x2
+ 2361 0195 0000 0000 		.long	.LM29
+ 2362 0199 16        		.byte	0x16
+ 2363 019a 00        		.byte	0x0
+ 2364 019b 05        		.uleb128 0x5
+ 2365 019c 02        		.byte	0x2
+ 2366 019d 0000 0000 		.long	.LM30
+ 2367 01a1 15        		.byte	0x15
+ 2368 01a2 00        		.byte	0x0
+ 2369 01a3 05        		.uleb128 0x5
+ 2370 01a4 02        		.byte	0x2
+ 2371 01a5 0000 0000 		.long	.LM31
+ 2372 01a9 15        		.byte	0x15
+ 2373 01aa 00        		.byte	0x0
+ 2374 01ab 05        		.uleb128 0x5
+ 2375 01ac 02        		.byte	0x2
+ 2376 01ad 0000 0000 		.long	.LM32
+ 2377 01b1 15        		.byte	0x15
+ 2378 01b2 00        		.byte	0x0
+ 2379 01b3 05        		.uleb128 0x5
+ 2380 01b4 02        		.byte	0x2
+ 2381 01b5 0000 0000 		.long	.LM33
+ 2382 01b9 15        		.byte	0x15
+ 2383 01ba 00        		.byte	0x0
+ 2384 01bb 05        		.uleb128 0x5
+ 2385 01bc 02        		.byte	0x2
+ 2386 01bd 0000 0000 		.long	.LM34
+ 2387 01c1 15        		.byte	0x15
+ 2388 01c2 00        		.byte	0x0
+ 2389 01c3 05        		.uleb128 0x5
+ 2390 01c4 02        		.byte	0x2
+ 2391 01c5 0000 0000 		.long	.LM35
+ 2392 01c9 15        		.byte	0x15
+ 2393 01ca 00        		.byte	0x0
+ 2394 01cb 05        		.uleb128 0x5
+ 2395 01cc 02        		.byte	0x2
+ 2396 01cd 0000 0000 		.long	.LM36
+ 2397 01d1 17        		.byte	0x17
+ 2398 01d2 00        		.byte	0x0
+ 2399 01d3 05        		.uleb128 0x5
+ 2400 01d4 02        		.byte	0x2
+ 2401 01d5 0000 0000 		.long	.LM37
+ 2402 01d9 12        		.byte	0x12
+ 2403 01da 00        		.byte	0x0
+ 2404 01db 05        		.uleb128 0x5
+ 2405 01dc 02        		.byte	0x2
+ 2406 01dd 0000 0000 		.long	.LM38
+ 2407 01e1 16        		.byte	0x16
+ 2408 01e2 00        		.byte	0x0
+ 2409 01e3 05        		.uleb128 0x5
+ 2410 01e4 02        		.byte	0x2
+ 2411 01e5 0000 0000 		.long	.LM39
+ 2412 01e9 13        		.byte	0x13
+ 2413 01ea 00        		.byte	0x0
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 44
+
+
+ 2414 01eb 05        		.uleb128 0x5
+ 2415 01ec 02        		.byte	0x2
+ 2416 01ed 0000 0000 		.long	.LM40
+ 2417 01f1 13        		.byte	0x13
+ 2418 01f2 00        		.byte	0x0
+ 2419 01f3 05        		.uleb128 0x5
+ 2420 01f4 02        		.byte	0x2
+ 2421 01f5 0000 0000 		.long	.LM41
+ 2422 01f9 17        		.byte	0x17
+ 2423 01fa 00        		.byte	0x0
+ 2424 01fb 05        		.uleb128 0x5
+ 2425 01fc 02        		.byte	0x2
+ 2426 01fd 0000 0000 		.long	.LM42
+ 2427 0201 17        		.byte	0x17
+ 2428 0202 00        		.byte	0x0
+ 2429 0203 05        		.uleb128 0x5
+ 2430 0204 02        		.byte	0x2
+ 2431 0205 0000 0000 		.long	.LM43
+ 2432 0209 01        		.byte	0x1
+ 2433 020a 00        		.byte	0x0
+ 2434 020b 05        		.uleb128 0x5
+ 2435 020c 02        		.byte	0x2
+ 2436 020d 0000 0000 		.long	.LM44
+ 2437 0211 16        		.byte	0x16
+ 2438 0212 00        		.byte	0x0
+ 2439 0213 05        		.uleb128 0x5
+ 2440 0214 02        		.byte	0x2
+ 2441 0215 0000 0000 		.long	.LM45
+ 2442 0219 15        		.byte	0x15
+ 2443 021a 00        		.byte	0x0
+ 2444 021b 05        		.uleb128 0x5
+ 2445 021c 02        		.byte	0x2
+ 2446 021d 0000 0000 		.long	.LM46
+ 2447 0221 15        		.byte	0x15
+ 2448 0222 00        		.byte	0x0
+ 2449 0223 05        		.uleb128 0x5
+ 2450 0224 02        		.byte	0x2
+ 2451 0225 0000 0000 		.long	.LM47
+ 2452 0229 15        		.byte	0x15
+ 2453 022a 00        		.byte	0x0
+ 2454 022b 05        		.uleb128 0x5
+ 2455 022c 02        		.byte	0x2
+ 2456 022d 0000 0000 		.long	.LM48
+ 2457 0231 15        		.byte	0x15
+ 2458 0232 00        		.byte	0x0
+ 2459 0233 05        		.uleb128 0x5
+ 2460 0234 02        		.byte	0x2
+ 2461 0235 0000 0000 		.long	.LM49
+ 2462 0239 15        		.byte	0x15
+ 2463 023a 00        		.byte	0x0
+ 2464 023b 05        		.uleb128 0x5
+ 2465 023c 02        		.byte	0x2
+ 2466 023d 0000 0000 		.long	.LM50
+ 2467 0241 15        		.byte	0x15
+ 2468 0242 00        		.byte	0x0
+ 2469 0243 05        		.uleb128 0x5
+ 2470 0244 02        		.byte	0x2
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 45
+
+
+ 2471 0245 0000 0000 		.long	.LM51
+ 2472 0249 17        		.byte	0x17
+ 2473 024a 00        		.byte	0x0
+ 2474 024b 05        		.uleb128 0x5
+ 2475 024c 02        		.byte	0x2
+ 2476 024d 0000 0000 		.long	.LM52
+ 2477 0251 03        		.byte	0x3
+ 2478 0252 75        		.sleb128 -11
+ 2479 0253 01        		.byte	0x1
+ 2480 0254 00        		.byte	0x0
+ 2481 0255 05        		.uleb128 0x5
+ 2482 0256 02        		.byte	0x2
+ 2483 0257 0000 0000 		.long	.LM53
+ 2484 025b 1F        		.byte	0x1f
+ 2485 025c 00        		.byte	0x0
+ 2486 025d 05        		.uleb128 0x5
+ 2487 025e 02        		.byte	0x2
+ 2488 025f 0000 0000 		.long	.LM54
+ 2489 0263 13        		.byte	0x13
+ 2490 0264 00        		.byte	0x0
+ 2491 0265 05        		.uleb128 0x5
+ 2492 0266 02        		.byte	0x2
+ 2493 0267 0000 0000 		.long	.LM55
+ 2494 026b 13        		.byte	0x13
+ 2495 026c 00        		.byte	0x0
+ 2496 026d 05        		.uleb128 0x5
+ 2497 026e 02        		.byte	0x2
+ 2498 026f 0000 0000 		.long	.LM56
+ 2499 0273 17        		.byte	0x17
+ 2500 0274 00        		.byte	0x0
+ 2501 0275 05        		.uleb128 0x5
+ 2502 0276 02        		.byte	0x2
+ 2503 0277 0000 0000 		.long	.LM57
+ 2504 027b 17        		.byte	0x17
+ 2505 027c 00        		.byte	0x0
+ 2506 027d 05        		.uleb128 0x5
+ 2507 027e 02        		.byte	0x2
+ 2508 027f 0000 0000 		.long	.LM58
+ 2509 0283 15        		.byte	0x15
+ 2510 0284 00        		.byte	0x0
+ 2511 0285 05        		.uleb128 0x5
+ 2512 0286 02        		.byte	0x2
+ 2513 0287 0000 0000 		.long	.LM59
+ 2514 028b 15        		.byte	0x15
+ 2515 028c 00        		.byte	0x0
+ 2516 028d 05        		.uleb128 0x5
+ 2517 028e 02        		.byte	0x2
+ 2518 028f 0000 0000 		.long	.LM60
+ 2519 0293 15        		.byte	0x15
+ 2520 0294 00        		.byte	0x0
+ 2521 0295 05        		.uleb128 0x5
+ 2522 0296 02        		.byte	0x2
+ 2523 0297 0000 0000 		.long	.LM61
+ 2524 029b 15        		.byte	0x15
+ 2525 029c 00        		.byte	0x0
+ 2526 029d 05        		.uleb128 0x5
+ 2527 029e 02        		.byte	0x2
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 46
+
+
+ 2528 029f 0000 0000 		.long	.LM62
+ 2529 02a3 15        		.byte	0x15
+ 2530 02a4 00        		.byte	0x0
+ 2531 02a5 05        		.uleb128 0x5
+ 2532 02a6 02        		.byte	0x2
+ 2533 02a7 0000 0000 		.long	.LM63
+ 2534 02ab 17        		.byte	0x17
+ 2535 02ac 00        		.byte	0x0
+ 2536 02ad 05        		.uleb128 0x5
+ 2537 02ae 02        		.byte	0x2
+ 2538 02af 0000 0000 		.long	.LM64
+ 2539 02b3 18        		.byte	0x18
+ 2540 02b4 00        		.byte	0x0
+ 2541 02b5 05        		.uleb128 0x5
+ 2542 02b6 02        		.byte	0x2
+ 2543 02b7 0000 0000 		.long	.LM65
+ 2544 02bb 15        		.byte	0x15
+ 2545 02bc 00        		.byte	0x0
+ 2546 02bd 05        		.uleb128 0x5
+ 2547 02be 02        		.byte	0x2
+ 2548 02bf 0000 0000 		.long	.LM66
+ 2549 02c3 13        		.byte	0x13
+ 2550 02c4 00        		.byte	0x0
+ 2551 02c5 05        		.uleb128 0x5
+ 2552 02c6 02        		.byte	0x2
+ 2553 02c7 0000 0000 		.long	.LM67
+ 2554 02cb 16        		.byte	0x16
+ 2555 02cc 00        		.byte	0x0
+ 2556 02cd 05        		.uleb128 0x5
+ 2557 02ce 02        		.byte	0x2
+ 2558 02cf 0000 0000 		.long	.LM68
+ 2559 02d3 15        		.byte	0x15
+ 2560 02d4 00        		.byte	0x0
+ 2561 02d5 05        		.uleb128 0x5
+ 2562 02d6 02        		.byte	0x2
+ 2563 02d7 0000 0000 		.long	.LM69
+ 2564 02db 15        		.byte	0x15
+ 2565 02dc 00        		.byte	0x0
+ 2566 02dd 05        		.uleb128 0x5
+ 2567 02de 02        		.byte	0x2
+ 2568 02df 0000 0000 		.long	.LM70
+ 2569 02e3 15        		.byte	0x15
+ 2570 02e4 00        		.byte	0x0
+ 2571 02e5 05        		.uleb128 0x5
+ 2572 02e6 02        		.byte	0x2
+ 2573 02e7 0000 0000 		.long	.LM71
+ 2574 02eb 1C        		.byte	0x1c
+ 2575 02ec 00        		.byte	0x0
+ 2576 02ed 05        		.uleb128 0x5
+ 2577 02ee 02        		.byte	0x2
+ 2578 02ef 0000 0000 		.long	.LM72
+ 2579 02f3 0E        		.byte	0xe
+ 2580 02f4 00        		.byte	0x0
+ 2581 02f5 05        		.uleb128 0x5
+ 2582 02f6 02        		.byte	0x2
+ 2583 02f7 0000 0000 		.long	.LM73
+ 2584 02fb 17        		.byte	0x17
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 47
+
+
+ 2585 02fc 00        		.byte	0x0
+ 2586 02fd 05        		.uleb128 0x5
+ 2587 02fe 02        		.byte	0x2
+ 2588 02ff 0000 0000 		.long	.LM74
+ 2589 0303 11        		.byte	0x11
+ 2590 0304 00        		.byte	0x0
+ 2591 0305 05        		.uleb128 0x5
+ 2592 0306 02        		.byte	0x2
+ 2593 0307 0000 0000 		.long	.LM75
+ 2594 030b 15        		.byte	0x15
+ 2595 030c 00        		.byte	0x0
+ 2596 030d 05        		.uleb128 0x5
+ 2597 030e 02        		.byte	0x2
+ 2598 030f 0000 0000 		.long	.LM76
+ 2599 0313 15        		.byte	0x15
+ 2600 0314 00        		.byte	0x0
+ 2601 0315 05        		.uleb128 0x5
+ 2602 0316 02        		.byte	0x2
+ 2603 0317 0000 0000 		.long	.LM77
+ 2604 031b 15        		.byte	0x15
+ 2605 031c 00        		.byte	0x0
+ 2606 031d 05        		.uleb128 0x5
+ 2607 031e 02        		.byte	0x2
+ 2608 031f 0000 0000 		.long	.LM78
+ 2609 0323 15        		.byte	0x15
+ 2610 0324 00        		.byte	0x0
+ 2611 0325 05        		.uleb128 0x5
+ 2612 0326 02        		.byte	0x2
+ 2613 0327 0000 0000 		.long	.LM79
+ 2614 032b 16        		.byte	0x16
+ 2615 032c 00        		.byte	0x0
+ 2616 032d 05        		.uleb128 0x5
+ 2617 032e 02        		.byte	0x2
+ 2618 032f 0000 0000 		.long	.LM80
+ 2619 0333 13        		.byte	0x13
+ 2620 0334 00        		.byte	0x0
+ 2621 0335 05        		.uleb128 0x5
+ 2622 0336 02        		.byte	0x2
+ 2623 0337 0000 0000 		.long	.LM81
+ 2624 033b 13        		.byte	0x13
+ 2625 033c 00        		.byte	0x0
+ 2626 033d 05        		.uleb128 0x5
+ 2627 033e 02        		.byte	0x2
+ 2628 033f 0000 0000 		.long	.LM82
+ 2629 0343 0F        		.byte	0xf
+ 2630 0344 00        		.byte	0x0
+ 2631 0345 05        		.uleb128 0x5
+ 2632 0346 02        		.byte	0x2
+ 2633 0347 0000 0000 		.long	.LM83
+ 2634 034b 1D        		.byte	0x1d
+ 2635 034c 00        		.byte	0x0
+ 2636 034d 05        		.uleb128 0x5
+ 2637 034e 02        		.byte	0x2
+ 2638 034f 0000 0000 		.long	.LM84
+ 2639 0353 15        		.byte	0x15
+ 2640 0354 00        		.byte	0x0
+ 2641 0355 05        		.uleb128 0x5
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 48
+
+
+ 2642 0356 02        		.byte	0x2
+ 2643 0357 0000 0000 		.long	.LM85
+ 2644 035b 15        		.byte	0x15
+ 2645 035c 00        		.byte	0x0
+ 2646 035d 05        		.uleb128 0x5
+ 2647 035e 02        		.byte	0x2
+ 2648 035f 0000 0000 		.long	.LM86
+ 2649 0363 15        		.byte	0x15
+ 2650 0364 00        		.byte	0x0
+ 2651 0365 05        		.uleb128 0x5
+ 2652 0366 02        		.byte	0x2
+ 2653 0367 0000 0000 		.long	.LM87
+ 2654 036b 16        		.byte	0x16
+ 2655 036c 00        		.byte	0x0
+ 2656 036d 05        		.uleb128 0x5
+ 2657 036e 02        		.byte	0x2
+ 2658 036f 0000 0000 		.long	.LM88
+ 2659 0373 13        		.byte	0x13
+ 2660 0374 00        		.byte	0x0
+ 2661 0375 05        		.uleb128 0x5
+ 2662 0376 02        		.byte	0x2
+ 2663 0377 0000 0000 		.long	.LM89
+ 2664 037b 17        		.byte	0x17
+ 2665 037c 00        		.byte	0x0
+ 2666 037d 05        		.uleb128 0x5
+ 2667 037e 02        		.byte	0x2
+ 2668 037f 0000 0000 		.long	.LM90
+ 2669 0383 15        		.byte	0x15
+ 2670 0384 00        		.byte	0x0
+ 2671 0385 05        		.uleb128 0x5
+ 2672 0386 02        		.byte	0x2
+ 2673 0387 0000 0000 		.long	.LM91
+ 2674 038b 15        		.byte	0x15
+ 2675 038c 00        		.byte	0x0
+ 2676 038d 05        		.uleb128 0x5
+ 2677 038e 02        		.byte	0x2
+ 2678 038f 0000 0000 		.long	.LM92
+ 2679 0393 17        		.byte	0x17
+ 2680 0394 00        		.byte	0x0
+ 2681 0395 05        		.uleb128 0x5
+ 2682 0396 02        		.byte	0x2
+ 2683 0397 0000 0000 		.long	.LM93
+ 2684 039b 01        		.byte	0x1
+ 2685 039c 00        		.byte	0x0
+ 2686 039d 05        		.uleb128 0x5
+ 2687 039e 02        		.byte	0x2
+ 2688 039f 0000 0000 		.long	.LM94
+ 2689 03a3 17        		.byte	0x17
+ 2690 03a4 00        		.byte	0x0
+ 2691 03a5 05        		.uleb128 0x5
+ 2692 03a6 02        		.byte	0x2
+ 2693 03a7 0000 0000 		.long	.LM95
+ 2694 03ab 13        		.byte	0x13
+ 2695 03ac 00        		.byte	0x0
+ 2696 03ad 05        		.uleb128 0x5
+ 2697 03ae 02        		.byte	0x2
+ 2698 03af 0000 0000 		.long	.LM96
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 49
+
+
+ 2699 03b3 16        		.byte	0x16
+ 2700 03b4 00        		.byte	0x0
+ 2701 03b5 05        		.uleb128 0x5
+ 2702 03b6 02        		.byte	0x2
+ 2703 03b7 0000 0000 		.long	.LM97
+ 2704 03bb 03        		.byte	0x3
+ 2705 03bc 877F      		.sleb128 -121
+ 2706 03be 01        		.byte	0x1
+ 2707 03bf 00        		.byte	0x0
+ 2708 03c0 05        		.uleb128 0x5
+ 2709 03c1 02        		.byte	0x2
+ 2710 03c2 0000 0000 		.long	.LM98
+ 2711 03c6 17        		.byte	0x17
+ 2712 03c7 00        		.byte	0x0
+ 2713 03c8 05        		.uleb128 0x5
+ 2714 03c9 02        		.byte	0x2
+ 2715 03ca 0000 0000 		.long	.LM99
+ 2716 03ce 15        		.byte	0x15
+ 2717 03cf 00        		.byte	0x0
+ 2718 03d0 05        		.uleb128 0x5
+ 2719 03d1 02        		.byte	0x2
+ 2720 03d2 0000 0000 		.long	.LM100
+ 2721 03d6 17        		.byte	0x17
+ 2722 03d7 00        		.byte	0x0
+ 2723 03d8 05        		.uleb128 0x5
+ 2724 03d9 02        		.byte	0x2
+ 2725 03da 0000 0000 		.long	.LM101
+ 2726 03de 15        		.byte	0x15
+ 2727 03df 00        		.byte	0x0
+ 2728 03e0 05        		.uleb128 0x5
+ 2729 03e1 02        		.byte	0x2
+ 2730 03e2 0000 0000 		.long	.LM102
+ 2731 03e6 18        		.byte	0x18
+ 2732 03e7 00        		.byte	0x0
+ 2733 03e8 05        		.uleb128 0x5
+ 2734 03e9 02        		.byte	0x2
+ 2735 03ea 0000 0000 		.long	.LM103
+ 2736 03ee 15        		.byte	0x15
+ 2737 03ef 00        		.byte	0x0
+ 2738 03f0 05        		.uleb128 0x5
+ 2739 03f1 02        		.byte	0x2
+ 2740 03f2 0000 0000 		.long	.Letext0
+ 2741 03f6 00        		.byte	0x0
+ 2742 03f7 01        		.uleb128 0x1
+ 2743 03f8 01        		.byte	0x1
+ 2744               	.LELT0:
+ 2745 03f9 1600 0000 		.section	.debug_str,"MS",@progbits,1
+ 2745      0200 1000 
+ 2745      0000 0101 
+ 2745      FB0E 0A00 
+ 2745      0101 0101 
+ 2746               	.LASF41:
+ 2747 0000 696E 6974 		.string	"init_lcd"
+ 2747      5F6C 6364 
+ 2747      00
+ 2748               	.LASF24:
+ 2749 0009 7365 745F 		.string	"set_orientation"
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 50
+
+
+ 2749      6F72 6965 
+ 2749      6E74 6174 
+ 2749      696F 6E00 
+ 2750               	.LASF37:
+ 2751 0019 474E 5520 		.string	"GNU C 4.3.3"
+ 2751      4320 342E 
+ 2751      332E 3300 
+ 2752               	.LASF21:
+ 2753 0025 7269 6768 		.string	"right"
+ 2753      7400 
+ 2754               	.LASF9:
+ 2755 002b 7072 6F67 		.string	"prog_char"
+ 2755      5F63 6861 
+ 2755      7200 
+ 2756               	.LASF23:
+ 2757 0035 7265 6374 		.string	"rectangle"
+ 2757      616E 676C 
+ 2757      6500 
+ 2758               	.LASF40:
+ 2759 003f 636C 6561 		.string	"clear_screen"
+ 2759      725F 7363 
+ 2759      7265 656E 
+ 2759      00
+ 2760               	.LASF39:
+ 2761 004c 433A 5C55 		.ascii	"C:\\Users\\Asus\\OneDr"
+ 2761      7365 7273 
+ 2761      5C41 7375 
+ 2761      735C 4F6E 
+ 2761      6544 72
+ 2762 005f 6976 6520 		.string	"ive - University of Southampton\\Desktop\\Codes\\Embedded\\D5\\lcdlib"
+ 2762      2D20 556E 
+ 2762      6976 6572 
+ 2762      7369 7479 
+ 2762      206F 6620 
+ 2763               	.LASF2:
+ 2764 00a0 7569 6E74 		.string	"uint8_t"
+ 2764      385F 7400 
+ 2765               	.LASF31:
+ 2766 00a8 5F5F 6164 		.string	"__addr16"
+ 2766      6472 3136 
+ 2766      00
+ 2767               	.LASF15:
+ 2768 00b1 7769 6474 		.string	"width"
+ 2768      6800 
+ 2769               	.LASF7:
+ 2770 00b7 6C6F 6E67 		.string	"long long int"
+ 2770      206C 6F6E 
+ 2770      6720 696E 
+ 2770      7400 
+ 2771               	.LASF35:
+ 2772 00c5 666F 6E74 		.string	"font5x7"
+ 2772      3578 3700 
+ 2773               	.LASF30:
+ 2774 00cd 6269 7473 		.string	"bits"
+ 2774      00
+ 2775               	.LASF10:
+ 2776 00d2 4E6F 7274 		.string	"North"
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 51
+
+
+ 2776      6800 
+ 2777               	.LASF5:
+ 2778 00d8 6C6F 6E67 		.string	"long int"
+ 2778      2069 6E74 
+ 2778      00
+ 2779               	.LASF17:
+ 2780 00e1 6F72 6965 		.string	"orient"
+ 2780      6E74 00
+ 2781               	.LASF18:
+ 2782 00e8 666F 7265 		.string	"foreground"
+ 2782      6772 6F75 
+ 2782      6E64 00
+ 2783               	.LASF27:
+ 2784 00f3 6469 7370 		.string	"display_char"
+ 2784      6C61 795F 
+ 2784      6368 6172 
+ 2784      00
+ 2785               	.LASF1:
+ 2786 0100 756E 7369 		.string	"unsigned char"
+ 2786      676E 6564 
+ 2786      2063 6861 
+ 2786      7200 
+ 2787               	.LASF13:
+ 2788 010e 4561 7374 		.string	"East"
+ 2788      00
+ 2789               	.LASF22:
+ 2790 0113 626F 7474 		.string	"bottom"
+ 2790      6F6D 00
+ 2791               	.LASF0:
+ 2792 011a 7369 676E 		.string	"signed char"
+ 2792      6564 2063 
+ 2792      6861 7200 
+ 2793               	.LASF8:
+ 2794 0126 6C6F 6E67 		.string	"long long unsigned int"
+ 2794      206C 6F6E 
+ 2794      6720 756E 
+ 2794      7369 676E 
+ 2794      6564 2069 
+ 2795               	.LASF16:
+ 2796 013d 6865 6967 		.string	"height"
+ 2796      6874 00
+ 2797               	.LASF4:
+ 2798 0144 756E 7369 		.string	"unsigned int"
+ 2798      676E 6564 
+ 2798      2069 6E74 
+ 2798      00
+ 2799               	.LASF3:
+ 2800 0151 7569 6E74 		.string	"uint16_t"
+ 2800      3136 5F74 
+ 2800      00
+ 2801               	.LASF32:
+ 2802 015a 5F5F 7265 		.string	"__result"
+ 2802      7375 6C74 
+ 2802      00
+ 2803               	.LASF14:
+ 2804 0163 6F72 6965 		.string	"orientation"
+ 2804      6E74 6174 
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 52
+
+
+ 2804      696F 6E00 
+ 2805               	.LASF33:
+ 2806 016f 6368 6172 		.string	"char"
+ 2806      00
+ 2807               	.LASF20:
+ 2808 0174 6C65 6674 		.string	"left"
+ 2808      00
+ 2809               	.LASF38:
+ 2810 0179 6C63 642E 		.string	"lcd.c"
+ 2810      6300 
+ 2811               	.LASF11:
+ 2812 017f 5765 7374 		.string	"West"
+ 2812      00
+ 2813               	.LASF34:
+ 2814 0184 6469 7370 		.string	"display_string"
+ 2814      6C61 795F 
+ 2814      7374 7269 
+ 2814      6E67 00
+ 2815               	.LASF25:
+ 2816 0193 6669 6C6C 		.string	"fill_rectangle"
+ 2816      5F72 6563 
+ 2816      7461 6E67 
+ 2816      6C65 00
+ 2817               	.LASF6:
+ 2818 01a2 6C6F 6E67 		.string	"long unsigned int"
+ 2818      2075 6E73 
+ 2818      6967 6E65 
+ 2818      6420 696E 
+ 2818      7400 
+ 2819               	.LASF12:
+ 2820 01b4 536F 7574 		.string	"South"
+ 2820      6800 
+ 2821               	.LASF36:
+ 2822 01ba 6469 7370 		.string	"display"
+ 2822      6C61 7900 
+ 2823               	.LASF26:
+ 2824 01c2 6669 6C6C 		.string	"fill_rectangle_indexed"
+ 2824      5F72 6563 
+ 2824      7461 6E67 
+ 2824      6C65 5F69 
+ 2824      6E64 6578 
+ 2825               	.LASF29:
+ 2826 01d9 6D61 736B 		.string	"mask"
+ 2826      00
+ 2827               	.LASF28:
+ 2828 01de 6664 6174 		.string	"fdata"
+ 2828      6100 
+ 2829               	.LASF19:
+ 2830 01e4 6261 636B 		.string	"background"
+ 2830      6772 6F75 
+ 2830      6E64 00
+ 2831               	.global __do_copy_data
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s 			page 53
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 lcd.c
+C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s:2      *ABS*:0000003f __SREG__
+C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s:5      *ABS*:00000034 __CCP__
+C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s:18     .text:00000000 set_orientation
+C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s:887    .data:00000000 display
+C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s:170    .text:00000108 fill_rectangle
+C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s:321    .text:000001e6 fill_rectangle_indexed
+C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s:480    .text:000002d2 clear_screen
+C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s:547    .text:00000350 display_char
+C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s:817    .text:000004ec display_string
+C:\Users\Asus\AppData\Local\Temp/ccR38iuD.s:857    .text:00000512 init_lcd
+
+UNDEFINED SYMBOLS
+font5x7
+init_display_controller
+__do_copy_data

@@ -1,0 +1,2161 @@
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
+
+
+   1               		.file	"ili934x.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.section	.debug_abbrev,"",@progbits
+   9               	.Ldebug_abbrev0:
+  10               		.section	.debug_info,"",@progbits
+  11               	.Ldebug_info0:
+  12               		.section	.debug_line,"",@progbits
+  13               	.Ldebug_line0:
+  14               		.text
+  15               	.Ltext0:
+  16               		.data
+  17               	.LC0:
+  18 0000 00        		.string	""
+  19 0001 00        		.string	""
+  20 0002 013F 00   		.string	"\001?"
+  21               	.LC1:
+  22 0005 00        		.string	""
+  23 0006 00        		.string	""
+  24 0007 00        		.string	""
+  25 0008 EF00      		.string	"\357"
+  26               	.LC2:
+  27 000a 00        		.string	""
+  28 000b 2527 0510 		.string	"%'\005\020\t:xM\005\030\r8:\037"
+  28      093A 784D 
+  28      0518 0D38 
+  28      3A1F 00
+  29               	.LC3:
+  30 001a 1F1A 180A 		.string	"\037\032\030\n\017\006E\2072\n\007\002\007\005"
+  30      0F06 4587 
+  30      320A 0702 
+  30      0705 00
+  31 0029 00        		.string	""
+  32               	.LC4:
+  33 002a 0100      		.string	"\001"
+  34 002c 00        		.string	""
+  35 002d 00        		.string	""
+  36               	.LC5:
+  37 002e 0A82 2700 		.string	"\n\202'"
+  38 0032 00        		.string	""
+  39               		.text
+  40               	.global	init_display_controller
+  41               		.type	init_display_controller, @function
+  42               	init_display_controller:
+  43               	.LFB6:
+  44               	.LM1:
+  45               	/* prologue: function */
+  46               	/* frame size = 0 */
+  47               	.LM2:
+  48 0000 2A98      		cbi 37-32,2
+  49 0002 88EE      		ldi r24,lo8(1000)
+  50 0004 93E0      		ldi r25,hi8(1000)
+  51               	.LVL0:
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 2
+
+
+  52               	.LBB49:
+  53               	.LBB50:
+  54               	.LBB51:
+  55               	.LBB52:
+  56               	.LM3:
+  57 0006 2CE2      		ldi r18,lo8(300)
+  58 0008 31E0      		ldi r19,hi8(300)
+  59               	.L2:
+  60 000a F901      		movw r30,r18
+  61               	.LVL1:
+  62               	/* #APP */
+  63               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+  64 000c 3197      		1: sbiw r30,1
+  65 000e 01F4      		brne 1b
+  66               	 ;  0 "" 2
+  67               	/* #NOAPP */
+  68               	.LBE52:
+  69               	.LBE51:
+  70               	.LM4:
+  71 0010 0197      		sbiw r24,1
+  72               	.LM5:
+  73 0012 01F4      		brne .L2
+  74               	.LBE50:
+  75               	.LBE49:
+  76               	.LM6:
+  77 0014 2A9A      		sbi 37-32,2
+  78 0016 88EE      		ldi r24,lo8(1000)
+  79 0018 93E0      		ldi r25,hi8(1000)
+  80               	.LVL2:
+  81               	.LBB53:
+  82               	.LBB54:
+  83               	.LBB55:
+  84               	.LBB56:
+  85               	.LM7:
+  86 001a 2CE2      		ldi r18,lo8(300)
+  87 001c 31E0      		ldi r19,hi8(300)
+  88               	.L3:
+  89 001e F901      		movw r30,r18
+  90               	.LVL3:
+  91               	/* #APP */
+  92               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+  93 0020 3197      		1: sbiw r30,1
+  94 0022 01F4      		brne 1b
+  95               	 ;  0 "" 2
+  96               	/* #NOAPP */
+  97               	.LBE56:
+  98               	.LBE55:
+  99               	.LM8:
+ 100 0024 0197      		sbiw r24,1
+ 101               	.LM9:
+ 102 0026 01F4      		brne .L3
+ 103               	.LBE54:
+ 104               	.LBE53:
+ 105               	.LM10:
+ 106 0028 2C9A      		sbi 37-32,4
+ 107               	.LM11:
+ 108 002a 2B9A      		sbi 37-32,3
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 3
+
+
+ 109               	.LM12:
+ 110 002c 2D9A      		sbi 37-32,5
+ 111               	.LM13:
+ 112 002e 2898      		cbi 37-32,0
+ 113               	.LM14:
+ 114 0030 2998      		cbi 37-32,1
+ 115               	.LM15:
+ 116 0032 2E9A      		sbi 37-32,6
+ 117               	.LM16:
+ 118 0034 2C98      		cbi 37-32,4
+ 119 0036 88E2      		ldi r24,lo8(40)
+ 120               	.LVL4:
+ 121 0038 88B9      		out 40-32,r24
+ 122 003a 2B98      		cbi 37-32,3
+ 123 003c 2B9A      		sbi 37-32,3
+ 124 003e 2C9A      		sbi 37-32,4
+ 125               	.LM17:
+ 126 0040 2C98      		cbi 37-32,4
+ 127 0042 81E1      		ldi r24,lo8(17)
+ 128 0044 88B9      		out 40-32,r24
+ 129 0046 2B98      		cbi 37-32,3
+ 130 0048 2B9A      		sbi 37-32,3
+ 131 004a 2C9A      		sbi 37-32,4
+ 132 004c 88E5      		ldi r24,lo8(600)
+ 133 004e 92E0      		ldi r25,hi8(600)
+ 134               	.LVL5:
+ 135               	.LBB57:
+ 136               	.LBB58:
+ 137               	.LBB59:
+ 138               	.LBB60:
+ 139               	.LM18:
+ 140 0050 2CE2      		ldi r18,lo8(300)
+ 141 0052 31E0      		ldi r19,hi8(300)
+ 142               	.L4:
+ 143 0054 F901      		movw r30,r18
+ 144               	.LVL6:
+ 145               	/* #APP */
+ 146               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 147 0056 3197      		1: sbiw r30,1
+ 148 0058 01F4      		brne 1b
+ 149               	 ;  0 "" 2
+ 150               	/* #NOAPP */
+ 151               	.LBE60:
+ 152               	.LBE59:
+ 153               	.LM19:
+ 154 005a 0197      		sbiw r24,1
+ 155               	.LM20:
+ 156 005c 01F4      		brne .L4
+ 157               	.LBE58:
+ 158               	.LBE57:
+ 159               	.LBB61:
+ 160               	.LM21:
+ 161 005e 2C98      		cbi 37-32,4
+ 162 0060 8BEC      		ldi r24,lo8(-53)
+ 163               	.LVL7:
+ 164 0062 88B9      		out 40-32,r24
+ 165 0064 2B98      		cbi 37-32,3
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 4
+
+
+ 166 0066 2B9A      		sbi 37-32,3
+ 167 0068 2C9A      		sbi 37-32,4
+ 168 006a 81E0      		ldi r24,lo8(1)
+ 169 006c 88B9      		out 40-32,r24
+ 170 006e 2B98      		cbi 37-32,3
+ 171 0070 2B9A      		sbi 37-32,3
+ 172               	.LBE61:
+ 173               	.LBB62:
+ 174               	.LM22:
+ 175 0072 2C98      		cbi 37-32,4
+ 176 0074 80EC      		ldi r24,lo8(-64)
+ 177 0076 88B9      		out 40-32,r24
+ 178 0078 2B98      		cbi 37-32,3
+ 179 007a 2B9A      		sbi 37-32,3
+ 180 007c 2C9A      		sbi 37-32,4
+ 181 007e 86E2      		ldi r24,lo8(38)
+ 182 0080 88B9      		out 40-32,r24
+ 183 0082 2B98      		cbi 37-32,3
+ 184 0084 2B9A      		sbi 37-32,3
+ 185 0086 88E0      		ldi r24,lo8(8)
+ 186 0088 88B9      		out 40-32,r24
+ 187 008a 2B98      		cbi 37-32,3
+ 188 008c 2B9A      		sbi 37-32,3
+ 189               	.LBE62:
+ 190               	.LBB63:
+ 191               	.LM23:
+ 192 008e 2C98      		cbi 37-32,4
+ 193 0090 81EC      		ldi r24,lo8(-63)
+ 194 0092 88B9      		out 40-32,r24
+ 195 0094 2B98      		cbi 37-32,3
+ 196 0096 2B9A      		sbi 37-32,3
+ 197 0098 2C9A      		sbi 37-32,4
+ 198 009a 80E1      		ldi r24,lo8(16)
+ 199 009c 88B9      		out 40-32,r24
+ 200 009e 2B98      		cbi 37-32,3
+ 201 00a0 2B9A      		sbi 37-32,3
+ 202               	.LBE63:
+ 203               	.LBB64:
+ 204               	.LM24:
+ 205 00a2 2C98      		cbi 37-32,4
+ 206 00a4 85EC      		ldi r24,lo8(-59)
+ 207 00a6 88B9      		out 40-32,r24
+ 208 00a8 2B98      		cbi 37-32,3
+ 209 00aa 2B9A      		sbi 37-32,3
+ 210 00ac 2C9A      		sbi 37-32,4
+ 211 00ae 85E3      		ldi r24,lo8(53)
+ 212 00b0 88B9      		out 40-32,r24
+ 213 00b2 2B98      		cbi 37-32,3
+ 214 00b4 2B9A      		sbi 37-32,3
+ 215 00b6 8EE3      		ldi r24,lo8(62)
+ 216 00b8 88B9      		out 40-32,r24
+ 217 00ba 2B98      		cbi 37-32,3
+ 218 00bc 2B9A      		sbi 37-32,3
+ 219               	.LBE64:
+ 220               	.LBB65:
+ 221               	.LM25:
+ 222 00be 2C98      		cbi 37-32,4
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 5
+
+
+ 223 00c0 86E3      		ldi r24,lo8(54)
+ 224 00c2 88B9      		out 40-32,r24
+ 225 00c4 2B98      		cbi 37-32,3
+ 226 00c6 2B9A      		sbi 37-32,3
+ 227 00c8 2C9A      		sbi 37-32,4
+ 228 00ca 88E4      		ldi r24,lo8(72)
+ 229 00cc 88B9      		out 40-32,r24
+ 230 00ce 2B98      		cbi 37-32,3
+ 231 00d0 2B9A      		sbi 37-32,3
+ 232               	.LBE65:
+ 233               	.LBB66:
+ 234               	.LM26:
+ 235 00d2 2C98      		cbi 37-32,4
+ 236 00d4 80EB      		ldi r24,lo8(-80)
+ 237 00d6 88B9      		out 40-32,r24
+ 238 00d8 2B98      		cbi 37-32,3
+ 239 00da 2B9A      		sbi 37-32,3
+ 240 00dc 2C9A      		sbi 37-32,4
+ 241 00de 8AE4      		ldi r24,lo8(74)
+ 242 00e0 88B9      		out 40-32,r24
+ 243 00e2 2B98      		cbi 37-32,3
+ 244 00e4 2B9A      		sbi 37-32,3
+ 245               	.LBE66:
+ 246               	.LBB67:
+ 247               	.LM27:
+ 248 00e6 2C98      		cbi 37-32,4
+ 249 00e8 81EB      		ldi r24,lo8(-79)
+ 250 00ea 88B9      		out 40-32,r24
+ 251 00ec 2B98      		cbi 37-32,3
+ 252 00ee 2B9A      		sbi 37-32,3
+ 253 00f0 2C9A      		sbi 37-32,4
+ 254 00f2 18B8      		out 40-32,__zero_reg__
+ 255 00f4 2B98      		cbi 37-32,3
+ 256 00f6 2B9A      		sbi 37-32,3
+ 257 00f8 8BE1      		ldi r24,lo8(27)
+ 258 00fa 88B9      		out 40-32,r24
+ 259 00fc 2B98      		cbi 37-32,3
+ 260 00fe 2B9A      		sbi 37-32,3
+ 261               	.LBE67:
+ 262               	.LBB68:
+ 263               	.LM28:
+ 264 0100 2C98      		cbi 37-32,4
+ 265 0102 86EB      		ldi r24,lo8(-74)
+ 266 0104 88B9      		out 40-32,r24
+ 267 0106 2B98      		cbi 37-32,3
+ 268 0108 2B9A      		sbi 37-32,3
+ 269 010a 2C9A      		sbi 37-32,4
+ 270 010c E0E0      		ldi r30,lo8(.LC5)
+ 271 010e F0E0      		ldi r31,hi8(.LC5)
+ 272               	.LVL8:
+ 273               	.L5:
+ 274 0110 8191      		ld r24,Z+
+ 275 0112 88B9      		out 40-32,r24
+ 276 0114 2B98      		cbi 37-32,3
+ 277 0116 2B9A      		sbi 37-32,3
+ 278 0118 40E0      		ldi r20,hi8(.LC5+4)
+ 279 011a E030      		cpi r30,lo8(.LC5+4)
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 6
+
+
+ 280 011c F407      		cpc r31,r20
+ 281 011e 01F4      		brne .L5
+ 282               	.LBE68:
+ 283               	.LBB69:
+ 284               	.LM29:
+ 285 0120 2C98      		cbi 37-32,4
+ 286 0122 87EC      		ldi r24,lo8(-57)
+ 287 0124 88B9      		out 40-32,r24
+ 288 0126 2B98      		cbi 37-32,3
+ 289 0128 2B9A      		sbi 37-32,3
+ 290 012a 2C9A      		sbi 37-32,4
+ 291 012c 85EB      		ldi r24,lo8(-75)
+ 292 012e 88B9      		out 40-32,r24
+ 293 0130 2B98      		cbi 37-32,3
+ 294 0132 2B9A      		sbi 37-32,3
+ 295               	.LBE69:
+ 296               	.LBB70:
+ 297               	.LM30:
+ 298 0134 2C98      		cbi 37-32,4
+ 299 0136 86EF      		ldi r24,lo8(-10)
+ 300 0138 88B9      		out 40-32,r24
+ 301 013a 2B98      		cbi 37-32,3
+ 302 013c 2B9A      		sbi 37-32,3
+ 303 013e 2C9A      		sbi 37-32,4
+ 304 0140 E0E0      		ldi r30,lo8(.LC4)
+ 305 0142 F0E0      		ldi r31,hi8(.LC4)
+ 306               	.LVL9:
+ 307               	.L6:
+ 308 0144 8191      		ld r24,Z+
+ 309 0146 88B9      		out 40-32,r24
+ 310 0148 2B98      		cbi 37-32,3
+ 311 014a 2B9A      		sbi 37-32,3
+ 312 014c 80E0      		ldi r24,hi8(.LC4+3)
+ 313 014e E030      		cpi r30,lo8(.LC4+3)
+ 314 0150 F807      		cpc r31,r24
+ 315 0152 01F4      		brne .L6
+ 316               	.LBE70:
+ 317               	.LBB71:
+ 318               	.LM31:
+ 319 0154 2C98      		cbi 37-32,4
+ 320 0156 82EF      		ldi r24,lo8(-14)
+ 321 0158 88B9      		out 40-32,r24
+ 322 015a 2B98      		cbi 37-32,3
+ 323 015c 2B9A      		sbi 37-32,3
+ 324 015e 2C9A      		sbi 37-32,4
+ 325 0160 18B8      		out 40-32,__zero_reg__
+ 326 0162 2B98      		cbi 37-32,3
+ 327 0164 2B9A      		sbi 37-32,3
+ 328               	.LBE71:
+ 329               	.LBB72:
+ 330               	.LM32:
+ 331 0166 2C98      		cbi 37-32,4
+ 332 0168 86E2      		ldi r24,lo8(38)
+ 333 016a 88B9      		out 40-32,r24
+ 334 016c 2B98      		cbi 37-32,3
+ 335 016e 2B9A      		sbi 37-32,3
+ 336 0170 2C9A      		sbi 37-32,4
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 7
+
+
+ 337 0172 81E0      		ldi r24,lo8(1)
+ 338 0174 88B9      		out 40-32,r24
+ 339 0176 2B98      		cbi 37-32,3
+ 340 0178 2B9A      		sbi 37-32,3
+ 341               	.LBE72:
+ 342               	.LBB73:
+ 343               	.LM33:
+ 344 017a 2C98      		cbi 37-32,4
+ 345 017c 8AE3      		ldi r24,lo8(58)
+ 346 017e 88B9      		out 40-32,r24
+ 347 0180 2B98      		cbi 37-32,3
+ 348 0182 2B9A      		sbi 37-32,3
+ 349 0184 2C9A      		sbi 37-32,4
+ 350 0186 85E5      		ldi r24,lo8(85)
+ 351 0188 88B9      		out 40-32,r24
+ 352 018a 2B98      		cbi 37-32,3
+ 353 018c 2B9A      		sbi 37-32,3
+ 354               	.LBE73:
+ 355               	.LBB74:
+ 356               	.LM34:
+ 357 018e 2C98      		cbi 37-32,4
+ 358 0190 80EE      		ldi r24,lo8(-32)
+ 359 0192 88B9      		out 40-32,r24
+ 360 0194 2B98      		cbi 37-32,3
+ 361 0196 2B9A      		sbi 37-32,3
+ 362 0198 2C9A      		sbi 37-32,4
+ 363 019a E0E0      		ldi r30,lo8(.LC3)
+ 364 019c F0E0      		ldi r31,hi8(.LC3)
+ 365               	.LVL10:
+ 366               	.L7:
+ 367 019e 8191      		ld r24,Z+
+ 368 01a0 88B9      		out 40-32,r24
+ 369 01a2 2B98      		cbi 37-32,3
+ 370 01a4 2B9A      		sbi 37-32,3
+ 371 01a6 40E0      		ldi r20,hi8(.LC3+15)
+ 372 01a8 E030      		cpi r30,lo8(.LC3+15)
+ 373 01aa F407      		cpc r31,r20
+ 374 01ac 01F4      		brne .L7
+ 375               	.LBE74:
+ 376               	.LBB75:
+ 377               	.LM35:
+ 378 01ae 2C98      		cbi 37-32,4
+ 379 01b0 81EE      		ldi r24,lo8(-31)
+ 380 01b2 88B9      		out 40-32,r24
+ 381 01b4 2B98      		cbi 37-32,3
+ 382 01b6 2B9A      		sbi 37-32,3
+ 383 01b8 2C9A      		sbi 37-32,4
+ 384 01ba E0E0      		ldi r30,lo8(.LC2)
+ 385 01bc F0E0      		ldi r31,hi8(.LC2)
+ 386               	.LVL11:
+ 387               	.L8:
+ 388 01be 8191      		ld r24,Z+
+ 389 01c0 88B9      		out 40-32,r24
+ 390 01c2 2B98      		cbi 37-32,3
+ 391 01c4 2B9A      		sbi 37-32,3
+ 392 01c6 80E0      		ldi r24,hi8(.LC2+15)
+ 393 01c8 E030      		cpi r30,lo8(.LC2+15)
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 8
+
+
+ 394 01ca F807      		cpc r31,r24
+ 395 01cc 01F4      		brne .L8
+ 396               	.LBE75:
+ 397               	.LBB76:
+ 398               	.LM36:
+ 399 01ce 2C98      		cbi 37-32,4
+ 400 01d0 8AE2      		ldi r24,lo8(42)
+ 401 01d2 88B9      		out 40-32,r24
+ 402 01d4 2B98      		cbi 37-32,3
+ 403 01d6 2B9A      		sbi 37-32,3
+ 404 01d8 2C9A      		sbi 37-32,4
+ 405 01da E0E0      		ldi r30,lo8(.LC1)
+ 406 01dc F0E0      		ldi r31,hi8(.LC1)
+ 407               	.LVL12:
+ 408               	.L9:
+ 409 01de 8191      		ld r24,Z+
+ 410 01e0 88B9      		out 40-32,r24
+ 411 01e2 2B98      		cbi 37-32,3
+ 412 01e4 2B9A      		sbi 37-32,3
+ 413 01e6 40E0      		ldi r20,hi8(.LC1+4)
+ 414 01e8 E030      		cpi r30,lo8(.LC1+4)
+ 415 01ea F407      		cpc r31,r20
+ 416 01ec 01F4      		brne .L9
+ 417               	.LBE76:
+ 418               	.LBB77:
+ 419               	.LM37:
+ 420 01ee 2C98      		cbi 37-32,4
+ 421 01f0 8BE2      		ldi r24,lo8(43)
+ 422 01f2 88B9      		out 40-32,r24
+ 423 01f4 2B98      		cbi 37-32,3
+ 424 01f6 2B9A      		sbi 37-32,3
+ 425 01f8 2C9A      		sbi 37-32,4
+ 426 01fa E0E0      		ldi r30,lo8(.LC0)
+ 427 01fc F0E0      		ldi r31,hi8(.LC0)
+ 428               	.LVL13:
+ 429               	.L10:
+ 430 01fe 8191      		ld r24,Z+
+ 431 0200 88B9      		out 40-32,r24
+ 432 0202 2B98      		cbi 37-32,3
+ 433 0204 2B9A      		sbi 37-32,3
+ 434 0206 80E0      		ldi r24,hi8(.LC0+4)
+ 435 0208 E030      		cpi r30,lo8(.LC0+4)
+ 436 020a F807      		cpc r31,r24
+ 437 020c 01F4      		brne .L10
+ 438               	.LBE77:
+ 439               	.LM38:
+ 440 020e 2C98      		cbi 37-32,4
+ 441 0210 84E3      		ldi r24,lo8(52)
+ 442 0212 88B9      		out 40-32,r24
+ 443 0214 2B98      		cbi 37-32,3
+ 444 0216 2B9A      		sbi 37-32,3
+ 445 0218 2C9A      		sbi 37-32,4
+ 446               	.LBB78:
+ 447               	.LM39:
+ 448 021a 2C98      		cbi 37-32,4
+ 449 021c 84EB      		ldi r24,lo8(-76)
+ 450 021e 88B9      		out 40-32,r24
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 9
+
+
+ 451 0220 2B98      		cbi 37-32,3
+ 452 0222 2B9A      		sbi 37-32,3
+ 453 0224 2C9A      		sbi 37-32,4
+ 454 0226 18B8      		out 40-32,__zero_reg__
+ 455 0228 2B98      		cbi 37-32,3
+ 456 022a 2B9A      		sbi 37-32,3
+ 457               	.LBE78:
+ 458               	.LBB79:
+ 459               	.LM40:
+ 460 022c 2C98      		cbi 37-32,4
+ 461 022e 87EB      		ldi r24,lo8(-73)
+ 462 0230 88B9      		out 40-32,r24
+ 463 0232 2B98      		cbi 37-32,3
+ 464 0234 2B9A      		sbi 37-32,3
+ 465 0236 2C9A      		sbi 37-32,4
+ 466 0238 87E0      		ldi r24,lo8(7)
+ 467 023a 88B9      		out 40-32,r24
+ 468 023c 2B98      		cbi 37-32,3
+ 469 023e 2B9A      		sbi 37-32,3
+ 470               	.LBE79:
+ 471               	.LM41:
+ 472 0240 2C98      		cbi 37-32,4
+ 473 0242 8CE2      		ldi r24,lo8(44)
+ 474 0244 88B9      		out 40-32,r24
+ 475 0246 2B98      		cbi 37-32,3
+ 476 0248 2B9A      		sbi 37-32,3
+ 477 024a 2C9A      		sbi 37-32,4
+ 478 024c 20E0      		ldi r18,lo8(0)
+ 479 024e 30E0      		ldi r19,hi8(0)
+ 480               	.LVL14:
+ 481 0250 00C0      		rjmp .L11
+ 482               	.LVL15:
+ 483               	.L12:
+ 484               	.LM42:
+ 485 0252 18B8      		out 40-32,__zero_reg__
+ 486 0254 2B98      		cbi 37-32,3
+ 487 0256 2B9A      		sbi 37-32,3
+ 488 0258 18B8      		out 40-32,__zero_reg__
+ 489 025a 2B98      		cbi 37-32,3
+ 490 025c 2B9A      		sbi 37-32,3
+ 491               	.LM43:
+ 492 025e 0196      		adiw r24,1
+ 493 0260 41E0      		ldi r20,hi8(320)
+ 494 0262 8034      		cpi r24,lo8(320)
+ 495 0264 9407      		cpc r25,r20
+ 496 0266 01F4      		brne .L12
+ 497               	.LM44:
+ 498 0268 2F5F      		subi r18,lo8(-(1))
+ 499 026a 3F4F      		sbci r19,hi8(-(1))
+ 500 026c 203F      		cpi r18,240
+ 501 026e 3105      		cpc r19,__zero_reg__
+ 502 0270 01F0      		breq .L13
+ 503               	.L11:
+ 504 0272 80E0      		ldi r24,lo8(0)
+ 505 0274 90E0      		ldi r25,hi8(0)
+ 506 0276 00C0      		rjmp .L12
+ 507               	.L13:
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 10
+
+
+ 508               	.LM45:
+ 509 0278 2C98      		cbi 37-32,4
+ 510 027a 89E2      		ldi r24,lo8(41)
+ 511               	.LVL16:
+ 512 027c 88B9      		out 40-32,r24
+ 513 027e 2B98      		cbi 37-32,3
+ 514 0280 2B9A      		sbi 37-32,3
+ 515 0282 2C9A      		sbi 37-32,4
+ 516 0284 84EF      		ldi r24,lo8(500)
+ 517 0286 91E0      		ldi r25,hi8(500)
+ 518               	.LVL17:
+ 519               	.LBB80:
+ 520               	.LBB81:
+ 521               	.LBB82:
+ 522               	.LBB83:
+ 523               	.LM46:
+ 524 0288 2CE2      		ldi r18,lo8(300)
+ 525 028a 31E0      		ldi r19,hi8(300)
+ 526               	.LVL18:
+ 527               	.L14:
+ 528 028c F901      		movw r30,r18
+ 529               	.LVL19:
+ 530               	/* #APP */
+ 531               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 532 028e 3197      		1: sbiw r30,1
+ 533 0290 01F4      		brne 1b
+ 534               	 ;  0 "" 2
+ 535               	/* #NOAPP */
+ 536               	.LBE83:
+ 537               	.LBE82:
+ 538               	.LM47:
+ 539 0292 0197      		sbiw r24,1
+ 540               	.LM48:
+ 541 0294 01F4      		brne .L14
+ 542               	.LBE81:
+ 543               	.LBE80:
+ 544               	.LM49:
+ 545 0296 299A      		sbi 37-32,1
+ 546               	/* epilogue start */
+ 547               	.LM50:
+ 548 0298 0895      		ret
+ 549               	.LFE6:
+ 550               		.size	init_display_controller, .-init_display_controller
+ 551               		.section	.debug_frame,"",@progbits
+ 552               	.Lframe0:
+ 553 0000 0C00 0000 		.long	.LECIE0-.LSCIE0
+ 554               	.LSCIE0:
+ 555 0004 FFFF FFFF 		.long	0xffffffff
+ 556 0008 01        		.byte	0x1
+ 557 0009 00        		.string	""
+ 558 000a 01        		.uleb128 0x1
+ 559 000b 7F        		.sleb128 -1
+ 560 000c 24        		.byte	0x24
+ 561 000d 0C        		.byte	0xc
+ 562 000e 20        		.uleb128 0x20
+ 563 000f 00        		.uleb128 0x0
+ 564               		.p2align	2
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 11
+
+
+ 565               	.LECIE0:
+ 566               	.LSFDE0:
+ 567 0010 0C00 0000 		.long	.LEFDE0-.LASFDE0
+ 568               	.LASFDE0:
+ 569 0014 0000 0000 		.long	.Lframe0
+ 570 0018 0000 0000 		.long	.LFB6
+ 571 001c 9A02 0000 		.long	.LFE6-.LFB6
+ 572               		.p2align	2
+ 573               	.LEFDE0:
+ 574               		.text
+ 575               	.Letext0:
+ 576               		.section	.debug_loc,"",@progbits
+ 577               	.Ldebug_loc0:
+ 578               	.LLST1:
+ 579 0000 5002 0000 		.long	.LVL14-.Ltext0
+ 580 0004 8C02 0000 		.long	.LVL18-.Ltext0
+ 581 0008 0600      		.word	0x6
+ 582 000a 62        		.byte	0x62
+ 583 000b 93        		.byte	0x93
+ 584 000c 01        		.uleb128 0x1
+ 585 000d 63        		.byte	0x63
+ 586 000e 93        		.byte	0x93
+ 587 000f 01        		.uleb128 0x1
+ 588 0010 0000 0000 		.long	0x0
+ 589 0014 0000 0000 		.long	0x0
+ 590               	.LLST2:
+ 591 0018 5202 0000 		.long	.LVL15-.Ltext0
+ 592 001c 7C02 0000 		.long	.LVL16-.Ltext0
+ 593 0020 0600      		.word	0x6
+ 594 0022 68        		.byte	0x68
+ 595 0023 93        		.byte	0x93
+ 596 0024 01        		.uleb128 0x1
+ 597 0025 69        		.byte	0x69
+ 598 0026 93        		.byte	0x93
+ 599 0027 01        		.uleb128 0x1
+ 600 0028 0000 0000 		.long	0x0
+ 601 002c 0000 0000 		.long	0x0
+ 602               	.LLST3:
+ 603 0030 0600 0000 		.long	.LVL0-.Ltext0
+ 604 0034 1A00 0000 		.long	.LVL2-.Ltext0
+ 605 0038 0600      		.word	0x6
+ 606 003a 68        		.byte	0x68
+ 607 003b 93        		.byte	0x93
+ 608 003c 01        		.uleb128 0x1
+ 609 003d 69        		.byte	0x69
+ 610 003e 93        		.byte	0x93
+ 611 003f 01        		.uleb128 0x1
+ 612 0040 0000 0000 		.long	0x0
+ 613 0044 0000 0000 		.long	0x0
+ 614               	.LLST4:
+ 615 0048 0C00 0000 		.long	.LVL1-.Ltext0
+ 616 004c 2000 0000 		.long	.LVL3-.Ltext0
+ 617 0050 0600      		.word	0x6
+ 618 0052 6E        		.byte	0x6e
+ 619 0053 93        		.byte	0x93
+ 620 0054 01        		.uleb128 0x1
+ 621 0055 6F        		.byte	0x6f
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 12
+
+
+ 622 0056 93        		.byte	0x93
+ 623 0057 01        		.uleb128 0x1
+ 624 0058 0000 0000 		.long	0x0
+ 625 005c 0000 0000 		.long	0x0
+ 626               	.LLST5:
+ 627 0060 1A00 0000 		.long	.LVL2-.Ltext0
+ 628 0064 3800 0000 		.long	.LVL4-.Ltext0
+ 629 0068 0600      		.word	0x6
+ 630 006a 68        		.byte	0x68
+ 631 006b 93        		.byte	0x93
+ 632 006c 01        		.uleb128 0x1
+ 633 006d 69        		.byte	0x69
+ 634 006e 93        		.byte	0x93
+ 635 006f 01        		.uleb128 0x1
+ 636 0070 0000 0000 		.long	0x0
+ 637 0074 0000 0000 		.long	0x0
+ 638               	.LLST6:
+ 639 0078 2000 0000 		.long	.LVL3-.Ltext0
+ 640 007c 5600 0000 		.long	.LVL6-.Ltext0
+ 641 0080 0600      		.word	0x6
+ 642 0082 6E        		.byte	0x6e
+ 643 0083 93        		.byte	0x93
+ 644 0084 01        		.uleb128 0x1
+ 645 0085 6F        		.byte	0x6f
+ 646 0086 93        		.byte	0x93
+ 647 0087 01        		.uleb128 0x1
+ 648 0088 0000 0000 		.long	0x0
+ 649 008c 0000 0000 		.long	0x0
+ 650               	.LLST7:
+ 651 0090 5000 0000 		.long	.LVL5-.Ltext0
+ 652 0094 6200 0000 		.long	.LVL7-.Ltext0
+ 653 0098 0600      		.word	0x6
+ 654 009a 68        		.byte	0x68
+ 655 009b 93        		.byte	0x93
+ 656 009c 01        		.uleb128 0x1
+ 657 009d 69        		.byte	0x69
+ 658 009e 93        		.byte	0x93
+ 659 009f 01        		.uleb128 0x1
+ 660 00a0 0000 0000 		.long	0x0
+ 661 00a4 0000 0000 		.long	0x0
+ 662               	.LLST8:
+ 663 00a8 5600 0000 		.long	.LVL6-.Ltext0
+ 664 00ac 1001 0000 		.long	.LVL8-.Ltext0
+ 665 00b0 0600      		.word	0x6
+ 666 00b2 6E        		.byte	0x6e
+ 667 00b3 93        		.byte	0x93
+ 668 00b4 01        		.uleb128 0x1
+ 669 00b5 6F        		.byte	0x6f
+ 670 00b6 93        		.byte	0x93
+ 671 00b7 01        		.uleb128 0x1
+ 672 00b8 0000 0000 		.long	0x0
+ 673 00bc 0000 0000 		.long	0x0
+ 674               	.LLST9:
+ 675 00c0 1001 0000 		.long	.LVL8-.Ltext0
+ 676 00c4 4401 0000 		.long	.LVL9-.Ltext0
+ 677 00c8 0600      		.word	0x6
+ 678 00ca 6E        		.byte	0x6e
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 13
+
+
+ 679 00cb 93        		.byte	0x93
+ 680 00cc 01        		.uleb128 0x1
+ 681 00cd 6F        		.byte	0x6f
+ 682 00ce 93        		.byte	0x93
+ 683 00cf 01        		.uleb128 0x1
+ 684 00d0 0000 0000 		.long	0x0
+ 685 00d4 0000 0000 		.long	0x0
+ 686               	.LLST10:
+ 687 00d8 4401 0000 		.long	.LVL9-.Ltext0
+ 688 00dc 9E01 0000 		.long	.LVL10-.Ltext0
+ 689 00e0 0600      		.word	0x6
+ 690 00e2 6E        		.byte	0x6e
+ 691 00e3 93        		.byte	0x93
+ 692 00e4 01        		.uleb128 0x1
+ 693 00e5 6F        		.byte	0x6f
+ 694 00e6 93        		.byte	0x93
+ 695 00e7 01        		.uleb128 0x1
+ 696 00e8 0000 0000 		.long	0x0
+ 697 00ec 0000 0000 		.long	0x0
+ 698               	.LLST11:
+ 699 00f0 9E01 0000 		.long	.LVL10-.Ltext0
+ 700 00f4 BE01 0000 		.long	.LVL11-.Ltext0
+ 701 00f8 0600      		.word	0x6
+ 702 00fa 6E        		.byte	0x6e
+ 703 00fb 93        		.byte	0x93
+ 704 00fc 01        		.uleb128 0x1
+ 705 00fd 6F        		.byte	0x6f
+ 706 00fe 93        		.byte	0x93
+ 707 00ff 01        		.uleb128 0x1
+ 708 0100 0000 0000 		.long	0x0
+ 709 0104 0000 0000 		.long	0x0
+ 710               	.LLST12:
+ 711 0108 BE01 0000 		.long	.LVL11-.Ltext0
+ 712 010c DE01 0000 		.long	.LVL12-.Ltext0
+ 713 0110 0600      		.word	0x6
+ 714 0112 6E        		.byte	0x6e
+ 715 0113 93        		.byte	0x93
+ 716 0114 01        		.uleb128 0x1
+ 717 0115 6F        		.byte	0x6f
+ 718 0116 93        		.byte	0x93
+ 719 0117 01        		.uleb128 0x1
+ 720 0118 0000 0000 		.long	0x0
+ 721 011c 0000 0000 		.long	0x0
+ 722               	.LLST13:
+ 723 0120 DE01 0000 		.long	.LVL12-.Ltext0
+ 724 0124 FE01 0000 		.long	.LVL13-.Ltext0
+ 725 0128 0600      		.word	0x6
+ 726 012a 6E        		.byte	0x6e
+ 727 012b 93        		.byte	0x93
+ 728 012c 01        		.uleb128 0x1
+ 729 012d 6F        		.byte	0x6f
+ 730 012e 93        		.byte	0x93
+ 731 012f 01        		.uleb128 0x1
+ 732 0130 0000 0000 		.long	0x0
+ 733 0134 0000 0000 		.long	0x0
+ 734               	.LLST14:
+ 735 0138 FE01 0000 		.long	.LVL13-.Ltext0
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 14
+
+
+ 736 013c 8E02 0000 		.long	.LVL19-.Ltext0
+ 737 0140 0600      		.word	0x6
+ 738 0142 6E        		.byte	0x6e
+ 739 0143 93        		.byte	0x93
+ 740 0144 01        		.uleb128 0x1
+ 741 0145 6F        		.byte	0x6f
+ 742 0146 93        		.byte	0x93
+ 743 0147 01        		.uleb128 0x1
+ 744 0148 0000 0000 		.long	0x0
+ 745 014c 0000 0000 		.long	0x0
+ 746               		.section	.debug_info
+ 747 0000 A204 0000 		.long	0x4a2
+ 748 0004 0200      		.word	0x2
+ 749 0006 0000 0000 		.long	.Ldebug_abbrev0
+ 750 000a 04        		.byte	0x4
+ 751 000b 01        		.uleb128 0x1
+ 752 000c 0000 0000 		.long	.LASF17
+ 753 0010 01        		.byte	0x1
+ 754 0011 0000 0000 		.long	.LASF18
+ 755 0015 0000 0000 		.long	.LASF19
+ 756 0019 0000 0000 		.long	.Ltext0
+ 757 001d 0000 0000 		.long	.Letext0
+ 758 0021 0000 0000 		.long	.Ldebug_line0
+ 759 0025 02        		.uleb128 0x2
+ 760 0026 01        		.byte	0x1
+ 761 0027 06        		.byte	0x6
+ 762 0028 0000 0000 		.long	.LASF0
+ 763 002c 03        		.uleb128 0x3
+ 764 002d 0000 0000 		.long	.LASF2
+ 765 0031 04        		.byte	0x4
+ 766 0032 7A        		.byte	0x7a
+ 767 0033 3700 0000 		.long	0x37
+ 768 0037 02        		.uleb128 0x2
+ 769 0038 01        		.byte	0x1
+ 770 0039 08        		.byte	0x8
+ 771 003a 0000 0000 		.long	.LASF1
+ 772 003e 04        		.uleb128 0x4
+ 773 003f 02        		.byte	0x2
+ 774 0040 05        		.byte	0x5
+ 775 0041 696E 7400 		.string	"int"
+ 776 0045 03        		.uleb128 0x3
+ 777 0046 0000 0000 		.long	.LASF3
+ 778 004a 04        		.byte	0x4
+ 779 004b 7C        		.byte	0x7c
+ 780 004c 5000 0000 		.long	0x50
+ 781 0050 02        		.uleb128 0x2
+ 782 0051 02        		.byte	0x2
+ 783 0052 07        		.byte	0x7
+ 784 0053 0000 0000 		.long	.LASF4
+ 785 0057 02        		.uleb128 0x2
+ 786 0058 04        		.byte	0x4
+ 787 0059 05        		.byte	0x5
+ 788 005a 0000 0000 		.long	.LASF5
+ 789 005e 02        		.uleb128 0x2
+ 790 005f 04        		.byte	0x4
+ 791 0060 07        		.byte	0x7
+ 792 0061 0000 0000 		.long	.LASF6
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 15
+
+
+ 793 0065 02        		.uleb128 0x2
+ 794 0066 08        		.byte	0x8
+ 795 0067 05        		.byte	0x5
+ 796 0068 0000 0000 		.long	.LASF7
+ 797 006c 02        		.uleb128 0x2
+ 798 006d 08        		.byte	0x8
+ 799 006e 07        		.byte	0x7
+ 800 006f 0000 0000 		.long	.LASF8
+ 801 0073 05        		.uleb128 0x5
+ 802 0074 0000 0000 		.long	.LASF9
+ 803 0078 02        		.byte	0x2
+ 804 0079 68        		.byte	0x68
+ 805 007a 01        		.byte	0x1
+ 806 007b 03        		.byte	0x3
+ 807 007c 8C00 0000 		.long	0x8c
+ 808 0080 06        		.uleb128 0x6
+ 809 0081 0000 0000 		.long	.LASF11
+ 810 0085 02        		.byte	0x2
+ 811 0086 67        		.byte	0x67
+ 812 0087 4500 0000 		.long	0x45
+ 813 008b 00        		.byte	0x0
+ 814 008c 05        		.uleb128 0x5
+ 815 008d 0000 0000 		.long	.LASF10
+ 816 0091 03        		.byte	0x3
+ 817 0092 6F        		.byte	0x6f
+ 818 0093 01        		.byte	0x1
+ 819 0094 03        		.byte	0x3
+ 820 0095 BD00 0000 		.long	0xbd
+ 821 0099 06        		.uleb128 0x6
+ 822 009a 0000 0000 		.long	.LASF12
+ 823 009e 03        		.byte	0x3
+ 824 009f 6E        		.byte	0x6e
+ 825 00a0 BD00 0000 		.long	0xbd
+ 826 00a4 07        		.uleb128 0x7
+ 827 00a5 0000 0000 		.long	.LASF13
+ 828 00a9 03        		.byte	0x3
+ 829 00aa 70        		.byte	0x70
+ 830 00ab 4500 0000 		.long	0x45
+ 831 00af 07        		.uleb128 0x7
+ 832 00b0 0000 0000 		.long	.LASF14
+ 833 00b4 03        		.byte	0x3
+ 834 00b5 71        		.byte	0x71
+ 835 00b6 BD00 0000 		.long	0xbd
+ 836 00ba 08        		.uleb128 0x8
+ 837 00bb 08        		.uleb128 0x8
+ 838 00bc 00        		.byte	0x0
+ 839 00bd 02        		.uleb128 0x2
+ 840 00be 04        		.byte	0x4
+ 841 00bf 04        		.byte	0x4
+ 842 00c0 0000 0000 		.long	.LASF15
+ 843 00c4 09        		.uleb128 0x9
+ 844 00c5 01        		.byte	0x1
+ 845 00c6 0000 0000 		.long	.LASF20
+ 846 00ca 01        		.byte	0x1
+ 847 00cb 0A        		.byte	0xa
+ 848 00cc 0000 0000 		.long	.LFB6
+ 849 00d0 0000 0000 		.long	.LFE6
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 16
+
+
+ 850 00d4 02        		.byte	0x2
+ 851 00d5 90        		.byte	0x90
+ 852 00d6 20        		.uleb128 0x20
+ 853 00d7 9804 0000 		.long	0x498
+ 854 00db 0A        		.uleb128 0xa
+ 855 00dc 7800      		.string	"x"
+ 856 00de 01        		.byte	0x1
+ 857 00df 0B        		.byte	0xb
+ 858 00e0 4500 0000 		.long	0x45
+ 859 00e4 0000 0000 		.long	.LLST1
+ 860 00e8 0A        		.uleb128 0xa
+ 861 00e9 7900      		.string	"y"
+ 862 00eb 01        		.byte	0x1
+ 863 00ec 0B        		.byte	0xb
+ 864 00ed 4500 0000 		.long	0x45
+ 865 00f1 0000 0000 		.long	.LLST2
+ 866 00f5 0B        		.uleb128 0xb
+ 867 00f6 8C00 0000 		.long	0x8c
+ 868 00fa 0000 0000 		.long	.LBB49
+ 869 00fe 0000 0000 		.long	.LBE49
+ 870 0102 01        		.byte	0x1
+ 871 0103 0D        		.byte	0xd
+ 872 0104 3F01 0000 		.long	0x13f
+ 873 0108 0C        		.uleb128 0xc
+ 874 0109 9900 0000 		.long	0x99
+ 875 010d 0D        		.uleb128 0xd
+ 876 010e 0000 0000 		.long	.LBB50
+ 877 0112 0000 0000 		.long	.LBE50
+ 878 0116 0E        		.uleb128 0xe
+ 879 0117 A400 0000 		.long	0xa4
+ 880 011b 0000 0000 		.long	.LLST3
+ 881 011f 0F        		.uleb128 0xf
+ 882 0120 AF00 0000 		.long	0xaf
+ 883 0124 10        		.uleb128 0x10
+ 884 0125 7300 0000 		.long	0x73
+ 885 0129 0000 0000 		.long	.LBB51
+ 886 012d 0000 0000 		.long	.LBE51
+ 887 0131 03        		.byte	0x3
+ 888 0132 7B        		.byte	0x7b
+ 889 0133 11        		.uleb128 0x11
+ 890 0134 8000 0000 		.long	0x80
+ 891 0138 0000 0000 		.long	.LLST4
+ 892 013c 00        		.byte	0x0
+ 893 013d 00        		.byte	0x0
+ 894 013e 00        		.byte	0x0
+ 895 013f 0B        		.uleb128 0xb
+ 896 0140 8C00 0000 		.long	0x8c
+ 897 0144 0000 0000 		.long	.LBB53
+ 898 0148 0000 0000 		.long	.LBE53
+ 899 014c 01        		.byte	0x1
+ 900 014d 0F        		.byte	0xf
+ 901 014e 8901 0000 		.long	0x189
+ 902 0152 0C        		.uleb128 0xc
+ 903 0153 9900 0000 		.long	0x99
+ 904 0157 0D        		.uleb128 0xd
+ 905 0158 0000 0000 		.long	.LBB54
+ 906 015c 0000 0000 		.long	.LBE54
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 17
+
+
+ 907 0160 0E        		.uleb128 0xe
+ 908 0161 A400 0000 		.long	0xa4
+ 909 0165 0000 0000 		.long	.LLST5
+ 910 0169 0F        		.uleb128 0xf
+ 911 016a AF00 0000 		.long	0xaf
+ 912 016e 10        		.uleb128 0x10
+ 913 016f 7300 0000 		.long	0x73
+ 914 0173 0000 0000 		.long	.LBB55
+ 915 0177 0000 0000 		.long	.LBE55
+ 916 017b 03        		.byte	0x3
+ 917 017c 7B        		.byte	0x7b
+ 918 017d 11        		.uleb128 0x11
+ 919 017e 8000 0000 		.long	0x80
+ 920 0182 0000 0000 		.long	.LLST6
+ 921 0186 00        		.byte	0x0
+ 922 0187 00        		.byte	0x0
+ 923 0188 00        		.byte	0x0
+ 924 0189 0B        		.uleb128 0xb
+ 925 018a 8C00 0000 		.long	0x8c
+ 926 018e 0000 0000 		.long	.LBB57
+ 927 0192 0000 0000 		.long	.LBE57
+ 928 0196 01        		.byte	0x1
+ 929 0197 18        		.byte	0x18
+ 930 0198 D301 0000 		.long	0x1d3
+ 931 019c 0C        		.uleb128 0xc
+ 932 019d 9900 0000 		.long	0x99
+ 933 01a1 0D        		.uleb128 0xd
+ 934 01a2 0000 0000 		.long	.LBB58
+ 935 01a6 0000 0000 		.long	.LBE58
+ 936 01aa 0E        		.uleb128 0xe
+ 937 01ab A400 0000 		.long	0xa4
+ 938 01af 0000 0000 		.long	.LLST7
+ 939 01b3 0F        		.uleb128 0xf
+ 940 01b4 AF00 0000 		.long	0xaf
+ 941 01b8 10        		.uleb128 0x10
+ 942 01b9 7300 0000 		.long	0x73
+ 943 01bd 0000 0000 		.long	.LBB59
+ 944 01c1 0000 0000 		.long	.LBE59
+ 945 01c5 03        		.byte	0x3
+ 946 01c6 7B        		.byte	0x7b
+ 947 01c7 11        		.uleb128 0x11
+ 948 01c8 8000 0000 		.long	0x80
+ 949 01cc 0000 0000 		.long	.LLST8
+ 950 01d0 00        		.byte	0x0
+ 951 01d1 00        		.byte	0x0
+ 952 01d2 00        		.byte	0x0
+ 953 01d3 12        		.uleb128 0x12
+ 954 01d4 0000 0000 		.long	.LBB61
+ 955 01d8 0000 0000 		.long	.LBE61
+ 956 01dc F301 0000 		.long	0x1f3
+ 957 01e0 13        		.uleb128 0x13
+ 958 01e1 6900      		.string	"i"
+ 959 01e3 01        		.byte	0x1
+ 960 01e4 19        		.byte	0x19
+ 961 01e5 2C00 0000 		.long	0x2c
+ 962 01e9 13        		.uleb128 0x13
+ 963 01ea 6400      		.string	"d"
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 18
+
+
+ 964 01ec 01        		.byte	0x1
+ 965 01ed 19        		.byte	0x19
+ 966 01ee 9804 0000 		.long	0x498
+ 967 01f2 00        		.byte	0x0
+ 968 01f3 12        		.uleb128 0x12
+ 969 01f4 0000 0000 		.long	.LBB62
+ 970 01f8 0000 0000 		.long	.LBE62
+ 971 01fc 1302 0000 		.long	0x213
+ 972 0200 13        		.uleb128 0x13
+ 973 0201 6900      		.string	"i"
+ 974 0203 01        		.byte	0x1
+ 975 0204 1A        		.byte	0x1a
+ 976 0205 2C00 0000 		.long	0x2c
+ 977 0209 13        		.uleb128 0x13
+ 978 020a 6400      		.string	"d"
+ 979 020c 01        		.byte	0x1
+ 980 020d 1A        		.byte	0x1a
+ 981 020e 9804 0000 		.long	0x498
+ 982 0212 00        		.byte	0x0
+ 983 0213 12        		.uleb128 0x12
+ 984 0214 0000 0000 		.long	.LBB63
+ 985 0218 0000 0000 		.long	.LBE63
+ 986 021c 3302 0000 		.long	0x233
+ 987 0220 13        		.uleb128 0x13
+ 988 0221 6900      		.string	"i"
+ 989 0223 01        		.byte	0x1
+ 990 0224 1B        		.byte	0x1b
+ 991 0225 2C00 0000 		.long	0x2c
+ 992 0229 13        		.uleb128 0x13
+ 993 022a 6400      		.string	"d"
+ 994 022c 01        		.byte	0x1
+ 995 022d 1B        		.byte	0x1b
+ 996 022e 9804 0000 		.long	0x498
+ 997 0232 00        		.byte	0x0
+ 998 0233 12        		.uleb128 0x12
+ 999 0234 0000 0000 		.long	.LBB64
+ 1000 0238 0000 0000 		.long	.LBE64
+ 1001 023c 5302 0000 		.long	0x253
+ 1002 0240 13        		.uleb128 0x13
+ 1003 0241 6900      		.string	"i"
+ 1004 0243 01        		.byte	0x1
+ 1005 0244 1C        		.byte	0x1c
+ 1006 0245 2C00 0000 		.long	0x2c
+ 1007 0249 13        		.uleb128 0x13
+ 1008 024a 6400      		.string	"d"
+ 1009 024c 01        		.byte	0x1
+ 1010 024d 1C        		.byte	0x1c
+ 1011 024e 9804 0000 		.long	0x498
+ 1012 0252 00        		.byte	0x0
+ 1013 0253 12        		.uleb128 0x12
+ 1014 0254 0000 0000 		.long	.LBB65
+ 1015 0258 0000 0000 		.long	.LBE65
+ 1016 025c 7302 0000 		.long	0x273
+ 1017 0260 13        		.uleb128 0x13
+ 1018 0261 6900      		.string	"i"
+ 1019 0263 01        		.byte	0x1
+ 1020 0264 1D        		.byte	0x1d
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 19
+
+
+ 1021 0265 2C00 0000 		.long	0x2c
+ 1022 0269 13        		.uleb128 0x13
+ 1023 026a 6400      		.string	"d"
+ 1024 026c 01        		.byte	0x1
+ 1025 026d 1D        		.byte	0x1d
+ 1026 026e 9804 0000 		.long	0x498
+ 1027 0272 00        		.byte	0x0
+ 1028 0273 12        		.uleb128 0x12
+ 1029 0274 0000 0000 		.long	.LBB66
+ 1030 0278 0000 0000 		.long	.LBE66
+ 1031 027c 9302 0000 		.long	0x293
+ 1032 0280 13        		.uleb128 0x13
+ 1033 0281 6900      		.string	"i"
+ 1034 0283 01        		.byte	0x1
+ 1035 0284 1E        		.byte	0x1e
+ 1036 0285 2C00 0000 		.long	0x2c
+ 1037 0289 13        		.uleb128 0x13
+ 1038 028a 6400      		.string	"d"
+ 1039 028c 01        		.byte	0x1
+ 1040 028d 1E        		.byte	0x1e
+ 1041 028e 9804 0000 		.long	0x498
+ 1042 0292 00        		.byte	0x0
+ 1043 0293 12        		.uleb128 0x12
+ 1044 0294 0000 0000 		.long	.LBB67
+ 1045 0298 0000 0000 		.long	.LBE67
+ 1046 029c B302 0000 		.long	0x2b3
+ 1047 02a0 13        		.uleb128 0x13
+ 1048 02a1 6900      		.string	"i"
+ 1049 02a3 01        		.byte	0x1
+ 1050 02a4 1F        		.byte	0x1f
+ 1051 02a5 2C00 0000 		.long	0x2c
+ 1052 02a9 13        		.uleb128 0x13
+ 1053 02aa 6400      		.string	"d"
+ 1054 02ac 01        		.byte	0x1
+ 1055 02ad 1F        		.byte	0x1f
+ 1056 02ae 9804 0000 		.long	0x498
+ 1057 02b2 00        		.byte	0x0
+ 1058 02b3 12        		.uleb128 0x12
+ 1059 02b4 0000 0000 		.long	.LBB68
+ 1060 02b8 0000 0000 		.long	.LBE68
+ 1061 02bc D702 0000 		.long	0x2d7
+ 1062 02c0 13        		.uleb128 0x13
+ 1063 02c1 6900      		.string	"i"
+ 1064 02c3 01        		.byte	0x1
+ 1065 02c4 20        		.byte	0x20
+ 1066 02c5 2C00 0000 		.long	0x2c
+ 1067 02c9 0A        		.uleb128 0xa
+ 1068 02ca 6400      		.string	"d"
+ 1069 02cc 01        		.byte	0x1
+ 1070 02cd 20        		.byte	0x20
+ 1071 02ce 9804 0000 		.long	0x498
+ 1072 02d2 0000 0000 		.long	.LLST9
+ 1073 02d6 00        		.byte	0x0
+ 1074 02d7 12        		.uleb128 0x12
+ 1075 02d8 0000 0000 		.long	.LBB69
+ 1076 02dc 0000 0000 		.long	.LBE69
+ 1077 02e0 F702 0000 		.long	0x2f7
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 20
+
+
+ 1078 02e4 13        		.uleb128 0x13
+ 1079 02e5 6900      		.string	"i"
+ 1080 02e7 01        		.byte	0x1
+ 1081 02e8 21        		.byte	0x21
+ 1082 02e9 2C00 0000 		.long	0x2c
+ 1083 02ed 13        		.uleb128 0x13
+ 1084 02ee 6400      		.string	"d"
+ 1085 02f0 01        		.byte	0x1
+ 1086 02f1 21        		.byte	0x21
+ 1087 02f2 9804 0000 		.long	0x498
+ 1088 02f6 00        		.byte	0x0
+ 1089 02f7 12        		.uleb128 0x12
+ 1090 02f8 0000 0000 		.long	.LBB70
+ 1091 02fc 0000 0000 		.long	.LBE70
+ 1092 0300 1B03 0000 		.long	0x31b
+ 1093 0304 13        		.uleb128 0x13
+ 1094 0305 6900      		.string	"i"
+ 1095 0307 01        		.byte	0x1
+ 1096 0308 22        		.byte	0x22
+ 1097 0309 2C00 0000 		.long	0x2c
+ 1098 030d 0A        		.uleb128 0xa
+ 1099 030e 6400      		.string	"d"
+ 1100 0310 01        		.byte	0x1
+ 1101 0311 22        		.byte	0x22
+ 1102 0312 9804 0000 		.long	0x498
+ 1103 0316 0000 0000 		.long	.LLST10
+ 1104 031a 00        		.byte	0x0
+ 1105 031b 12        		.uleb128 0x12
+ 1106 031c 0000 0000 		.long	.LBB71
+ 1107 0320 0000 0000 		.long	.LBE71
+ 1108 0324 3B03 0000 		.long	0x33b
+ 1109 0328 13        		.uleb128 0x13
+ 1110 0329 6900      		.string	"i"
+ 1111 032b 01        		.byte	0x1
+ 1112 032c 23        		.byte	0x23
+ 1113 032d 2C00 0000 		.long	0x2c
+ 1114 0331 13        		.uleb128 0x13
+ 1115 0332 6400      		.string	"d"
+ 1116 0334 01        		.byte	0x1
+ 1117 0335 23        		.byte	0x23
+ 1118 0336 9804 0000 		.long	0x498
+ 1119 033a 00        		.byte	0x0
+ 1120 033b 12        		.uleb128 0x12
+ 1121 033c 0000 0000 		.long	.LBB72
+ 1122 0340 0000 0000 		.long	.LBE72
+ 1123 0344 5B03 0000 		.long	0x35b
+ 1124 0348 13        		.uleb128 0x13
+ 1125 0349 6900      		.string	"i"
+ 1126 034b 01        		.byte	0x1
+ 1127 034c 24        		.byte	0x24
+ 1128 034d 2C00 0000 		.long	0x2c
+ 1129 0351 13        		.uleb128 0x13
+ 1130 0352 6400      		.string	"d"
+ 1131 0354 01        		.byte	0x1
+ 1132 0355 24        		.byte	0x24
+ 1133 0356 9804 0000 		.long	0x498
+ 1134 035a 00        		.byte	0x0
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 21
+
+
+ 1135 035b 12        		.uleb128 0x12
+ 1136 035c 0000 0000 		.long	.LBB73
+ 1137 0360 0000 0000 		.long	.LBE73
+ 1138 0364 7B03 0000 		.long	0x37b
+ 1139 0368 13        		.uleb128 0x13
+ 1140 0369 6900      		.string	"i"
+ 1141 036b 01        		.byte	0x1
+ 1142 036c 25        		.byte	0x25
+ 1143 036d 2C00 0000 		.long	0x2c
+ 1144 0371 13        		.uleb128 0x13
+ 1145 0372 6400      		.string	"d"
+ 1146 0374 01        		.byte	0x1
+ 1147 0375 25        		.byte	0x25
+ 1148 0376 9804 0000 		.long	0x498
+ 1149 037a 00        		.byte	0x0
+ 1150 037b 12        		.uleb128 0x12
+ 1151 037c 0000 0000 		.long	.LBB74
+ 1152 0380 0000 0000 		.long	.LBE74
+ 1153 0384 9F03 0000 		.long	0x39f
+ 1154 0388 13        		.uleb128 0x13
+ 1155 0389 6900      		.string	"i"
+ 1156 038b 01        		.byte	0x1
+ 1157 038c 26        		.byte	0x26
+ 1158 038d 2C00 0000 		.long	0x2c
+ 1159 0391 0A        		.uleb128 0xa
+ 1160 0392 6400      		.string	"d"
+ 1161 0394 01        		.byte	0x1
+ 1162 0395 26        		.byte	0x26
+ 1163 0396 9804 0000 		.long	0x498
+ 1164 039a 0000 0000 		.long	.LLST11
+ 1165 039e 00        		.byte	0x0
+ 1166 039f 12        		.uleb128 0x12
+ 1167 03a0 0000 0000 		.long	.LBB75
+ 1168 03a4 0000 0000 		.long	.LBE75
+ 1169 03a8 C303 0000 		.long	0x3c3
+ 1170 03ac 13        		.uleb128 0x13
+ 1171 03ad 6900      		.string	"i"
+ 1172 03af 01        		.byte	0x1
+ 1173 03b0 27        		.byte	0x27
+ 1174 03b1 2C00 0000 		.long	0x2c
+ 1175 03b5 0A        		.uleb128 0xa
+ 1176 03b6 6400      		.string	"d"
+ 1177 03b8 01        		.byte	0x1
+ 1178 03b9 27        		.byte	0x27
+ 1179 03ba 9804 0000 		.long	0x498
+ 1180 03be 0000 0000 		.long	.LLST12
+ 1181 03c2 00        		.byte	0x0
+ 1182 03c3 12        		.uleb128 0x12
+ 1183 03c4 0000 0000 		.long	.LBB76
+ 1184 03c8 0000 0000 		.long	.LBE76
+ 1185 03cc E703 0000 		.long	0x3e7
+ 1186 03d0 13        		.uleb128 0x13
+ 1187 03d1 6900      		.string	"i"
+ 1188 03d3 01        		.byte	0x1
+ 1189 03d4 28        		.byte	0x28
+ 1190 03d5 2C00 0000 		.long	0x2c
+ 1191 03d9 0A        		.uleb128 0xa
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 22
+
+
+ 1192 03da 6400      		.string	"d"
+ 1193 03dc 01        		.byte	0x1
+ 1194 03dd 28        		.byte	0x28
+ 1195 03de 9804 0000 		.long	0x498
+ 1196 03e2 0000 0000 		.long	.LLST13
+ 1197 03e6 00        		.byte	0x0
+ 1198 03e7 12        		.uleb128 0x12
+ 1199 03e8 0000 0000 		.long	.LBB77
+ 1200 03ec 0000 0000 		.long	.LBE77
+ 1201 03f0 0B04 0000 		.long	0x40b
+ 1202 03f4 13        		.uleb128 0x13
+ 1203 03f5 6900      		.string	"i"
+ 1204 03f7 01        		.byte	0x1
+ 1205 03f8 29        		.byte	0x29
+ 1206 03f9 2C00 0000 		.long	0x2c
+ 1207 03fd 0A        		.uleb128 0xa
+ 1208 03fe 6400      		.string	"d"
+ 1209 0400 01        		.byte	0x1
+ 1210 0401 29        		.byte	0x29
+ 1211 0402 9804 0000 		.long	0x498
+ 1212 0406 0000 0000 		.long	.LLST14
+ 1213 040a 00        		.byte	0x0
+ 1214 040b 12        		.uleb128 0x12
+ 1215 040c 0000 0000 		.long	.LBB78
+ 1216 0410 0000 0000 		.long	.LBE78
+ 1217 0414 2B04 0000 		.long	0x42b
+ 1218 0418 13        		.uleb128 0x13
+ 1219 0419 6900      		.string	"i"
+ 1220 041b 01        		.byte	0x1
+ 1221 041c 2B        		.byte	0x2b
+ 1222 041d 2C00 0000 		.long	0x2c
+ 1223 0421 13        		.uleb128 0x13
+ 1224 0422 6400      		.string	"d"
+ 1225 0424 01        		.byte	0x1
+ 1226 0425 2B        		.byte	0x2b
+ 1227 0426 9804 0000 		.long	0x498
+ 1228 042a 00        		.byte	0x0
+ 1229 042b 12        		.uleb128 0x12
+ 1230 042c 0000 0000 		.long	.LBB79
+ 1231 0430 0000 0000 		.long	.LBE79
+ 1232 0434 4B04 0000 		.long	0x44b
+ 1233 0438 13        		.uleb128 0x13
+ 1234 0439 6900      		.string	"i"
+ 1235 043b 01        		.byte	0x1
+ 1236 043c 2C        		.byte	0x2c
+ 1237 043d 2C00 0000 		.long	0x2c
+ 1238 0441 13        		.uleb128 0x13
+ 1239 0442 6400      		.string	"d"
+ 1240 0444 01        		.byte	0x1
+ 1241 0445 2C        		.byte	0x2c
+ 1242 0446 9804 0000 		.long	0x498
+ 1243 044a 00        		.byte	0x0
+ 1244 044b 10        		.uleb128 0x10
+ 1245 044c 8C00 0000 		.long	0x8c
+ 1246 0450 0000 0000 		.long	.LBB80
+ 1247 0454 0000 0000 		.long	.LBE80
+ 1248 0458 01        		.byte	0x1
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 23
+
+
+ 1249 0459 33        		.byte	0x33
+ 1250 045a 0C        		.uleb128 0xc
+ 1251 045b 9900 0000 		.long	0x99
+ 1252 045f 0D        		.uleb128 0xd
+ 1253 0460 0000 0000 		.long	.LBB81
+ 1254 0464 0000 0000 		.long	.LBE81
+ 1255 0468 14        		.uleb128 0x14
+ 1256 0469 A400 0000 		.long	0xa4
+ 1257 046d 06        		.byte	0x6
+ 1258 046e 68        		.byte	0x68
+ 1259 046f 93        		.byte	0x93
+ 1260 0470 01        		.uleb128 0x1
+ 1261 0471 69        		.byte	0x69
+ 1262 0472 93        		.byte	0x93
+ 1263 0473 01        		.uleb128 0x1
+ 1264 0474 0F        		.uleb128 0xf
+ 1265 0475 AF00 0000 		.long	0xaf
+ 1266 0479 10        		.uleb128 0x10
+ 1267 047a 7300 0000 		.long	0x73
+ 1268 047e 0000 0000 		.long	.LBB82
+ 1269 0482 0000 0000 		.long	.LBE82
+ 1270 0486 03        		.byte	0x3
+ 1271 0487 7B        		.byte	0x7b
+ 1272 0488 15        		.uleb128 0x15
+ 1273 0489 8000 0000 		.long	0x80
+ 1274 048d 06        		.byte	0x6
+ 1275 048e 6E        		.byte	0x6e
+ 1276 048f 93        		.byte	0x93
+ 1277 0490 01        		.uleb128 0x1
+ 1278 0491 6F        		.byte	0x6f
+ 1279 0492 93        		.byte	0x93
+ 1280 0493 01        		.uleb128 0x1
+ 1281 0494 00        		.byte	0x0
+ 1282 0495 00        		.byte	0x0
+ 1283 0496 00        		.byte	0x0
+ 1284 0497 00        		.byte	0x0
+ 1285 0498 16        		.uleb128 0x16
+ 1286 0499 02        		.byte	0x2
+ 1287 049a 9E04 0000 		.long	0x49e
+ 1288 049e 02        		.uleb128 0x2
+ 1289 049f 01        		.byte	0x1
+ 1290 04a0 08        		.byte	0x8
+ 1291 04a1 0000 0000 		.long	.LASF16
+ 1292 04a5 00        		.byte	0x0
+ 1293               		.section	.debug_abbrev
+ 1294 0000 01        		.uleb128 0x1
+ 1295 0001 11        		.uleb128 0x11
+ 1296 0002 01        		.byte	0x1
+ 1297 0003 25        		.uleb128 0x25
+ 1298 0004 0E        		.uleb128 0xe
+ 1299 0005 13        		.uleb128 0x13
+ 1300 0006 0B        		.uleb128 0xb
+ 1301 0007 03        		.uleb128 0x3
+ 1302 0008 0E        		.uleb128 0xe
+ 1303 0009 1B        		.uleb128 0x1b
+ 1304 000a 0E        		.uleb128 0xe
+ 1305 000b 11        		.uleb128 0x11
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 24
+
+
+ 1306 000c 01        		.uleb128 0x1
+ 1307 000d 12        		.uleb128 0x12
+ 1308 000e 01        		.uleb128 0x1
+ 1309 000f 10        		.uleb128 0x10
+ 1310 0010 06        		.uleb128 0x6
+ 1311 0011 00        		.byte	0x0
+ 1312 0012 00        		.byte	0x0
+ 1313 0013 02        		.uleb128 0x2
+ 1314 0014 24        		.uleb128 0x24
+ 1315 0015 00        		.byte	0x0
+ 1316 0016 0B        		.uleb128 0xb
+ 1317 0017 0B        		.uleb128 0xb
+ 1318 0018 3E        		.uleb128 0x3e
+ 1319 0019 0B        		.uleb128 0xb
+ 1320 001a 03        		.uleb128 0x3
+ 1321 001b 0E        		.uleb128 0xe
+ 1322 001c 00        		.byte	0x0
+ 1323 001d 00        		.byte	0x0
+ 1324 001e 03        		.uleb128 0x3
+ 1325 001f 16        		.uleb128 0x16
+ 1326 0020 00        		.byte	0x0
+ 1327 0021 03        		.uleb128 0x3
+ 1328 0022 0E        		.uleb128 0xe
+ 1329 0023 3A        		.uleb128 0x3a
+ 1330 0024 0B        		.uleb128 0xb
+ 1331 0025 3B        		.uleb128 0x3b
+ 1332 0026 0B        		.uleb128 0xb
+ 1333 0027 49        		.uleb128 0x49
+ 1334 0028 13        		.uleb128 0x13
+ 1335 0029 00        		.byte	0x0
+ 1336 002a 00        		.byte	0x0
+ 1337 002b 04        		.uleb128 0x4
+ 1338 002c 24        		.uleb128 0x24
+ 1339 002d 00        		.byte	0x0
+ 1340 002e 0B        		.uleb128 0xb
+ 1341 002f 0B        		.uleb128 0xb
+ 1342 0030 3E        		.uleb128 0x3e
+ 1343 0031 0B        		.uleb128 0xb
+ 1344 0032 03        		.uleb128 0x3
+ 1345 0033 08        		.uleb128 0x8
+ 1346 0034 00        		.byte	0x0
+ 1347 0035 00        		.byte	0x0
+ 1348 0036 05        		.uleb128 0x5
+ 1349 0037 2E        		.uleb128 0x2e
+ 1350 0038 01        		.byte	0x1
+ 1351 0039 03        		.uleb128 0x3
+ 1352 003a 0E        		.uleb128 0xe
+ 1353 003b 3A        		.uleb128 0x3a
+ 1354 003c 0B        		.uleb128 0xb
+ 1355 003d 3B        		.uleb128 0x3b
+ 1356 003e 0B        		.uleb128 0xb
+ 1357 003f 27        		.uleb128 0x27
+ 1358 0040 0C        		.uleb128 0xc
+ 1359 0041 20        		.uleb128 0x20
+ 1360 0042 0B        		.uleb128 0xb
+ 1361 0043 01        		.uleb128 0x1
+ 1362 0044 13        		.uleb128 0x13
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 25
+
+
+ 1363 0045 00        		.byte	0x0
+ 1364 0046 00        		.byte	0x0
+ 1365 0047 06        		.uleb128 0x6
+ 1366 0048 05        		.uleb128 0x5
+ 1367 0049 00        		.byte	0x0
+ 1368 004a 03        		.uleb128 0x3
+ 1369 004b 0E        		.uleb128 0xe
+ 1370 004c 3A        		.uleb128 0x3a
+ 1371 004d 0B        		.uleb128 0xb
+ 1372 004e 3B        		.uleb128 0x3b
+ 1373 004f 0B        		.uleb128 0xb
+ 1374 0050 49        		.uleb128 0x49
+ 1375 0051 13        		.uleb128 0x13
+ 1376 0052 00        		.byte	0x0
+ 1377 0053 00        		.byte	0x0
+ 1378 0054 07        		.uleb128 0x7
+ 1379 0055 34        		.uleb128 0x34
+ 1380 0056 00        		.byte	0x0
+ 1381 0057 03        		.uleb128 0x3
+ 1382 0058 0E        		.uleb128 0xe
+ 1383 0059 3A        		.uleb128 0x3a
+ 1384 005a 0B        		.uleb128 0xb
+ 1385 005b 3B        		.uleb128 0x3b
+ 1386 005c 0B        		.uleb128 0xb
+ 1387 005d 49        		.uleb128 0x49
+ 1388 005e 13        		.uleb128 0x13
+ 1389 005f 00        		.byte	0x0
+ 1390 0060 00        		.byte	0x0
+ 1391 0061 08        		.uleb128 0x8
+ 1392 0062 0B        		.uleb128 0xb
+ 1393 0063 00        		.byte	0x0
+ 1394 0064 00        		.byte	0x0
+ 1395 0065 00        		.byte	0x0
+ 1396 0066 09        		.uleb128 0x9
+ 1397 0067 2E        		.uleb128 0x2e
+ 1398 0068 01        		.byte	0x1
+ 1399 0069 3F        		.uleb128 0x3f
+ 1400 006a 0C        		.uleb128 0xc
+ 1401 006b 03        		.uleb128 0x3
+ 1402 006c 0E        		.uleb128 0xe
+ 1403 006d 3A        		.uleb128 0x3a
+ 1404 006e 0B        		.uleb128 0xb
+ 1405 006f 3B        		.uleb128 0x3b
+ 1406 0070 0B        		.uleb128 0xb
+ 1407 0071 11        		.uleb128 0x11
+ 1408 0072 01        		.uleb128 0x1
+ 1409 0073 12        		.uleb128 0x12
+ 1410 0074 01        		.uleb128 0x1
+ 1411 0075 40        		.uleb128 0x40
+ 1412 0076 0A        		.uleb128 0xa
+ 1413 0077 01        		.uleb128 0x1
+ 1414 0078 13        		.uleb128 0x13
+ 1415 0079 00        		.byte	0x0
+ 1416 007a 00        		.byte	0x0
+ 1417 007b 0A        		.uleb128 0xa
+ 1418 007c 34        		.uleb128 0x34
+ 1419 007d 00        		.byte	0x0
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 26
+
+
+ 1420 007e 03        		.uleb128 0x3
+ 1421 007f 08        		.uleb128 0x8
+ 1422 0080 3A        		.uleb128 0x3a
+ 1423 0081 0B        		.uleb128 0xb
+ 1424 0082 3B        		.uleb128 0x3b
+ 1425 0083 0B        		.uleb128 0xb
+ 1426 0084 49        		.uleb128 0x49
+ 1427 0085 13        		.uleb128 0x13
+ 1428 0086 02        		.uleb128 0x2
+ 1429 0087 06        		.uleb128 0x6
+ 1430 0088 00        		.byte	0x0
+ 1431 0089 00        		.byte	0x0
+ 1432 008a 0B        		.uleb128 0xb
+ 1433 008b 1D        		.uleb128 0x1d
+ 1434 008c 01        		.byte	0x1
+ 1435 008d 31        		.uleb128 0x31
+ 1436 008e 13        		.uleb128 0x13
+ 1437 008f 11        		.uleb128 0x11
+ 1438 0090 01        		.uleb128 0x1
+ 1439 0091 12        		.uleb128 0x12
+ 1440 0092 01        		.uleb128 0x1
+ 1441 0093 58        		.uleb128 0x58
+ 1442 0094 0B        		.uleb128 0xb
+ 1443 0095 59        		.uleb128 0x59
+ 1444 0096 0B        		.uleb128 0xb
+ 1445 0097 01        		.uleb128 0x1
+ 1446 0098 13        		.uleb128 0x13
+ 1447 0099 00        		.byte	0x0
+ 1448 009a 00        		.byte	0x0
+ 1449 009b 0C        		.uleb128 0xc
+ 1450 009c 05        		.uleb128 0x5
+ 1451 009d 00        		.byte	0x0
+ 1452 009e 31        		.uleb128 0x31
+ 1453 009f 13        		.uleb128 0x13
+ 1454 00a0 00        		.byte	0x0
+ 1455 00a1 00        		.byte	0x0
+ 1456 00a2 0D        		.uleb128 0xd
+ 1457 00a3 0B        		.uleb128 0xb
+ 1458 00a4 01        		.byte	0x1
+ 1459 00a5 11        		.uleb128 0x11
+ 1460 00a6 01        		.uleb128 0x1
+ 1461 00a7 12        		.uleb128 0x12
+ 1462 00a8 01        		.uleb128 0x1
+ 1463 00a9 00        		.byte	0x0
+ 1464 00aa 00        		.byte	0x0
+ 1465 00ab 0E        		.uleb128 0xe
+ 1466 00ac 34        		.uleb128 0x34
+ 1467 00ad 00        		.byte	0x0
+ 1468 00ae 31        		.uleb128 0x31
+ 1469 00af 13        		.uleb128 0x13
+ 1470 00b0 02        		.uleb128 0x2
+ 1471 00b1 06        		.uleb128 0x6
+ 1472 00b2 00        		.byte	0x0
+ 1473 00b3 00        		.byte	0x0
+ 1474 00b4 0F        		.uleb128 0xf
+ 1475 00b5 34        		.uleb128 0x34
+ 1476 00b6 00        		.byte	0x0
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 27
+
+
+ 1477 00b7 31        		.uleb128 0x31
+ 1478 00b8 13        		.uleb128 0x13
+ 1479 00b9 00        		.byte	0x0
+ 1480 00ba 00        		.byte	0x0
+ 1481 00bb 10        		.uleb128 0x10
+ 1482 00bc 1D        		.uleb128 0x1d
+ 1483 00bd 01        		.byte	0x1
+ 1484 00be 31        		.uleb128 0x31
+ 1485 00bf 13        		.uleb128 0x13
+ 1486 00c0 11        		.uleb128 0x11
+ 1487 00c1 01        		.uleb128 0x1
+ 1488 00c2 12        		.uleb128 0x12
+ 1489 00c3 01        		.uleb128 0x1
+ 1490 00c4 58        		.uleb128 0x58
+ 1491 00c5 0B        		.uleb128 0xb
+ 1492 00c6 59        		.uleb128 0x59
+ 1493 00c7 0B        		.uleb128 0xb
+ 1494 00c8 00        		.byte	0x0
+ 1495 00c9 00        		.byte	0x0
+ 1496 00ca 11        		.uleb128 0x11
+ 1497 00cb 05        		.uleb128 0x5
+ 1498 00cc 00        		.byte	0x0
+ 1499 00cd 31        		.uleb128 0x31
+ 1500 00ce 13        		.uleb128 0x13
+ 1501 00cf 02        		.uleb128 0x2
+ 1502 00d0 06        		.uleb128 0x6
+ 1503 00d1 00        		.byte	0x0
+ 1504 00d2 00        		.byte	0x0
+ 1505 00d3 12        		.uleb128 0x12
+ 1506 00d4 0B        		.uleb128 0xb
+ 1507 00d5 01        		.byte	0x1
+ 1508 00d6 11        		.uleb128 0x11
+ 1509 00d7 01        		.uleb128 0x1
+ 1510 00d8 12        		.uleb128 0x12
+ 1511 00d9 01        		.uleb128 0x1
+ 1512 00da 01        		.uleb128 0x1
+ 1513 00db 13        		.uleb128 0x13
+ 1514 00dc 00        		.byte	0x0
+ 1515 00dd 00        		.byte	0x0
+ 1516 00de 13        		.uleb128 0x13
+ 1517 00df 34        		.uleb128 0x34
+ 1518 00e0 00        		.byte	0x0
+ 1519 00e1 03        		.uleb128 0x3
+ 1520 00e2 08        		.uleb128 0x8
+ 1521 00e3 3A        		.uleb128 0x3a
+ 1522 00e4 0B        		.uleb128 0xb
+ 1523 00e5 3B        		.uleb128 0x3b
+ 1524 00e6 0B        		.uleb128 0xb
+ 1525 00e7 49        		.uleb128 0x49
+ 1526 00e8 13        		.uleb128 0x13
+ 1527 00e9 00        		.byte	0x0
+ 1528 00ea 00        		.byte	0x0
+ 1529 00eb 14        		.uleb128 0x14
+ 1530 00ec 34        		.uleb128 0x34
+ 1531 00ed 00        		.byte	0x0
+ 1532 00ee 31        		.uleb128 0x31
+ 1533 00ef 13        		.uleb128 0x13
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 28
+
+
+ 1534 00f0 02        		.uleb128 0x2
+ 1535 00f1 0A        		.uleb128 0xa
+ 1536 00f2 00        		.byte	0x0
+ 1537 00f3 00        		.byte	0x0
+ 1538 00f4 15        		.uleb128 0x15
+ 1539 00f5 05        		.uleb128 0x5
+ 1540 00f6 00        		.byte	0x0
+ 1541 00f7 31        		.uleb128 0x31
+ 1542 00f8 13        		.uleb128 0x13
+ 1543 00f9 02        		.uleb128 0x2
+ 1544 00fa 0A        		.uleb128 0xa
+ 1545 00fb 00        		.byte	0x0
+ 1546 00fc 00        		.byte	0x0
+ 1547 00fd 16        		.uleb128 0x16
+ 1548 00fe 0F        		.uleb128 0xf
+ 1549 00ff 00        		.byte	0x0
+ 1550 0100 0B        		.uleb128 0xb
+ 1551 0101 0B        		.uleb128 0xb
+ 1552 0102 49        		.uleb128 0x49
+ 1553 0103 13        		.uleb128 0x13
+ 1554 0104 00        		.byte	0x0
+ 1555 0105 00        		.byte	0x0
+ 1556 0106 00        		.byte	0x0
+ 1557               		.section	.debug_pubnames,"",@progbits
+ 1558 0000 2A00 0000 		.long	0x2a
+ 1559 0004 0200      		.word	0x2
+ 1560 0006 0000 0000 		.long	.Ldebug_info0
+ 1561 000a A604 0000 		.long	0x4a6
+ 1562 000e C400 0000 		.long	0xc4
+ 1563 0012 696E 6974 		.string	"init_display_controller"
+ 1563      5F64 6973 
+ 1563      706C 6179 
+ 1563      5F63 6F6E 
+ 1563      7472 6F6C 
+ 1564 002a 0000 0000 		.long	0x0
+ 1565               		.section	.debug_aranges,"",@progbits
+ 1566 0000 1C00 0000 		.long	0x1c
+ 1567 0004 0200      		.word	0x2
+ 1568 0006 0000 0000 		.long	.Ldebug_info0
+ 1569 000a 04        		.byte	0x4
+ 1570 000b 00        		.byte	0x0
+ 1571 000c 0000      		.word	0x0
+ 1572 000e 0000      		.word	0x0
+ 1573 0010 0000 0000 		.long	.Ltext0
+ 1574 0014 9A02 0000 		.long	.Letext0-.Ltext0
+ 1575 0018 0000 0000 		.long	0x0
+ 1576 001c 0000 0000 		.long	0x0
+ 1577               		.section	.debug_line
+ 1578 0000 7202 0000 		.long	.LELT0-.LSLT0
+ 1579               	.LSLT0:
+ 1580 0004 0200      		.word	0x2
+ 1581 0006 AE00 0000 		.long	.LELTP0-.LASLTP0
+ 1582               	.LASLTP0:
+ 1583 000a 01        		.byte	0x1
+ 1584 000b 01        		.byte	0x1
+ 1585 000c F6        		.byte	0xf6
+ 1586 000d F5        		.byte	0xf5
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 29
+
+
+ 1587 000e 0A        		.byte	0xa
+ 1588 000f 00        		.byte	0x0
+ 1589 0010 01        		.byte	0x1
+ 1590 0011 01        		.byte	0x1
+ 1591 0012 01        		.byte	0x1
+ 1592 0013 01        		.byte	0x1
+ 1593 0014 00        		.byte	0x0
+ 1594 0015 00        		.byte	0x0
+ 1595 0016 00        		.byte	0x0
+ 1596 0017 01        		.byte	0x1
+ 1597 0018 633A 2F77 		.ascii	"c:/winavr-20100110/lib/gcc/../../avr/include"
+ 1597      696E 6176 
+ 1597      722D 3230 
+ 1597      3130 3031 
+ 1597      3130 2F6C 
+ 1598 0044 00        		.byte	0
+ 1599 0045 633A 2F77 		.ascii	"c:/winavr-20100110/lib/gcc/../../avr/include/util"
+ 1599      696E 6176 
+ 1599      722D 3230 
+ 1599      3130 3031 
+ 1599      3130 2F6C 
+ 1600 0076 00        		.byte	0
+ 1601 0077 00        		.byte	0x0
+ 1602 0078 696C 6939 		.string	"ili934x.c"
+ 1602      3334 782E 
+ 1602      6300 
+ 1603 0082 00        		.uleb128 0x0
+ 1604 0083 00        		.uleb128 0x0
+ 1605 0084 00        		.uleb128 0x0
+ 1606 0085 7574 696C 		.string	"util/delay_basic.h"
+ 1606      2F64 656C 
+ 1606      6179 5F62 
+ 1606      6173 6963 
+ 1606      2E68 00
+ 1607 0098 01        		.uleb128 0x1
+ 1608 0099 00        		.uleb128 0x0
+ 1609 009a 00        		.uleb128 0x0
+ 1610 009b 7574 696C 		.string	"util/delay.h"
+ 1610      2F64 656C 
+ 1610      6179 2E68 
+ 1610      00
+ 1611 00a8 01        		.uleb128 0x1
+ 1612 00a9 00        		.uleb128 0x0
+ 1613 00aa 00        		.uleb128 0x0
+ 1614 00ab 7374 6469 		.string	"stdint.h"
+ 1614      6E74 2E68 
+ 1614      00
+ 1615 00b4 01        		.uleb128 0x1
+ 1616 00b5 00        		.uleb128 0x0
+ 1617 00b6 00        		.uleb128 0x0
+ 1618 00b7 00        		.byte	0x0
+ 1619               	.LELTP0:
+ 1620 00b8 00        		.byte	0x0
+ 1621 00b9 05        		.uleb128 0x5
+ 1622 00ba 02        		.byte	0x2
+ 1623 00bb 0000 0000 		.long	.LM1
+ 1624 00bf 1D        		.byte	0x1d
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 30
+
+
+ 1625 00c0 00        		.byte	0x0
+ 1626 00c1 05        		.uleb128 0x5
+ 1627 00c2 02        		.byte	0x2
+ 1628 00c3 0000 0000 		.long	.LM2
+ 1629 00c7 16        		.byte	0x16
+ 1630 00c8 00        		.byte	0x0
+ 1631 00c9 05        		.uleb128 0x5
+ 1632 00ca 02        		.byte	0x2
+ 1633 00cb 0000 0000 		.long	.LM3
+ 1634 00cf 04        		.byte	0x4
+ 1635 00d0 02        		.uleb128 0x2
+ 1636 00d1 71        		.byte	0x71
+ 1637 00d2 00        		.byte	0x0
+ 1638 00d3 05        		.uleb128 0x5
+ 1639 00d4 02        		.byte	0x2
+ 1640 00d5 0000 0000 		.long	.LM4
+ 1641 00d9 04        		.byte	0x4
+ 1642 00da 03        		.uleb128 0x3
+ 1643 00db 27        		.byte	0x27
+ 1644 00dc 00        		.byte	0x0
+ 1645 00dd 05        		.uleb128 0x5
+ 1646 00de 02        		.byte	0x2
+ 1647 00df 0000 0000 		.long	.LM5
+ 1648 00e3 10        		.byte	0x10
+ 1649 00e4 00        		.byte	0x0
+ 1650 00e5 05        		.uleb128 0x5
+ 1651 00e6 02        		.byte	0x2
+ 1652 00e7 0000 0000 		.long	.LM6
+ 1653 00eb 04        		.byte	0x4
+ 1654 00ec 01        		.uleb128 0x1
+ 1655 00ed 03        		.byte	0x3
+ 1656 00ee 967F      		.sleb128 -106
+ 1657 00f0 01        		.byte	0x1
+ 1658 00f1 00        		.byte	0x0
+ 1659 00f2 05        		.uleb128 0x5
+ 1660 00f3 02        		.byte	0x2
+ 1661 00f4 0000 0000 		.long	.LM7
+ 1662 00f8 04        		.byte	0x4
+ 1663 00f9 02        		.uleb128 0x2
+ 1664 00fa 6F        		.byte	0x6f
+ 1665 00fb 00        		.byte	0x0
+ 1666 00fc 05        		.uleb128 0x5
+ 1667 00fd 02        		.byte	0x2
+ 1668 00fe 0000 0000 		.long	.LM8
+ 1669 0102 04        		.byte	0x4
+ 1670 0103 03        		.uleb128 0x3
+ 1671 0104 27        		.byte	0x27
+ 1672 0105 00        		.byte	0x0
+ 1673 0106 05        		.uleb128 0x5
+ 1674 0107 02        		.byte	0x2
+ 1675 0108 0000 0000 		.long	.LM9
+ 1676 010c 10        		.byte	0x10
+ 1677 010d 00        		.byte	0x0
+ 1678 010e 05        		.uleb128 0x5
+ 1679 010f 02        		.byte	0x2
+ 1680 0110 0000 0000 		.long	.LM10
+ 1681 0114 04        		.byte	0x4
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 31
+
+
+ 1682 0115 01        		.uleb128 0x1
+ 1683 0116 03        		.byte	0x3
+ 1684 0117 987F      		.sleb128 -104
+ 1685 0119 01        		.byte	0x1
+ 1686 011a 00        		.byte	0x0
+ 1687 011b 05        		.uleb128 0x5
+ 1688 011c 02        		.byte	0x2
+ 1689 011d 0000 0000 		.long	.LM11
+ 1690 0121 15        		.byte	0x15
+ 1691 0122 00        		.byte	0x0
+ 1692 0123 05        		.uleb128 0x5
+ 1693 0124 02        		.byte	0x2
+ 1694 0125 0000 0000 		.long	.LM12
+ 1695 0129 15        		.byte	0x15
+ 1696 012a 00        		.byte	0x0
+ 1697 012b 05        		.uleb128 0x5
+ 1698 012c 02        		.byte	0x2
+ 1699 012d 0000 0000 		.long	.LM13
+ 1700 0131 15        		.byte	0x15
+ 1701 0132 00        		.byte	0x0
+ 1702 0133 05        		.uleb128 0x5
+ 1703 0134 02        		.byte	0x2
+ 1704 0135 0000 0000 		.long	.LM14
+ 1705 0139 15        		.byte	0x15
+ 1706 013a 00        		.byte	0x0
+ 1707 013b 05        		.uleb128 0x5
+ 1708 013c 02        		.byte	0x2
+ 1709 013d 0000 0000 		.long	.LM15
+ 1710 0141 15        		.byte	0x15
+ 1711 0142 00        		.byte	0x0
+ 1712 0143 05        		.uleb128 0x5
+ 1713 0144 02        		.byte	0x2
+ 1714 0145 0000 0000 		.long	.LM16
+ 1715 0149 15        		.byte	0x15
+ 1716 014a 00        		.byte	0x0
+ 1717 014b 05        		.uleb128 0x5
+ 1718 014c 02        		.byte	0x2
+ 1719 014d 0000 0000 		.long	.LM17
+ 1720 0151 15        		.byte	0x15
+ 1721 0152 00        		.byte	0x0
+ 1722 0153 05        		.uleb128 0x5
+ 1723 0154 02        		.byte	0x2
+ 1724 0155 0000 0000 		.long	.LM18
+ 1725 0159 04        		.byte	0x4
+ 1726 015a 02        		.uleb128 0x2
+ 1727 015b 66        		.byte	0x66
+ 1728 015c 00        		.byte	0x0
+ 1729 015d 05        		.uleb128 0x5
+ 1730 015e 02        		.byte	0x2
+ 1731 015f 0000 0000 		.long	.LM19
+ 1732 0163 04        		.byte	0x4
+ 1733 0164 03        		.uleb128 0x3
+ 1734 0165 27        		.byte	0x27
+ 1735 0166 00        		.byte	0x0
+ 1736 0167 05        		.uleb128 0x5
+ 1737 0168 02        		.byte	0x2
+ 1738 0169 0000 0000 		.long	.LM20
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 32
+
+
+ 1739 016d 10        		.byte	0x10
+ 1740 016e 00        		.byte	0x0
+ 1741 016f 05        		.uleb128 0x5
+ 1742 0170 02        		.byte	0x2
+ 1743 0171 0000 0000 		.long	.LM21
+ 1744 0175 04        		.byte	0x4
+ 1745 0176 01        		.uleb128 0x1
+ 1746 0177 03        		.byte	0x3
+ 1747 0178 A17F      		.sleb128 -95
+ 1748 017a 01        		.byte	0x1
+ 1749 017b 00        		.byte	0x0
+ 1750 017c 05        		.uleb128 0x5
+ 1751 017d 02        		.byte	0x2
+ 1752 017e 0000 0000 		.long	.LM22
+ 1753 0182 15        		.byte	0x15
+ 1754 0183 00        		.byte	0x0
+ 1755 0184 05        		.uleb128 0x5
+ 1756 0185 02        		.byte	0x2
+ 1757 0186 0000 0000 		.long	.LM23
+ 1758 018a 15        		.byte	0x15
+ 1759 018b 00        		.byte	0x0
+ 1760 018c 05        		.uleb128 0x5
+ 1761 018d 02        		.byte	0x2
+ 1762 018e 0000 0000 		.long	.LM24
+ 1763 0192 15        		.byte	0x15
+ 1764 0193 00        		.byte	0x0
+ 1765 0194 05        		.uleb128 0x5
+ 1766 0195 02        		.byte	0x2
+ 1767 0196 0000 0000 		.long	.LM25
+ 1768 019a 15        		.byte	0x15
+ 1769 019b 00        		.byte	0x0
+ 1770 019c 05        		.uleb128 0x5
+ 1771 019d 02        		.byte	0x2
+ 1772 019e 0000 0000 		.long	.LM26
+ 1773 01a2 15        		.byte	0x15
+ 1774 01a3 00        		.byte	0x0
+ 1775 01a4 05        		.uleb128 0x5
+ 1776 01a5 02        		.byte	0x2
+ 1777 01a6 0000 0000 		.long	.LM27
+ 1778 01aa 15        		.byte	0x15
+ 1779 01ab 00        		.byte	0x0
+ 1780 01ac 05        		.uleb128 0x5
+ 1781 01ad 02        		.byte	0x2
+ 1782 01ae 0000 0000 		.long	.LM28
+ 1783 01b2 15        		.byte	0x15
+ 1784 01b3 00        		.byte	0x0
+ 1785 01b4 05        		.uleb128 0x5
+ 1786 01b5 02        		.byte	0x2
+ 1787 01b6 0000 0000 		.long	.LM29
+ 1788 01ba 15        		.byte	0x15
+ 1789 01bb 00        		.byte	0x0
+ 1790 01bc 05        		.uleb128 0x5
+ 1791 01bd 02        		.byte	0x2
+ 1792 01be 0000 0000 		.long	.LM30
+ 1793 01c2 15        		.byte	0x15
+ 1794 01c3 00        		.byte	0x0
+ 1795 01c4 05        		.uleb128 0x5
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 33
+
+
+ 1796 01c5 02        		.byte	0x2
+ 1797 01c6 0000 0000 		.long	.LM31
+ 1798 01ca 15        		.byte	0x15
+ 1799 01cb 00        		.byte	0x0
+ 1800 01cc 05        		.uleb128 0x5
+ 1801 01cd 02        		.byte	0x2
+ 1802 01ce 0000 0000 		.long	.LM32
+ 1803 01d2 15        		.byte	0x15
+ 1804 01d3 00        		.byte	0x0
+ 1805 01d4 05        		.uleb128 0x5
+ 1806 01d5 02        		.byte	0x2
+ 1807 01d6 0000 0000 		.long	.LM33
+ 1808 01da 15        		.byte	0x15
+ 1809 01db 00        		.byte	0x0
+ 1810 01dc 05        		.uleb128 0x5
+ 1811 01dd 02        		.byte	0x2
+ 1812 01de 0000 0000 		.long	.LM34
+ 1813 01e2 15        		.byte	0x15
+ 1814 01e3 00        		.byte	0x0
+ 1815 01e4 05        		.uleb128 0x5
+ 1816 01e5 02        		.byte	0x2
+ 1817 01e6 0000 0000 		.long	.LM35
+ 1818 01ea 15        		.byte	0x15
+ 1819 01eb 00        		.byte	0x0
+ 1820 01ec 05        		.uleb128 0x5
+ 1821 01ed 02        		.byte	0x2
+ 1822 01ee 0000 0000 		.long	.LM36
+ 1823 01f2 15        		.byte	0x15
+ 1824 01f3 00        		.byte	0x0
+ 1825 01f4 05        		.uleb128 0x5
+ 1826 01f5 02        		.byte	0x2
+ 1827 01f6 0000 0000 		.long	.LM37
+ 1828 01fa 15        		.byte	0x15
+ 1829 01fb 00        		.byte	0x0
+ 1830 01fc 05        		.uleb128 0x5
+ 1831 01fd 02        		.byte	0x2
+ 1832 01fe 0000 0000 		.long	.LM38
+ 1833 0202 15        		.byte	0x15
+ 1834 0203 00        		.byte	0x0
+ 1835 0204 05        		.uleb128 0x5
+ 1836 0205 02        		.byte	0x2
+ 1837 0206 0000 0000 		.long	.LM39
+ 1838 020a 15        		.byte	0x15
+ 1839 020b 00        		.byte	0x0
+ 1840 020c 05        		.uleb128 0x5
+ 1841 020d 02        		.byte	0x2
+ 1842 020e 0000 0000 		.long	.LM40
+ 1843 0212 15        		.byte	0x15
+ 1844 0213 00        		.byte	0x0
+ 1845 0214 05        		.uleb128 0x5
+ 1846 0215 02        		.byte	0x2
+ 1847 0216 0000 0000 		.long	.LM41
+ 1848 021a 16        		.byte	0x16
+ 1849 021b 00        		.byte	0x0
+ 1850 021c 05        		.uleb128 0x5
+ 1851 021d 02        		.byte	0x2
+ 1852 021e 0000 0000 		.long	.LM42
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 34
+
+
+ 1853 0222 17        		.byte	0x17
+ 1854 0223 00        		.byte	0x0
+ 1855 0224 05        		.uleb128 0x5
+ 1856 0225 02        		.byte	0x2
+ 1857 0226 0000 0000 		.long	.LM43
+ 1858 022a 13        		.byte	0x13
+ 1859 022b 00        		.byte	0x0
+ 1860 022c 05        		.uleb128 0x5
+ 1861 022d 02        		.byte	0x2
+ 1862 022e 0000 0000 		.long	.LM44
+ 1863 0232 13        		.byte	0x13
+ 1864 0233 00        		.byte	0x0
+ 1865 0234 05        		.uleb128 0x5
+ 1866 0235 02        		.byte	0x2
+ 1867 0236 0000 0000 		.long	.LM45
+ 1868 023a 17        		.byte	0x17
+ 1869 023b 00        		.byte	0x0
+ 1870 023c 05        		.uleb128 0x5
+ 1871 023d 02        		.byte	0x2
+ 1872 023e 0000 0000 		.long	.LM46
+ 1873 0242 04        		.byte	0x4
+ 1874 0243 02        		.uleb128 0x2
+ 1875 0244 4B        		.byte	0x4b
+ 1876 0245 00        		.byte	0x0
+ 1877 0246 05        		.uleb128 0x5
+ 1878 0247 02        		.byte	0x2
+ 1879 0248 0000 0000 		.long	.LM47
+ 1880 024c 04        		.byte	0x4
+ 1881 024d 03        		.uleb128 0x3
+ 1882 024e 27        		.byte	0x27
+ 1883 024f 00        		.byte	0x0
+ 1884 0250 05        		.uleb128 0x5
+ 1885 0251 02        		.byte	0x2
+ 1886 0252 0000 0000 		.long	.LM48
+ 1887 0256 10        		.byte	0x10
+ 1888 0257 00        		.byte	0x0
+ 1889 0258 05        		.uleb128 0x5
+ 1890 0259 02        		.byte	0x2
+ 1891 025a 0000 0000 		.long	.LM49
+ 1892 025e 04        		.byte	0x4
+ 1893 025f 01        		.uleb128 0x1
+ 1894 0260 03        		.byte	0x3
+ 1895 0261 BC7F      		.sleb128 -68
+ 1896 0263 01        		.byte	0x1
+ 1897 0264 00        		.byte	0x0
+ 1898 0265 05        		.uleb128 0x5
+ 1899 0266 02        		.byte	0x2
+ 1900 0267 0000 0000 		.long	.LM50
+ 1901 026b 15        		.byte	0x15
+ 1902 026c 00        		.byte	0x0
+ 1903 026d 05        		.uleb128 0x5
+ 1904 026e 02        		.byte	0x2
+ 1905 026f 0000 0000 		.long	.Letext0
+ 1906 0273 00        		.byte	0x0
+ 1907 0274 01        		.uleb128 0x1
+ 1908 0275 01        		.byte	0x1
+ 1909               	.LELT0:
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 35
+
+
+ 1910 0276 1600 0000 		.section	.debug_str,"MS",@progbits,1
+ 1910      0200 1000 
+ 1910      0000 0101 
+ 1910      FB0E 0A00 
+ 1910      0101 0101 
+ 1911               	.LASF1:
+ 1912 0000 756E 7369 		.string	"unsigned char"
+ 1912      676E 6564 
+ 1912      2063 6861 
+ 1912      7200 
+ 1913               	.LASF9:
+ 1914 000e 5F64 656C 		.string	"_delay_loop_2"
+ 1914      6179 5F6C 
+ 1914      6F6F 705F 
+ 1914      3200 
+ 1915               	.LASF6:
+ 1916 001c 6C6F 6E67 		.string	"long unsigned int"
+ 1916      2075 6E73 
+ 1916      6967 6E65 
+ 1916      6420 696E 
+ 1916      7400 
+ 1917               	.LASF10:
+ 1918 002e 5F64 656C 		.string	"_delay_ms"
+ 1918      6179 5F6D 
+ 1918      7300 
+ 1919               	.LASF17:
+ 1920 0038 474E 5520 		.string	"GNU C 4.3.3"
+ 1920      4320 342E 
+ 1920      332E 3300 
+ 1921               	.LASF18:
+ 1922 0044 696C 6939 		.string	"ili934x.c"
+ 1922      3334 782E 
+ 1922      6300 
+ 1923               	.LASF15:
+ 1924 004e 646F 7562 		.string	"double"
+ 1924      6C65 00
+ 1925               	.LASF19:
+ 1926 0055 433A 5C55 		.ascii	"C:\\Users\\Asus\\OneDr"
+ 1926      7365 7273 
+ 1926      5C41 7375 
+ 1926      735C 4F6E 
+ 1926      6544 72
+ 1927 0068 6976 6520 		.string	"ive - University of Southampton\\Desktop\\Codes\\Embedded\\D5\\lcdlib"
+ 1927      2D20 556E 
+ 1927      6976 6572 
+ 1927      7369 7479 
+ 1927      206F 6620 
+ 1928               	.LASF14:
+ 1929 00a9 5F5F 746D 		.string	"__tmp"
+ 1929      7000 
+ 1930               	.LASF4:
+ 1931 00af 756E 7369 		.string	"unsigned int"
+ 1931      676E 6564 
+ 1931      2069 6E74 
+ 1931      00
+ 1932               	.LASF8:
+ 1933 00bc 6C6F 6E67 		.string	"long long unsigned int"
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 36
+
+
+ 1933      206C 6F6E 
+ 1933      6720 756E 
+ 1933      7369 676E 
+ 1933      6564 2069 
+ 1934               	.LASF2:
+ 1935 00d3 7569 6E74 		.string	"uint8_t"
+ 1935      385F 7400 
+ 1936               	.LASF7:
+ 1937 00db 6C6F 6E67 		.string	"long long int"
+ 1937      206C 6F6E 
+ 1937      6720 696E 
+ 1937      7400 
+ 1938               	.LASF16:
+ 1939 00e9 6368 6172 		.string	"char"
+ 1939      00
+ 1940               	.LASF11:
+ 1941 00ee 5F5F 636F 		.string	"__count"
+ 1941      756E 7400 
+ 1942               	.LASF3:
+ 1943 00f6 7569 6E74 		.string	"uint16_t"
+ 1943      3136 5F74 
+ 1943      00
+ 1944               	.LASF13:
+ 1945 00ff 5F5F 7469 		.string	"__ticks"
+ 1945      636B 7300 
+ 1946               	.LASF5:
+ 1947 0107 6C6F 6E67 		.string	"long int"
+ 1947      2069 6E74 
+ 1947      00
+ 1948               	.LASF0:
+ 1949 0110 7369 676E 		.string	"signed char"
+ 1949      6564 2063 
+ 1949      6861 7200 
+ 1950               	.LASF12:
+ 1951 011c 5F5F 6D73 		.string	"__ms"
+ 1951      00
+ 1952               	.LASF20:
+ 1953 0121 696E 6974 		.string	"init_display_controller"
+ 1953      5F64 6973 
+ 1953      706C 6179 
+ 1953      5F63 6F6E 
+ 1953      7472 6F6C 
+ 1954               	.global __do_copy_data
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 37
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ili934x.c
+C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s:2      *ABS*:0000003f __SREG__
+C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s:5      *ABS*:00000034 __CCP__
+C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s:42     .text:00000000 init_display_controller
+
+UNDEFINED SYMBOLS
+__do_copy_data
