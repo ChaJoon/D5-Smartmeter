@@ -139,8 +139,15 @@ double wind_capacity = 0;
 double solar_capacity = 0;
 
 /* boolean array for load calls and switches */
-bool load_call[3] = {true, true, true};
-bool load_switch[3] = {true, false, false};
+// Changed the array to individual variables to match emulator
+//bool load_call[3] = {true, true, true};
+bool LoadCall1 = 0;
+bool LoadCall2 = 0;
+bool LoadCall3 = 0;
+//bool load_switch[3] = {true, false, false};
+bool LoadSw1 = 0;
+bool LoadSw2 = 0;
+bool LoadSw3 = 0;
 
 /* boolean for charging and discharging battery */
 bool charge_battery = false;
@@ -244,25 +251,25 @@ void input_digital()
   int inp = PINA&_BV(LOAD1_CALL) ;
   /* Set the array */
   if(inp)
-    load_call[0] = true ;
+    LoadCall1 = true ;
   else
-    load_call[0] = false ;
+    LoadCall1 = false ;
 
   /* Checks load2 call */
   inp = PINA&_BV(LOAD2_CALL) ;
   /* Set the array */
   if(inp)
-    load_call[1] = true ;
+    LoadCall2 = true ;
   else
-    load_call[1] = false ;
+    LoadCall2 = false ;
 
   /* Checks load3 call */
   inp = PINA&_BV(LOAD3_CALL) ;
   /* Set the array */
   if(inp)
-    load_call[2] = true ;
+    LoadCall3 = true ;
   else
-    load_call[2] = false ;
+    LoadCall3 = false ;
 }
 
 void output_pwm()
@@ -274,19 +281,19 @@ void output_pwm()
 void output_digital()
 {
   /* Set the load switch 1 high */
-  if(load_switch[0]==true)
+  if(LoadSw1==true)
     PORTD |= _BV(LOAD1_SWITCH) ;
   else
     PORTD &= ~(_BV(LOAD1_SWITCH)) ;
     
   /* Set the load switch 2 high */
-  if(load_switch[1]==true)
+  if(LoadSw2==true)
     PORTD |= _BV(LOAD2_SWITCH) ;
   else
     PORTD &= ~(_BV(LOAD2_SWITCH)) ;
     
   /* Set the load switch 3 high */
-  if(load_switch[2]==true)
+  if(LoadSw3==true)
     PORTD |= _BV(LOAD3_SWITCH) ;
   else
     PORTD &= ~(_BV(LOAD3_SWITCH)) ;
@@ -512,9 +519,9 @@ void display_values()
   display_double(10 , display.y , "Solar Capacity = " , (solar_capacity/VREF)*5 , " A " , 2) ;
   display_double(10 , display.y , "Total Renewable = " , ((wind_capacity + solar_capacity)/VREF) *5 , " A " , 2) ;
   display_double(10 , display.y , "Main Request = " , mains_req , " A " , 2) ;
-  display_loads((LCDHEIGHT/2) + 15 , (LCDWIDTH/2) - 10 , "Load 1 = " , load_call[0] , load_switch[0]) ;
-  display_loads((LCDHEIGHT/2) + 15 , display.y , "Load 2 = " , load_call[1] , load_switch[1]) ;
-  display_loads((LCDHEIGHT/2) + 15 , display.y , "Load 3 = " , load_call[2] , load_switch[2]) ;
+  display_loads((LCDHEIGHT/2) + 15 , (LCDWIDTH/2) - 10 , "Load 1 = " , LoadCall1 , LoadSw1) ;
+  display_loads((LCDHEIGHT/2) + 15 , display.y , "Load 2 = " , LoadCall2 , LoadSw2) ;
+  display_loads((LCDHEIGHT/2) + 15 , display.y , "Load 3 = " , LoadCall3 , LoadSw3) ;
   display_batt((LCDHEIGHT/2) + 15 , display.y , "Batt Status : " , charge_battery , discharge_battery) ;
 }
 
@@ -790,7 +797,7 @@ int main(void)
     read_inputs() ; 
 
     /* Compute the algorithms */
-    algorithm(load_call[0], load_call[1] , load_call[2]) ; 
+    algorithm(LoadCall1, LoadCall2 , LoadCall3) ; 
 
     /* Send all output signals */
     send_outputs() ; 
