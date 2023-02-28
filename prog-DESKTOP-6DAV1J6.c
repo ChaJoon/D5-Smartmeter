@@ -83,11 +83,7 @@ Logs : For personal use. Will be deleted in final submission
 21/02/2023  : Placed this code in Github so my team can help using source control.
 22/02/2023  : in delay function changed i type from int to uint32_t.
               Need a smoother RGB colour flow. Need to work for the second review
-              report now. 
-              tests
-27/02/2023  : The final scenario is out and I need to rewrite the algorithm.
-              Tested the PSU and water test today.
-              Changing the name of the variables for labview now.
+              report now.
 */
 
 #include "../lcdlib/lcd.h"
@@ -147,6 +143,7 @@ bool charge_battery = false;
 bool discharge_battery = false;
 
 volatile uint32_t counter ; 
+volatile uint16_t teamcolour ; 
 
 /* Function Definintions */
 
@@ -154,6 +151,24 @@ ISR(TIMER1_COMPA_vect)
 {
     /* Counter incremented every 1 millisec */
     counter++;
+
+    /* For the coloured team RGB */
+    static bool direction = true;
+    const uint16_t max_color = 0xFFFC;
+    const uint16_t increment = 1;
+    if (direction) {
+        teamcolour += increment;
+        if (teamcolour >= max_color) {
+            teamcolour = max_color;
+            direction = false;
+        }
+    } else {
+        teamcolour -= increment;
+        if (teamcolour <= 255) {
+            teamcolour = 255;
+            direction = true;
+        }
+    }
 }
 
 void timer_init()
@@ -359,7 +374,7 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
   }
 
   /* calculate total energy available */
-  double total_energy = (((wind_capacity + solar_capacity)*5) / (2*VREF) ) ;
+  double total_energy = ((wind_capacity + solar_capacity)/2/VREF * 5) ;
 
   /* Check if we have enough energy */
   if(total_energy >= total_load_current)
@@ -376,7 +391,7 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
     else if ((excess_current < 1) && (excess_current > 0))
     {
       /* Request extra current from main to charge battery */
-      mains_req = 1.0 - excess_current ;
+      mains_req = ((1.0 - excess_current)*(10/max_mains_current)) ;
       charge_battery = true ;
       discharge_battery = false ;
     }
@@ -395,15 +410,15 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
     if((lack_current > 0 ) && (lack_current <= 3))
     {
       /* Request from main and leave batt on idle*/
-      mains_req = lack_current ;
+      mains_req = lack_current * (10/max_mains_current) ;
       charge_battery = false ;
       discharge_battery = false ;
     }
     else if (lack_current > 3)
     {
       /* If lack of current is too high we discharge batt as well as requesting from main */
-      double current_needed = lack_current - 1 ;
-      mains_req = current_needed  ;
+      double current_needed = lack_current - 1 ;\
+      mains_req = current_needed * (10/max_mains_current) ;
       charge_battery = false ;
       discharge_battery = true ;
     }
@@ -412,10 +427,10 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
 }
 
 /* Display double type on screen */
-void display_double(int x_position, int y_position, char* name, double value, char* units , int decimal_places)
+void display_double(int x_position, int y_position, char* name, double value, char* units)
 {
   /* Set font colour as grey */
-  display.foreground = WHITE ;
+  display.foreground = GREY ;
 
   /* Set the position on the screen */
   display.x = x_position ; 
@@ -426,7 +441,7 @@ void display_double(int x_position, int y_position, char* name, double value, ch
   //int temp ;
   
   /* Converting double to string */
-  dtostrf( value , 4, decimal_places, temp_str );
+  dtostrf( value , 4, 2, temp_str );
   //sprintf(temp_str,"%s",temp) ;
   
   /* Print the converted double as string */
@@ -443,7 +458,7 @@ int display_bool_check(bool load)
   /* Check for boolean. If the logic is high then we set the textx to print in green,
     if false we will print the text in red. */
   if(load==true)
-    return 0x14E0 ;
+    return GREEN ;
   else
     return RED ;
 }
@@ -460,7 +475,7 @@ void display_loads(int x_position , int y_position , char* name , bool load_call
   display_string(" CALL ") ;
   display.foreground = display_bool_check(load_switch) ;
   display_string(" SWITCH ") ;
-  display.foreground = WHITE ;
+  display.foreground = GREY ;
   display.y += 20 ;
 }
 
@@ -494,25 +509,22 @@ void display_batt(int x_position , int y_position , char* name , bool charging ,
   }
 
   /* Set the font colour back to grey */
-  display.foreground = WHITE ;
+  display.foreground = GREY ;
 }
 
 void display_values()
 {
-  /* Set the default position on the display */
+  /* Set the position on the display */
   display.x = 10; 
   display.y = 10;
 
   /* Display all values and states on the screen */
-  display_double(LCDHEIGHT/2 - 10 , 5 , "Elapsed = " , counter/60000 , " m " , 0) ;
-  display_double(display.x , 5 , "" , (counter/1000)%60 , " sec " , 0) ;
-  display_double(10 , (LCDWIDTH/2) - 10 , "Busbar Voltage = " , (busbar_voltage/VREF)*200 , " V " , 2 ) ;
-  display_double(10 , display.y , "Busbar Current = " , (busbar_current/VREF)*5 , " A " , 2) ;
-  display_double(10 , display.y , "Wind Capacity = " , (wind_capacity/VREF)*5 , " A " , 2) ;
-  display_double(10 , display.y , "Solar Capacity = " , (solar_capacity/VREF)*5 , " A " , 2) ;
-  display_double(10 , display.y , "Total Renewable = " , ((wind_capacity + solar_capacity)/VREF) *5 , " A " , 2) ;
-  display_double(10 , display.y , "Main Request = " , mains_req , " A " , 2) ;
-  display_loads((LCDHEIGHT/2) + 15 , (LCDWIDTH/2) - 10 , "Load 1 = " , load_call[0] , load_switch[0]) ;
+  display_double(10 , (LCDWIDTH/2) + 10 , "Busbar voltage = " , (busbar_voltage/VREF)*200 , " V ") ;
+  display_double(10 , display.y , "Busbar current = " , (busbar_current/VREF)*5 , " A ") ;
+  display_double(10 , display.y , "Wind capacity = " , (wind_capacity/VREF)*5 , " A ") ;
+  display_double(10 , display.y , "Solar capacity = " , (solar_capacity/VREF)*5 , " A ") ;
+  display_double(10 , display.y , "Total Renewable = " , ((wind_capacity + solar_capacity)/VREF) *5 , " A ") ;
+  display_loads((LCDHEIGHT/2) + 15 , (LCDWIDTH/2) + 10 , "Load 1 = " , load_call[0] , load_switch[0]) ;
   display_loads((LCDHEIGHT/2) + 15 , display.y , "Load 2 = " , load_call[1] , load_switch[1]) ;
   display_loads((LCDHEIGHT/2) + 15 , display.y , "Load 3 = " , load_call[2] , load_switch[2]) ;
   display_batt((LCDHEIGHT/2) + 15 , display.y , "Batt Status : " , charge_battery , discharge_battery) ;
@@ -524,7 +536,7 @@ void display_pixel_shift(rectangle *shape , int width)
   (*shape).left = display.x ;
   (*shape).bottom = (*shape).top + width ;
   (*shape).right = (*shape).left + width ;
-  fill_rectangle(*shape , WHITE) ;
+  fill_rectangle(*shape , teamcolour) ;
 }
 
 void display_team_name()//Need to redo this so that it looks nicer
@@ -533,21 +545,21 @@ void display_team_name()//Need to redo this so that it looks nicer
   int i = 0 ;
   int topmost = 10 ;
   int leftmost = 10 ;
-  int width = 5 ;
+  int width = 13 ;
   /* T */
   display.y = topmost ;
   display.x = leftmost ;
-  display_pixel_shift(&shape , width) ;
+  display_pixel_shift(&shape,width) ;
   for(i = 0 ; i < 2 ; i++)
   {
     display.x += width ;
-    display_pixel_shift(&shape , width) ;
+    display_pixel_shift(&shape,width) ;
   }
   display.x -= width ;
   for(i = 1 ; i < 5 ; i ++ )
   {
     display.y += width ;
-    display_pixel_shift(&shape , width) ;
+    display_pixel_shift(&shape,width) ;
   }
   /* E */
   display.y = topmost - width ;
@@ -555,22 +567,22 @@ void display_team_name()//Need to redo this so that it looks nicer
   for(i = 0 ; i < 5 ; i++)
   {
     display.y += width ;
-    display_pixel_shift(&shape , width) ;
+    display_pixel_shift(&shape,width) ;
   }
   for(i = 0 ; i < 2 ; i ++)
   {
     display.x += width ;
-    display_pixel_shift(&shape , width) ;
+    display_pixel_shift(&shape,width) ;
   }
   display.y -= 2*width ;
   display.x -= width ;
-  display_pixel_shift(&shape , width) ;
+  display_pixel_shift(&shape,width) ;
   display.y -= 2*width ;
-  display_pixel_shift(&shape , width) ;
+  display_pixel_shift(&shape,width) ;
   for(i = 0 ; i < 1 ; i++ )
   {
     display.x += width ;
-    display_pixel_shift(&shape , width) ;
+    display_pixel_shift(&shape,width) ;
   }
   /* A */
   display.y  = topmost ;
@@ -578,27 +590,27 @@ void display_team_name()//Need to redo this so that it looks nicer
   for(i = 0 ; i < 4 ; i++ )
   {
     display.y += width ;
-    display_pixel_shift(&shape , width) ;
+    display_pixel_shift(&shape,width) ;
   }
   display.y = topmost ;
   for(i = 0 ; i < 2 ; i++)
   {
     display.x += width ;
-    display_pixel_shift(&shape , width) ;
+    display_pixel_shift(&shape,width) ;
   }
   display.y += 2*width ;
   display.x += width ;
   for(i = 0 ; i < 2  ; i++ )
   {
     display.x -= width ;
-    display_pixel_shift(&shape , width) ;
+    display_pixel_shift(&shape,width) ;
   }
   display.y = topmost ;
   display.x += 2*width ;
   for(i = 0 ; i < 4 ; i++ )
   {
     display.y += width ;
-    display_pixel_shift(&shape , width) ;
+    display_pixel_shift(&shape,width) ;
   }
   /* M */
   display.y = topmost - width ;
@@ -606,23 +618,23 @@ void display_team_name()//Need to redo this so that it looks nicer
   for( i = 0 ; i < 5 ; i++)
   {
     display.y += width ;
-    display_pixel_shift(&shape , width) ;
+    display_pixel_shift(&shape,width) ;
   }
   display.y -= 3*width ;
   display.x += width ;
-  display_pixel_shift(&shape , width) ;
+  display_pixel_shift(&shape,width) ;
   display.y += width ;
   display.x += width ;
-  display_pixel_shift(&shape , width) ;
+  display_pixel_shift(&shape,width) ;
   display.y -= width ;
   display.x += width ;
-  display_pixel_shift(&shape , width) ;
+  display_pixel_shift(&shape,width) ;
   display.y = topmost - width ; 
   display.x += width ;
   for( i = 0 ; i < 5 ; i++)
   {
     display.y += width ;
-    display_pixel_shift(&shape , width) ;
+    display_pixel_shift(&shape,width) ;
   }
   /* B */
   display.y = topmost - width ;
@@ -630,33 +642,33 @@ void display_team_name()//Need to redo this so that it looks nicer
   for(i = 0 ; i < 5 ; i++)
   {
     display.y += width ;
-    display_pixel_shift(&shape , width) ;
+    display_pixel_shift(&shape,width) ;
   }
   for(i = 0 ; i < 2 ; i++)
   {
     display.x += width ;
-    display_pixel_shift(&shape , width) ;
+    display_pixel_shift(&shape,width) ;
   }
   display.y -= 2*width ;
   display.x += width ;
   for(i = 0 ; i < 2 ; i++)
   {
     display.x -= width ;
-    display_pixel_shift(&shape , width) ;
+    display_pixel_shift(&shape,width) ;
   }
   display.y -= 2*width ;
   display.x -= width ;
   for(i = 0 ; i < 2 ; i++)
   {
     display.x += width ;
-    display_pixel_shift(&shape , width) ;
+    display_pixel_shift(&shape,width) ;
   }
   display.x += width ;
   display.y -= width ;
   for(i = 0 ; i < 2 ; i++)
   {
     display.y += 2*width ;
-    display_pixel_shift(&shape , width) ;
+    display_pixel_shift(&shape,width) ;
   }
 }
 
@@ -704,7 +716,7 @@ void display_line()
   /* Initialize the shape*/
   rectangle line ;
   /* Drawing the boxes at the bottom */
-  line.top = LCDWIDTH/2 - 20 ;
+  line.top = LCDWIDTH/2 ;
   line.bottom = line.top + 1 ;
   line.left = 5 ;
   line.right = LCDHEIGHT - 5 ;
@@ -714,17 +726,17 @@ void display_line()
   line.left = 5 ;
   line.right = LCDHEIGHT - 5 ;
   fill_rectangle(line,0xA514) ;
-  line.top = LCDWIDTH/2 - 20 ;
+  line.top = LCDWIDTH/2 ;
   line.bottom = LCDWIDTH - 5 ;
   line.left = LCDHEIGHT/2 + 8 ;
   line.right = line.left + 2 ;
   fill_rectangle(line , 0xA514) ; 
-  line.top = LCDWIDTH/2 -20 ;
+  line.top = LCDWIDTH/2 ;
   line.bottom = LCDWIDTH - 5 ;
   line.left = 5 ;
   line.right = line.left + 2 ;
   fill_rectangle(line , 0xA514) ; 
-  line.top = LCDWIDTH/2 - 20 ;
+  line.top = LCDWIDTH/2 ;
   line.bottom = LCDWIDTH - 5 ;
   line.left = LCDHEIGHT - 7 ;
   line.right = line.left + 2 ;
@@ -739,8 +751,24 @@ void delay_100ms()
   while(i>counter) ;
 }
 
+void delay_6000ms()
+{
+  /* Boot up loading time */
+  uint32_t i = counter + 6000 ;
+  while(i>counter) ;
+}
+
 int main(void)
 {
+  /* Start the counter */
+  timer_init() ;
+
+  /* Enable interrupts */
+  sei() ;
+
+  /* Give time for PSU to supply the il matto */
+  delay_6000ms() ;
+
   /* TFT display bootup */
   init_lcd();
 
@@ -748,11 +776,8 @@ int main(void)
   init_debug_uart0() ;
 
   /* Setup display orientation */
-  orientation o = East ;
+  orientation o = West ;
   set_orientation(o);
-
-  /* Refresh the screen */
-  clear_screen() ;
 
   /* Setup ADC */
   adc_init() ;
@@ -760,28 +785,17 @@ int main(void)
   /* Setup digital Inouts. */
   digital_init() ;
 
-  /* Start the counter */
-  timer_init() ;
-
-  /* Enable interrupts */
-  sei() ;
-
   /* Display the margin */
   display_line() ;
 
-  /* Display team name */
-  display_team_name() ;
-
   /* Create the line */
-  rectangle busbar_voltage_bar = shape_make((LCDWIDTH/2) , busbar_voltage) ;
+  rectangle busbar_voltage_bar = shape_make((LCDWIDTH/2) + 20, busbar_voltage) ;
   rectangle busbar_current_bar = shape_make(display.y, busbar_current) ;
   rectangle wind_bar = shape_make(display.y , wind_capacity) ;
   rectangle solar_bar = shape_make(display.y , solar_capacity) ;
   rectangle total_renewable_bar = shape_make(display.y , ((wind_capacity + solar_capacity)/2)) ;
-  rectangle mains_req_bar = shape_make(display.y , mains_req) ;
   /* Default background colour */
-  display.foreground = WHITE ;
-  display.background = BLACK ;
+  display.foreground = GREY ;
 
   /* Super Loop */
   for(;;) 
@@ -798,16 +812,18 @@ int main(void)
     /* Display what on screen */
     display_values() ; 
 
+    /* Display team name */
+    display_team_name() ;
+
     /* Update the screen every 100 ms */
     //delay_100ms() ;
 
     /* Updates graphic */
-    update_lines(&busbar_voltage_bar , busbar_voltage*2 , (LCDWIDTH/2) ) ;
+    update_lines(&busbar_voltage_bar , busbar_voltage*2 , (LCDWIDTH/2) + 20 ) ;
     update_lines(&busbar_current_bar , busbar_current*2 , display.y ) ;
     update_lines(&wind_bar , wind_capacity , display.y ) ;
     update_lines(&solar_bar , solar_capacity , display.y) ;
     update_lines(&total_renewable_bar , ((wind_capacity + solar_capacity)/2) , display.y) ;
-    update_lines(&mains_req_bar, (mains_req/5)*VREF , display.y) ;
   }
   //test
   return 0;
