@@ -251,7 +251,7 @@ void input_digital()
   int inp = PINA&_BV(LOAD1_CALL) ;
   /* Set the array */
   if(inp)
-    LoadCall1 = true ;
+    load_call[0] = true ;
   else
     LoadCall1 = false ;
 
