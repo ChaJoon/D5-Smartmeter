@@ -88,6 +88,9 @@ Logs : For personal use. Will be deleted in final submission
 27/02/2023  : The final scenario is out and I need to rewrite the algorithm.
               Tested the PSU and water test today.
               Changing the name of the variables for labview now.
+28/02/2023  : Turns out I didnt change it because Jimmy wants to do it so I leave
+              it and work on the algorithm instead.
+              Changed while loop to be 'i-counter' instead of 'i>counter' 
 */
 
 #include "../lcdlib/lcd.h"
@@ -132,7 +135,6 @@ Logs : For personal use. Will be deleted in final submission
 double mains_req = 0;
 
 /* Doubles for input values */
-double main_capacity = 0;
 double busbar_voltage = 0;
 double busbar_current = 0;
 double wind_capacity = 0;
@@ -153,6 +155,7 @@ bool LoadSw3 = 0;
 bool charge_battery = false;
 bool discharge_battery = false;
 
+/* Couunter can last up until 99.42 days before it overflows */
 volatile uint32_t counter ; 
 
 /* Function Definintions */
@@ -251,7 +254,7 @@ void input_digital()
   int inp = PINA&_BV(LOAD1_CALL) ;
   /* Set the array */
   if(inp)
-    load_call[0] = true ;
+    LoadCall1 = true ;
   else
     LoadCall1 = false ;
 
@@ -275,7 +278,9 @@ void input_digital()
 void output_pwm()
 {
   /* set the duty cycle of the PWM */
-  OCR2A = (mains_req/10) * 255 ; //from handbook
+  OCR2A = (mains_req/2) * 255 ; //from handbook
+  printf("test ") ;
+  printf(" %d\n " , OCR2A ) ;
 }
 
 void output_digital()
@@ -347,26 +352,29 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
   charge_battery = 0 ;
   discharge_battery = 0 ;
   int i = 0 ;
+  bool check_load_1 ;
+  bool check_load_2 ;
+  bool check_load_3 ;
 
   /* Maximum mains current */
-  double max_mains_current = 4.0 ;
+  double max_mains_current = 2.0 ;
   
   /* Calculate total load current requirements */
-  double load1_current = check_load_demand(load1_call, 0.8) ;
-  double load2_current = check_load_demand(load2_call, 1.8) ;
-  double load3_current = check_load_demand(load3_call, 1.4) ;
+  double load1_current = check_load_demand(load1_call, 1.2) ;
+  double load2_current = check_load_demand(load2_call, 2.0) ;
+  double load3_current = check_load_demand(load3_call, 0.8) ;
   double total_load_current = load1_current + load2_current + load3_current ;
 
-  for(i = 0 ; i < 3 ; i++ )
+  /*for(i = 0 ; i < 3 ; i++ )
   {
     if ( load_call[i] )  
       load_switch[i] = true ;
     else
       load_switch[i] = false ;
-  }
+  }*/
 
   /* calculate total energy available */
-  double total_energy = (((wind_capacity + solar_capacity)*5) / (2*VREF) ) ;
+  double total_energy = wind_capacity + solar_capacity ;
 
   /* Check if we have enough energy */
   if(total_energy >= total_load_current)
@@ -379,6 +387,9 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
       /* If more than 1A we can charge the batt */
       charge_battery = true ;
       discharge_battery = false ;
+      check_load_1 = true ;
+      check_load_2 = true ;
+      check_load_3 = true ;
     }
     else if ((excess_current < 1) && (excess_current > 0))
     {
@@ -386,12 +397,18 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
       mains_req = 1.0 - excess_current ;
       charge_battery = true ;
       discharge_battery = false ;
+      check_load_1 = true ;
+      check_load_2 = true ;
+      check_load_3 = true ;
     }
     else
     {
-      /* If current from renewable is the same as load, batt in idle state */
+      /* Default state in case the loop fails. */
       charge_battery = false ;
       discharge_battery = false ;
+      check_load_1 = true ;
+      check_load_2 = true ;
+      check_load_3 = true ;
     }
   }
 
@@ -399,23 +416,88 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
   {
     /* If renewable energy is less than load demands */
     double lack_current = total_load_current - total_energy ;
-    if((lack_current > 0 ) && (lack_current <= 3))
+    if(lack_current<=(max_mains_current-1))
     {
       /* Request from main and leave batt on idle*/
-      mains_req = lack_current ;
-      charge_battery = false ;
+      mains_req = lack_current + 1 ;
+      charge_battery = true ;
       discharge_battery = false ;
+      check_load_1 = true ;
+      check_load_2 = true ;
+      check_load_3 = true ;
     }
-    else if (lack_current > 3)
+    else if (lack_current <= (max_mains_current) )
     {
       /* If lack of current is too high we discharge batt as well as requesting from main */
-      double current_needed = lack_current - 1 ;
-      mains_req = current_needed  ;
+      mains_req = lack_current  ;
+      charge_battery = false ;
+      discharge_battery = false ;
+      check_load_1 = true ;
+      check_load_2 = true ;
+      check_load_3 = true ;
+    }
+    /* If support from main is not enough. We need to discharge battery  */
+    else if (lack_current <= (max_mains_current+1) )
+    {
+      mains_req = lack_current - 1 ;
       charge_battery = false ;
       discharge_battery = true ;
+      check_load_1 = true ;
+      check_load_2 = true ;
+      check_load_3 = true ;
+    }
+    /* If renewable is too low and exceeds max main request and battery 
+       Load1,Load2 and Load3 calls */
+    else if (load3_current)
+    {
+      /* If we have at least 0.2 renewables we can cancel load3 to save as many as we can */
+      if (total_energy>=0.2)
+      {
+        mains_req = max_mains_current ;
+        discharge_battery = true;
+        charge_battery = false ;
+        check_load_1 = true ;
+        check_load_2 = true ;
+        check_load_3 = false ;
+      }
+      /* If not then cancel load2 */
+      else 
+      {
+        mains_req = 2.0 - total_energy ;
+        discharge_battery = true ;
+        charge_battery = false ;
+        check_load_1 = true ;
+        check_load_2 = false ;
+        check_load_3 = true ;
+      }
+    }
+    /* Load1 and Load2 calls */
+    else
+    {
+      mains_req = load2_current - total_energy ;
+      charge_battery = false ;
+      discharge_battery = false ;
+      check_load_1 = true ;
+      check_load_2 = false ;
+      check_load_3 = true ;
     }
   }
 
+  /* Set Load Switch 1 */
+  if((check_load_1 == true) && (LoadCall1 ==  true) )
+    LoadSw1 = true ;
+  else 
+    LoadSw1 = false ;
+  /* Set Load Switch 2 */
+  if((check_load_2 == true) && (LoadCall2 == true) )
+    LoadSw2 = true ;
+  else
+    LoadSw2 = false ;
+  /* Set Load Switch 3 */
+  if( (check_load_3 == true) && (LoadCall3 == true) )
+    LoadSw3 = true ;
+  else 
+    LoadSw3 = false ;
 }
 
 /* Display double type on screen */
@@ -743,7 +825,8 @@ void delay_100ms()
   /* wait until counter is counts 100ms. i and counter must be
    the same type so that it still works when counter is overflowing */
   uint32_t i = counter + 100 ;
-  while(i>counter) ;
+  /*Only exit the while loop if counter and integer is the same number */
+  while(i-counter) ;
 }
 
 int main(void)
