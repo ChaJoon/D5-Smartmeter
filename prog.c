@@ -91,6 +91,11 @@ Logs : For personal use. Will be deleted in final submission
 28/02/2023  : Turns out I didnt change it because Jimmy wants to do it so I leave
               it and work on the algorithm instead.
               Changed while loop to be 'i-counter' instead of 'i>counter' 
+03/03/2023  : Fixing PWM using oscilloscope, still not fixed, tried adding prescaler.
+              Checked output of digitals. Fixed that discarge and charge pin is the same.
+              Fixed pwm, turns out the problem is I didnt initialize the pwm_init() fx
+              in the first place. Prescaler is removed since they as high frequency as 
+              they can get.
 */
 
 #include "../lcdlib/lcd.h"
@@ -125,7 +130,7 @@ Logs : For personal use. Will be deleted in final submission
 #define LOAD3_CALL PA6 
 
 /* Digital output pins */
-#define CHARGE_BATTERY PD3 
+#define CHARGE_BATTERY PD2 
 #define DISCHARGE_BATTERY PD3 
 #define LOAD1_SWITCH PD4 
 #define LOAD2_SWITCH PD5 
@@ -208,9 +213,9 @@ void pwm_init()
   DDRD |= _BV(MAIN_CALL);
 
   /* Set up timer 2 in Fast PWM mode */
-  TCCR2A |= ((1 << WGM20) | (1 << WGM21) | (1 << COM2A1));
-  TCCR2B |= ((1 << CS20)); // no prescaler
-  OCR2A = 0 ;
+  TCCR2A = _BV(COM2A1) | _BV(WGM20) | _BV(WGM21) ;
+  /* Set to no prescaler. */
+  TCCR2B = _BV(CS20) ;
 }
 
 double input_adc_read(uint8_t channel)
@@ -278,9 +283,10 @@ void input_digital()
 void output_pwm()
 {
   /* set the duty cycle of the PWM */
-  OCR2A = (mains_req/2) * 255 ; //from handbook
-  printf("test ") ;
-  printf(" %d\n " , OCR2A ) ;
+  OCR2A = (mains_req/VREF) * 255 ; //from handbook
+  //OCR2A = 255 ;
+  //printf("test ") ;
+  //printf(" %d\n " , OCR2A ) ;
 }
 
 void output_digital()
@@ -532,7 +538,7 @@ int display_bool_check(bool load)
   /* Check for boolean. If the logic is high then we set the textx to print in green,
     if false we will print the text in red. */
   if(load==true)
-    return 0x14E0 ;
+    return GREEN ;
   else
     return RED ;
 }
@@ -853,6 +859,9 @@ int main(void)
   /* Start the counter */
   timer_init() ;
 
+  /* Setup the PWM */
+  pwm_init() ;
+
   /* Enable interrupts */
   sei() ;
 
@@ -897,7 +906,7 @@ int main(void)
     update_lines(&wind_bar , wind_capacity , display.y ) ;
     update_lines(&solar_bar , solar_capacity , display.y) ;
     update_lines(&total_renewable_bar , ((wind_capacity + solar_capacity)/2) , display.y) ;
-    update_lines(&mains_req_bar, (mains_req/5)*VREF , display.y) ;
+    update_lines(&mains_req_bar, (mains_req/2)*VREF , display.y) ;
   }
   //test
   return 0;
