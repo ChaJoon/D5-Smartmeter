@@ -160,10 +160,147 @@ bool LoadSw3 = 0;
 bool charge_battery = false;
 bool discharge_battery = false;
 
-/* Couunter can last up until 99.42 days before it overflows */
-volatile uint32_t counter ; 
+/* Total Energy consumption */
+double power_consumption = 0 ;
 
-/* Function Definintions */
+/* Counter can last up until 99.42 days before it overflows */
+volatile uint32_t counter ; 
+/* Battery counter */
+volatile uint32_t battery_counter ;
+
+/* Battery level */
+int battery_lvl = 1 ;
+
+/*** Functions Initialisations ***/
+/* Interupt service routine */
+ISR(TIMER1_COMPA_vect) ;
+
+/* Initializations */
+void timer_init() ;
+void adc_init() ;
+void digital_init() ;
+void pwm_init() ;
+rectangle shape_make(int y, double value) ;
+
+/* Measure inputs */
+double input_adc_read(uint8_t channel) ;
+double input_calculate_rms(uint8_t channel) ;
+void input_digital() ;
+
+/* Calculate outputs */
+void output_pwm() ;
+void output_digital() ;
+
+/* Read and send inputs and outputs */
+void read_inputs() ;
+void send_outputs() ;
+
+/* Logics */
+double check_load_demand(bool call , double current) ;
+void algorithm(bool load1_call, bool load2_call, bool load3_call) ;
+
+/* Display graphics */
+int display_bool_check(bool load) ;
+void display_line() ;
+void display_double(int x_position, int y_position, char* name, double value, char* units , int decimal_places) ;
+void display_loads(int x_position , int y_position , char* name , bool load_call , bool load_switch ) ;
+void display_batt(int x_position , int y_position , char* name , bool charging , bool discharging ) ;
+void display_values() ;
+void display_pixel_shift(rectangle *shape , int width)  ;
+void display_team_name() ;
+
+/* Updates */
+void update_lines(rectangle *bar, double value , int y_position) ;
+//void update_battery_lvl() ;
+
+/* Delays */
+void delay_500ms() ;
+
+/* Main function */
+int main(void)
+{
+  /* TFT display bootup */
+  init_lcd();
+
+  /* Setup UART serial comms */
+  init_debug_uart0() ;
+
+  /* Setup display orientation */
+  orientation o = East ;
+  set_orientation(o);
+
+  /* Refresh the screen */
+  clear_screen() ;
+
+  /* Setup ADC */
+  adc_init() ;
+
+  /* Setup digital Inouts. */
+  digital_init() ;
+
+  /* Start the counter */
+  timer_init() ;
+
+  /* Setup the PWM */
+  pwm_init() ;
+
+  /* Enable interrupts */
+  sei() ;
+
+  /* Display the margin */
+  display_line() ;
+
+  /* Display team name */
+  display_team_name() ;
+
+  /* Create the lines */
+  rectangle busbar_voltage_bar = shape_make((LCDWIDTH/2) , busbar_voltage) ;
+  rectangle busbar_current_bar = shape_make(display.y, busbar_current) ;
+  rectangle wind_bar = shape_make(display.y , wind_capacity) ;
+  rectangle solar_bar = shape_make(display.y , solar_capacity) ;
+  rectangle total_renewable_bar = shape_make(display.y , ((wind_capacity + solar_capacity)/2)) ;
+  rectangle mains_req_bar = shape_make(display.y , mains_req) ;
+
+  /* Default background colour */
+  display.foreground = WHITE ;
+  display.background = BLACK ;
+
+  /* Super Loop */
+  for(;;) 
+  {
+    /* Read all inputs signals */
+    read_inputs() ; 
+
+    /* Compute the algorithms */
+    algorithm(LoadCall1, LoadCall2 , LoadCall3) ; 
+
+    /* Send all output signals */
+    send_outputs() ; 
+
+    /* Display what on screen */
+    display_values() ; 
+
+    /* Update the screen every 100 ms */
+    //delay_500ms() ;
+
+    /* Update battery level */
+    //update_battery_lvl() ;
+
+    /* Updates graphic */
+    update_lines(&busbar_voltage_bar , busbar_voltage*(sqrt(2)) , (LCDWIDTH/2) ) ;
+    update_lines(&busbar_current_bar , busbar_current*(sqrt(2)) , display.y ) ;
+    update_lines(&wind_bar , wind_capacity , display.y ) ;
+    update_lines(&solar_bar , solar_capacity , display.y) ;
+    update_lines(&total_renewable_bar , ((wind_capacity + solar_capacity)/2) , display.y) ;
+    update_lines(&mains_req_bar, (mains_req/2)*VREF , display.y) ;
+  }
+
+  return 0;
+}
+
+/******************************************************************************************************************************************/
+
+/* Functions definitions */
 
 ISR(TIMER1_COMPA_vect)
 {
@@ -248,7 +385,7 @@ double input_calculate_rms(uint8_t channel)
       maxval = val ;
       //break;
   }
-    maxval = (maxval / 2); // find the rms (due to the wave not being fully rectified, /2 intead of /sqrt(2) )
+    maxval = (maxval / sqrt(2) ); // find the rms (due to the wave not being fully rectified, /2 intead of /sqrt(2) )
     return maxval ;
 
 }
@@ -456,7 +593,7 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
        Load1,Load2 and Load3 calls */
     else if (load3_current)
     {
-      /* If we have at least 0.2 renewables we can cancel load3 to save as many as we can */
+      /* If we have at least 0.2 renewables we can cancel load3 for highest survival rate. */
       if (total_energy>=0.2)
       {
         mains_req = max_mains_current ;
@@ -465,6 +602,7 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
         check_load_1 = true ;
         check_load_2 = true ;
         check_load_3 = false ;
+        total_load_current -= 0.8 ;
       }
       /* If not then cancel load2 */
       else 
@@ -475,9 +613,10 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
         check_load_1 = true ;
         check_load_2 = false ;
         check_load_3 = true ;
+        total_load_current -= 2.0 ;
       }
     }
-    /* Load1 and Load2 calls */
+    /* Load1 and Load2 calls, cancels load2 calls */
     else
     {
       mains_req = load2_current - total_energy ;
@@ -486,7 +625,9 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
       check_load_1 = true ;
       check_load_2 = false ;
       check_load_3 = true ;
+      total_load_current -= 2.0 ;
     }
+
   }
 
   /* Set Load Switch 1 */
@@ -504,6 +645,9 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
     LoadSw3 = true ;
   else 
     LoadSw3 = false ;
+
+    /* Calcullate power consumption in kW/h */
+    power_consumption = (busbar_voltage*(400/VREF)*total_load_current)/1000 ;
 }
 
 /* Display double type on screen */
@@ -599,18 +743,19 @@ void display_values()
   display.y = 10;
 
   /* Display all values and states on the screen */
-  display_double(LCDHEIGHT/2 - 10 , 5 , "Elapsed = " , counter/60000 , " m " , 0) ;
-  display_double(display.x , 5 , "" , (counter/1000)%60 , " sec " , 0) ;
-  display_double(10 , (LCDWIDTH/2) - 10 , "Busbar Voltage = " , (busbar_voltage/VREF)*200 , " V " , 2 ) ;
-  display_double(10 , display.y , "Busbar Current = " , (busbar_current/VREF)*5 , " A " , 2) ;
-  display_double(10 , display.y , "Wind Capacity = " , (wind_capacity/VREF)*5 , " A " , 2) ;
-  display_double(10 , display.y , "Solar Capacity = " , (solar_capacity/VREF)*5 , " A " , 2) ;
-  display_double(10 , display.y , "Total Renewable = " , ((wind_capacity + solar_capacity)/VREF) *5 , " A " , 2) ;
-  display_double(10 , display.y , "Main Request = " , mains_req , " A " , 2) ;
-  display_loads((LCDHEIGHT/2) + 15 , (LCDWIDTH/2) - 10 , "Load 1 = " , LoadCall1 , LoadSw1) ;
+  display_double(LCDHEIGHT/2 - 10 , 5 , "Elapsed = " , counter/60000 , " m " , 0) ;//Display minutes
+  display_double(display.x , 5 , "" , (counter/1000)%60 , " sec " , 0) ;//Display seconds
+  display_double(10 , (LCDWIDTH/2) - 10 , "Busbar Voltage = " , (busbar_voltage)*(400/VREF) , " V " , 2 ) ;//Display actual value of busbarV
+  display_double(10 , display.y , "Busbar Current = " , (busbar_current)*(10/VREF) , " A " , 2) ;//Display actual value of busbarI
+  display_double(10 , display.y , "Wind Capacity = " , (wind_capacity/VREF)*5 , " A " , 2) ;//Displat actual value of windI
+  display_double(10 , display.y , "Solar Capacity = " , (solar_capacity/VREF)*5 , " A " , 2) ;//Display actual value of SolarI
+  display_double(10 , display.y , "Total Renewable = " , ((wind_capacity + solar_capacity)/VREF) *5 , " A " , 2) ;//Display Total renewable energy
+  display_double(10 , display.y , "Main Request = " , mains_req , " A " , 2) ;//Display Main request
+  display_loads((LCDHEIGHT/2) + 15 , (LCDWIDTH/2) - 10 , "Load 1 = " , LoadCall1 , LoadSw1) ;//Display load states
   display_loads((LCDHEIGHT/2) + 15 , display.y , "Load 2 = " , LoadCall2 , LoadSw2) ;
   display_loads((LCDHEIGHT/2) + 15 , display.y , "Load 3 = " , LoadCall3 , LoadSw3) ;
-  display_batt((LCDHEIGHT/2) + 15 , display.y , "Batt Status : " , charge_battery , discharge_battery) ;
+  display_batt((LCDHEIGHT/2) + 15 , display.y , "Batt Status : " , charge_battery , discharge_battery) ;// Display battery status
+  display_double((LCDHEIGHT/2) + 15 , display.y += 20, "Power = " , power_consumption , "kW/h " , 2) ;//Display power consumption
 }
 
 void display_pixel_shift(rectangle *shape , int width) 
@@ -622,7 +767,7 @@ void display_pixel_shift(rectangle *shape , int width)
   fill_rectangle(*shape , WHITE) ;
 }
 
-void display_team_name()//Need to redo this so that it looks nicer
+void display_team_name()
 {
   rectangle shape ;
   int i = 0 ;
@@ -781,6 +926,19 @@ void update_lines(rectangle *bar, double value , int y_position)
   fill_rectangle(*bar,colour) ;
 }
 
+// void update_battery_lvl()
+// {
+//   if(charge_battery)
+//     battery_counter++ ;
+//   if(discharge_battery)
+//     battery_counter-- ;
+//   if(battery_counter == (100*2000)+1 )
+//     battery_counter  = (100*2000);
+//   if(battery_counter == 0)
+//     battery_counter = 1 ;
+//   battery_lvl = battery_counter/5000 ;
+// }
+
 rectangle shape_make(int y, double value)
 {
   /* Lines that correspond to amount of value we have */
@@ -799,6 +957,7 @@ void display_line()
   /* Initialize the shape*/
   rectangle line ;
   /* Drawing the boxes at the bottom */
+  //0xA514 is colour hex for grey.
   line.top = LCDWIDTH/2 - 20 ;
   line.bottom = line.top + 1 ;
   line.left = 5 ;
@@ -826,88 +985,11 @@ void display_line()
   fill_rectangle(line , 0xA514) ; 
 }
 
-void delay_100ms()
+void delay_500ms()
 {
   /* wait until counter is counts 100ms. i and counter must be
    the same type so that it still works when counter is overflowing */
-  uint32_t i = counter + 100 ;
+  uint32_t i = counter + 500 ;
   /*Only exit the while loop if counter and integer is the same number */
   while(i-counter) ;
-}
-
-int main(void)
-{
-  /* TFT display bootup */
-  init_lcd();
-
-  /* Setup UART serial comms */
-  init_debug_uart0() ;
-
-  /* Setup display orientation */
-  orientation o = East ;
-  set_orientation(o);
-
-  /* Refresh the screen */
-  clear_screen() ;
-
-  /* Setup ADC */
-  adc_init() ;
-
-  /* Setup digital Inouts. */
-  digital_init() ;
-
-  /* Start the counter */
-  timer_init() ;
-
-  /* Setup the PWM */
-  pwm_init() ;
-
-  /* Enable interrupts */
-  sei() ;
-
-  /* Display the margin */
-  display_line() ;
-
-  /* Display team name */
-  display_team_name() ;
-
-  /* Create the line */
-  rectangle busbar_voltage_bar = shape_make((LCDWIDTH/2) , busbar_voltage) ;
-  rectangle busbar_current_bar = shape_make(display.y, busbar_current) ;
-  rectangle wind_bar = shape_make(display.y , wind_capacity) ;
-  rectangle solar_bar = shape_make(display.y , solar_capacity) ;
-  rectangle total_renewable_bar = shape_make(display.y , ((wind_capacity + solar_capacity)/2)) ;
-  rectangle mains_req_bar = shape_make(display.y , mains_req) ;
-  /* Default background colour */
-  display.foreground = WHITE ;
-  display.background = BLACK ;
-
-  /* Super Loop */
-  for(;;) 
-  {
-    /* Read all inputs signals */
-    read_inputs() ; 
-
-    /* Compute the algorithms */
-    algorithm(LoadCall1, LoadCall2 , LoadCall3) ; 
-
-    /* Send all output signals */
-    send_outputs() ; 
-
-    /* Display what on screen */
-    display_values() ; 
-
-    /* Update the screen every 100 ms */
-    //delay_100ms() ;
-
-    /* Updates graphic */
-    update_lines(&busbar_voltage_bar , busbar_voltage*2 , (LCDWIDTH/2) ) ;
-    update_lines(&busbar_current_bar , busbar_current*2 , display.y ) ;
-    update_lines(&wind_bar , wind_capacity , display.y ) ;
-    update_lines(&solar_bar , solar_capacity , display.y) ;
-    update_lines(&total_renewable_bar , ((wind_capacity + solar_capacity)/2) , display.y) ;
-    update_lines(&mains_req_bar, (mains_req/2)*VREF , display.y) ;
-  }
-  //test
-  return 0;
 }
