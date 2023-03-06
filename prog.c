@@ -147,18 +147,18 @@ double solar_capacity = 0;
 
 /* boolean array for load calls and switches */
 // Changed the array to individual variables to match emulator
-//bool load_call[3] = {true, true, true};
+//bool load_call[3] = {1, 1, 1};
 bool LoadCall1 = 0;
 bool LoadCall2 = 0;
 bool LoadCall3 = 0;
-//bool load_switch[3] = {true, false, false};
+//bool load_switch[3] = {1, 0, 0};
 bool LoadSw1 = 0;
 bool LoadSw2 = 0;
 bool LoadSw3 = 0;
 
 /* boolean for charging and discharging battery */
-bool charge_battery = false;
-bool discharge_battery = false;
+bool charge_battery = 0;
+bool discharge_battery = 0;
 
 /* Total Energy consumption */
 double power_consumption = 0 ;
@@ -396,25 +396,25 @@ void input_digital()
   int inp = PINA&_BV(LOAD1_CALL) ;
   /* Set the array */
   if(inp)
-    LoadCall1 = true ;
+    LoadCall1 = 1 ;
   else
-    LoadCall1 = false ;
+    LoadCall1 = 0 ;
 
   /* Checks load2 call */
   inp = PINA&_BV(LOAD2_CALL) ;
   /* Set the array */
   if(inp)
-    LoadCall2 = true ;
+    LoadCall2 = 1 ;
   else
-    LoadCall2 = false ;
+    LoadCall2 = 0 ;
 
   /* Checks load3 call */
   inp = PINA&_BV(LOAD3_CALL) ;
   /* Set the array */
   if(inp)
-    LoadCall3 = true ;
+    LoadCall3 = 1 ;
   else
-    LoadCall3 = false ;
+    LoadCall3 = 0 ;
 }
 
 void output_pwm()
@@ -429,19 +429,19 @@ void output_pwm()
 void output_digital()
 {
   /* Set the load switch 1 high */
-  if(LoadSw1==true)
+  if(LoadSw1==1)
     PORTD |= _BV(LOAD1_SWITCH) ;
   else
     PORTD &= ~(_BV(LOAD1_SWITCH)) ;
     
   /* Set the load switch 2 high */
-  if(LoadSw2==true)
+  if(LoadSw2==1)
     PORTD |= _BV(LOAD2_SWITCH) ;
   else
     PORTD &= ~(_BV(LOAD2_SWITCH)) ;
     
   /* Set the load switch 3 high */
-  if(LoadSw3==true)
+  if(LoadSw3==1)
     PORTD |= _BV(LOAD3_SWITCH) ;
   else
     PORTD &= ~(_BV(LOAD3_SWITCH)) ;
@@ -482,7 +482,7 @@ double check_load_demand(bool call , double current)
 {
   /* if load is calling, we return the value of the
   current required by the load */
-  if(call==true)
+  if(call==1)
     return current ;
   else
     return 0 ;
@@ -511,9 +511,9 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
   /*for(i = 0 ; i < 3 ; i++ )
   {
     if ( load_call[i] )  
-      load_switch[i] = true ;
+      load_switch[i] = 1 ;
     else
-      load_switch[i] = false ;
+      load_switch[i] = 0 ;
   }*/
 
   /* calculate total energy available */
@@ -528,30 +528,30 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
     if(excess_current >= 1)
     {
       /* If more than 1A we can charge the batt */
-      charge_battery = true ;
-      discharge_battery = false ;
-      check_load_1 = true ;
-      check_load_2 = true ;
-      check_load_3 = true ;
+      charge_battery = 1 ;
+      discharge_battery = 0 ;
+      check_load_1 = 1 ;
+      check_load_2 = 1 ;
+      check_load_3 = 1 ;
     }
     else if ((excess_current < 1) && (excess_current > 0))
     {
       /* Request extra current from main to charge battery */
       mains_req = 1.0 - excess_current ;
-      charge_battery = true ;
-      discharge_battery = false ;
-      check_load_1 = true ;
-      check_load_2 = true ;
-      check_load_3 = true ;
+      charge_battery = 1 ;
+      discharge_battery = 0 ;
+      check_load_1 = 1 ;
+      check_load_2 = 1 ;
+      check_load_3 = 1 ;
     }
     else
     {
       /* Default state in case the loop fails. */
-      charge_battery = false ;
-      discharge_battery = false ;
-      check_load_1 = true ;
-      check_load_2 = true ;
-      check_load_3 = true ;
+      charge_battery = 0 ;
+      discharge_battery = 0 ;
+      check_load_1 = 1 ;
+      check_load_2 = 1 ;
+      check_load_3 = 1 ;
     }
   }
 
@@ -563,31 +563,31 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
     {
       /* Request from main and leave batt on idle*/
       mains_req = lack_current + 1 ;
-      charge_battery = true ;
-      discharge_battery = false ;
-      check_load_1 = true ;
-      check_load_2 = true ;
-      check_load_3 = true ;
+      charge_battery = 1 ;
+      discharge_battery = 0 ;
+      check_load_1 = 1 ;
+      check_load_2 = 1 ;
+      check_load_3 = 1 ;
     }
     else if (lack_current <= (max_mains_current) )
     {
       /* If lack of current is too high we discharge batt as well as requesting from main */
       mains_req = lack_current  ;
-      charge_battery = false ;
-      discharge_battery = false ;
-      check_load_1 = true ;
-      check_load_2 = true ;
-      check_load_3 = true ;
+      charge_battery = 0 ;
+      discharge_battery = 0 ;
+      check_load_1 = 1 ;
+      check_load_2 = 1 ;
+      check_load_3 = 1 ;
     }
     /* If support from main is not enough. We need to discharge battery  */
     else if (lack_current <= (max_mains_current+1) )
     {
       mains_req = lack_current - 1 ;
-      charge_battery = false ;
-      discharge_battery = true ;
-      check_load_1 = true ;
-      check_load_2 = true ;
-      check_load_3 = true ;
+      charge_battery = 0 ;
+      discharge_battery = 1 ;
+      check_load_1 = 1 ;
+      check_load_2 = 1 ;
+      check_load_3 = 1 ;
     }
     /* If renewable is too low and exceeds max main request and battery 
        Load1,Load2 and Load3 calls */
@@ -597,22 +597,22 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
       if (total_energy>=0.2)
       {
         mains_req = max_mains_current ;
-        discharge_battery = true;
-        charge_battery = false ;
-        check_load_1 = true ;
-        check_load_2 = true ;
-        check_load_3 = false ;
+        discharge_battery = 1;
+        charge_battery = 0 ;
+        check_load_1 = 1 ;
+        check_load_2 = 1 ;
+        check_load_3 = 0 ;
         total_load_current -= 0.8 ;
       }
       /* If not then cancel load2 */
       else 
       {
         mains_req = 2.0 - total_energy ;
-        discharge_battery = true ;
-        charge_battery = false ;
-        check_load_1 = true ;
-        check_load_2 = false ;
-        check_load_3 = true ;
+        discharge_battery = 1 ;
+        charge_battery = 0 ;
+        check_load_1 = 1 ;
+        check_load_2 = 0 ;
+        check_load_3 = 1 ;
         total_load_current -= 2.0 ;
       }
     }
@@ -620,31 +620,31 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
     else
     {
       mains_req = load2_current - total_energy ;
-      charge_battery = false ;
-      discharge_battery = false ;
-      check_load_1 = true ;
-      check_load_2 = false ;
-      check_load_3 = true ;
+      charge_battery = 0 ;
+      discharge_battery = 0 ;
+      check_load_1 = 1 ;
+      check_load_2 = 0 ;
+      check_load_3 = 1 ;
       total_load_current -= 2.0 ;
     }
 
   }
 
   /* Set Load Switch 1 */
-  if((check_load_1 == true) && (LoadCall1 ==  true) )
-    LoadSw1 = true ;
+  if((check_load_1 == 1) && (LoadCall1 ==  1) )
+    LoadSw1 = 1 ;
   else 
-    LoadSw1 = false ;
+    LoadSw1 = 0 ;
   /* Set Load Switch 2 */
-  if((check_load_2 == true) && (LoadCall2 == true) )
-    LoadSw2 = true ;
+  if((check_load_2 == 1) && (LoadCall2 == 1) )
+    LoadSw2 = 1 ;
   else
-    LoadSw2 = false ;
+    LoadSw2 = 0 ;
   /* Set Load Switch 3 */
-  if( (check_load_3 == true) && (LoadCall3 == true) )
-    LoadSw3 = true ;
+  if( (check_load_3 == 1) && (LoadCall3 == 1) )
+    LoadSw3 = 1 ;
   else 
-    LoadSw3 = false ;
+    LoadSw3 = 0 ;
 
     /* Calcullate power consumption in kW/h */
     power_consumption = (busbar_voltage*(400/VREF)*total_load_current)/1000 ;
@@ -680,8 +680,8 @@ void display_double(int x_position, int y_position, char* name, double value, ch
 int display_bool_check(bool load)
 {
   /* Check for boolean. If the logic is high then we set the textx to print in green,
-    if false we will print the text in red. */
-  if(load==true)
+    if 0 we will print the text in red. */
+  if(load==1)
     return GREEN ;
   else
     return RED ;
@@ -717,7 +717,7 @@ void display_batt(int x_position , int y_position , char* name , bool charging ,
   display.y += 10 ;
 
   /* Display current state of the battery */
-  if(charging==true)
+  if(charging==1)
   {
     display.foreground = GREEN ;
     display_string(" CHARGING  ") ;
