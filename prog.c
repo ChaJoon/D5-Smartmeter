@@ -275,6 +275,9 @@ int main(void)
     /* Compute the algorithms */
     algorithm(LoadCall1, LoadCall2 , LoadCall3) ; 
 
+    /* Update battery level */
+    update_battery_lvl() ;
+
     /* Send all output signals */
     send_outputs() ; 
 
@@ -283,9 +286,6 @@ int main(void)
 
     /* Update the screen every 100 ms */
     //delay_500ms() ;
-
-    /* Update battery level */
-    update_battery_lvl() ;
 
     /* Updates the line graphics under every data */
     update_lines(&busbar_voltage_bar , busbar_voltage*(sqrt(2)) , (LCDWIDTH/2) ) ;
@@ -381,8 +381,8 @@ double input_adc_read(uint8_t channel)
 double input_calculate_rms(uint8_t channel)
 {
   /*To find rms, need to find the max voltage at
-  1 period. 50 Hz = 20 ms*/
-  uint32_t periodEnd = counter + 20 ;
+  1 period. 50 Hz = 20 ms. Take 30 ms just to make sure*/
+  uint32_t periodEnd = counter + 30 ;
   double val = 0 ;
   double maxval = 0;
   /* in a period of 20ms, find the max amplitude */
@@ -677,6 +677,49 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
   else 
     LoadSw3 = 0 ;
 
+  /* Check for stability and main availability */
+  if(busbar_voltage < 1.6)
+  {
+    mains_req = 2.0 ;
+    charge_battery = 0 ;
+    read_inputs() ;
+    send_outputs() ;
+  }
+  if((busbar_voltage < 1.6) && (battery_lvl>0))
+  {
+    discharge_battery = 1 ;
+    charge_battery = 0 ;
+    read_inputs() ;
+    send_outputs() ;
+  }
+  if(busbar_voltage < 1.6)
+  {
+    LoadSw3 = 0 ;
+    read_inputs() ;
+    send_outputs() ;
+  }
+  if(busbar_voltage < 1.6)
+  {
+    LoadCall2 = 0 ;
+    if( (check_load_3 == 1) && (LoadCall3 == 1) )
+    LoadSw3 = 1 ;
+    read_inputs() ;
+    send_outputs() ;
+  }
+  if(busbar_voltage < 1.6)
+  {
+    LoadSw2 = 0 ;
+    LoadSw3 = 0 ;
+    read_inputs() ;
+    send_outputs() ;
+  }
+  if (busbar_voltage < 1.6)
+  {
+    LoadSw1 = 0 ;
+    LoadSw2 = 0 ;
+    LoadSw3 = 0 ;
+    send_outputs() ;
+  }
     /* Calculate power consumption in kW/h */
     power_consumption = (busbar_voltage*(400/VREF)*total_load_current)/1000 ;
 }
@@ -777,8 +820,8 @@ void display_values()
   /* Display all values and states on the screen */
   display_double(LCDHEIGHT/2 + 45 , (LCDWIDTH/2) - 30 , "Elapsed = " , counter/60000 , "m " , 2 , 0) ;//Display minutes
   display_double(display.x , (LCDWIDTH/2) - 30 , "" , (counter/1000)%60 , "s " , 2, 0) ;//Display seconds
-  display_double(10 , (LCDWIDTH/2) - 10 , "Busbar Voltage = " , (busbar_voltage)*(400/VREF) , " V " , 4, 2 ) ;//Display actual value of busbarV
-  display_double(10 , display.y , "Busbar Current = " , (busbar_current)*(10/VREF) , " A " , 4 , 2) ;//Display actual value of busbarI
+  display_double(10 , (LCDWIDTH/2) - 10 , "BusbarV = " , (busbar_voltage)*(400/VREF) , " Vrms " , 4, 2 ) ;//Display actual value of busbarV
+  display_double(10 , display.y , "BusbarI = " , (busbar_current)*(10/VREF) , " Arms " , 4 , 2) ;//Display actual value of busbarI
   display_double(10 , display.y , "Wind Capacity = " , (wind_capacity/VREF)*5 , " A " , 4 , 2) ;//Display actual value of windI
   display_double(10 , display.y , "Solar Capacity = " , (solar_capacity/VREF)*5 , " A " , 4 , 2) ;//Display actual value of SolarI
   display_double(10 , display.y , "Total Renewable = " , ((wind_capacity + solar_capacity)/VREF) *5 , " A " , 4 , 2) ;//Display Total renewable energy
