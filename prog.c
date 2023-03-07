@@ -83,7 +83,7 @@ Logs : For personal use. Will be deleted in final submission
 21/02/2023  : Placed this code in Github so my team can help using source control.
 22/02/2023  : in delay function changed i type from int to uint32_t.
               Need a smoother RGB colour flow. Need to work for the second review
-              report now. 
+              report now.
               tests
 27/02/2023  : The final scenario is out and I need to rewrite the algorithm.
               Tested the PSU and water test today.
@@ -105,6 +105,7 @@ Logs : For personal use. Will be deleted in final submission
 #include <avr/interrupt.h>
 //#include <util/delay.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <string.h>
 #include <math.h>
 #include <stdbool.h>
@@ -163,13 +164,13 @@ bool discharge_battery = 0;
 /* Total Energy consumption */
 double power_consumption = 0 ;
 
-/* Counter can last up until 99.42 days before it overflows */
-volatile uint32_t counter ; 
+/* Counter can last up until 106751991 days before it overflows */
+volatile uint64_t counter ; 
 /* Battery counter */
-volatile uint32_t battery_counter ;
+volatile uint32_t battery_counter = 40000 ;
 
 /* Battery level */
-int battery_lvl = 1 ;
+int battery_lvl = 50 ;
 
 /*** Functions Initialisations ***/
 /* Interupt service routine */
@@ -202,7 +203,7 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call) ;
 /* Display graphics */
 int display_bool_check(bool load) ;
 void display_line() ;
-void display_double(int x_position, int y_position, char* name, double value, char* units , int decimal_places) ;
+void display_double(int x_position, int y_position, char* name, double value, char* units , int width , int decimal_places) ;
 void display_loads(int x_position , int y_position , char* name , bool load_call , bool load_switch ) ;
 void display_batt(int x_position , int y_position , char* name , bool charging , bool discharging ) ;
 void display_values() ;
@@ -211,12 +212,12 @@ void display_team_name() ;
 
 /* Updates */
 void update_lines(rectangle *bar, double value , int y_position) ;
-//void update_battery_lvl() ;
+void update_battery_lvl() ;
 
 /* Delays */
 void delay_500ms() ;
 
-/* Main function */
+/********************************************************** Main function *****************************************************************/
 int main(void)
 {
   /* TFT display bootup */
@@ -284,9 +285,9 @@ int main(void)
     //delay_500ms() ;
 
     /* Update battery level */
-    //update_battery_lvl() ;
+    update_battery_lvl() ;
 
-    /* Updates graphic */
+    /* Updates the line graphics under every data */
     update_lines(&busbar_voltage_bar , busbar_voltage*(sqrt(2)) , (LCDWIDTH/2) ) ;
     update_lines(&busbar_current_bar , busbar_current*(sqrt(2)) , display.y ) ;
     update_lines(&wind_bar , wind_capacity , display.y ) ;
@@ -306,6 +307,13 @@ ISR(TIMER1_COMPA_vect)
 {
     /* Counter incremented every 1 millisec */
     counter++;
+
+    /* Counter for battery level */
+    if((charge_battery) && (battery_counter < 200000))
+    battery_counter++ ;
+    if((discharge_battery) && (battery_counter > 0))
+    battery_counter-- ;
+    
 }
 
 void timer_init()
@@ -490,10 +498,6 @@ double check_load_demand(bool call , double current)
 
 void algorithm(bool load1_call, bool load2_call, bool load3_call)
 {
-  /* Initialize variables */
-  mains_req = 0 ;
-  charge_battery = 0 ;
-  discharge_battery = 0 ;
   int i = 0 ;
   bool check_load_1 ;
   bool check_load_2 ;
@@ -508,126 +512,153 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
   double load3_current = check_load_demand(load3_call, 0.8) ;
   double total_load_current = load1_current + load2_current + load3_current ;
 
-  /*for(i = 0 ; i < 3 ; i++ )
-  {
-    if ( load_call[i] )  
-      load_switch[i] = 1 ;
-    else
-      load_switch[i] = 0 ;
-  }*/
-
   /* calculate total energy available */
-  double total_energy = wind_capacity + solar_capacity ;
+  double total_renewable = wind_capacity + solar_capacity ;
 
   /* Check if we have enough energy */
-  if(total_energy >= total_load_current)
+  if(total_renewable >= total_load_current)
   {
-    /* Find if we have extra current */
-    double excess_current = total_energy - total_load_current ;
-
+    /* Calculate total excess of current */
+    double excess_current = total_renewable - total_load_current ;
+    /* If renewable is enough to charge battery */
     if(excess_current >= 1)
     {
-      /* If more than 1A we can charge the batt */
-      charge_battery = 1 ;
-      discharge_battery = 0 ;
+      mains_req = 0 ;
       check_load_1 = 1 ;
       check_load_2 = 1 ;
       check_load_3 = 1 ;
+      charge_battery = 1 ;
+      discharge_battery = 0 ;
     }
-    else if ((excess_current < 1) && (excess_current > 0))
+    /* If excess is less than one, and battery is low */
+    else if(battery_lvl < 50)
     {
-      /* Request extra current from main to charge battery */
-      mains_req = 1.0 - excess_current ;
-      charge_battery = 1 ;
-      discharge_battery = 0 ;
+      mains_req = 1 - (excess_current) ;
       check_load_1 = 1 ;
       check_load_2 = 1 ;
       check_load_3 = 1 ;
+      charge_battery = 1 ;
+      discharge_battery = 0 ;
     }
+    /* If battery is high, we dont use any mains to charge the battery */
     else
     {
-      /* Default state in case the loop fails. */
-      charge_battery = 0 ;
-      discharge_battery = 0 ;
+      mains_req = 0 ;
       check_load_1 = 1 ;
       check_load_2 = 1 ;
       check_load_3 = 1 ;
+      charge_battery = 0 ;
+      discharge_battery = 0 ;
     }
   }
 
+  /* If total renewable energy is less than load demands */
   else 
   {
-    /* If renewable energy is less than load demands */
-    double lack_current = total_load_current - total_energy ;
-    if(lack_current<=(max_mains_current-1))
+    double current_lack = total_load_current - total_renewable ;
+    /* If current lack is less than one */
+    if(current_lack <= 1)
     {
-      /* Request from main and leave batt on idle*/
-      mains_req = lack_current + 1 ;
-      charge_battery = 1 ;
-      discharge_battery = 0 ;
-      check_load_1 = 1 ;
-      check_load_2 = 1 ;
-      check_load_3 = 1 ;
-    }
-    else if (lack_current <= (max_mains_current) )
-    {
-      /* If lack of current is too high we discharge batt as well as requesting from main */
-      mains_req = lack_current  ;
-      charge_battery = 0 ;
-      discharge_battery = 0 ;
-      check_load_1 = 1 ;
-      check_load_2 = 1 ;
-      check_load_3 = 1 ;
-    }
-    /* If support from main is not enough. We need to discharge battery  */
-    else if (lack_current <= (max_mains_current+1) )
-    {
-      mains_req = lack_current - 1 ;
-      charge_battery = 0 ;
-      discharge_battery = 1 ;
-      check_load_1 = 1 ;
-      check_load_2 = 1 ;
-      check_load_3 = 1 ;
-    }
-    /* If renewable is too low and exceeds max main request and battery 
-       Load1,Load2 and Load3 calls */
-    else if (load3_current)
-    {
-      /* If we have at least 0.2 renewables we can cancel load3 for highest survival rate. */
-      if (total_energy>=0.2)
+      /* If battery is low prioritise charging it */
+      if(battery_lvl<50)
       {
-        mains_req = max_mains_current ;
-        discharge_battery = 1;
-        charge_battery = 0 ;
+        mains_req = current_lack + 1 ;
         check_load_1 = 1 ;
         check_load_2 = 1 ;
-        check_load_3 = 0 ;
-        total_load_current -= 0.8 ;
+        check_load_3 = 1 ;
+        charge_battery = 1 ;
+        discharge_battery = 0 ;
       }
-      /* If not then cancel load2 */
-      else 
+      /* If battery is high we can use battery to supply */
+      else if(battery_lvl > 50)
       {
-        mains_req = 2.0 - total_energy ;
-        discharge_battery = 1 ;
+        mains_req = 0 ; 
+        check_load_1 = 1 ;
+        check_load_2 = 1 ;
+        check_load_3 = 1 ;
         charge_battery = 0 ;
+        discharge_battery = 1;
+      }
+      /* if battery is at 50 we maintain it */
+      else
+      {
+        mains_req = current_lack ;
+        check_load_1 = 1 ;
+        check_load_2 = 1 ;
+        check_load_3 = 1 ;
+        charge_battery = 0 ;
+        discharge_battery = 0 ;
+      }
+    }
+    /* If less then 2 we use battery if battery is high */
+    else if(current_lack <= 2)
+    {
+      if (battery_lvl<=50)
+      {
+        mains_req = current_lack ;
+        check_load_1 = 1 ;
+        check_load_2 = 1 ;
+        check_load_3 = 1 ;
+        charge_battery = 0 ;
+        discharge_battery = 0 ;
+      }
+      else
+      {
+        mains_req = current_lack - 1 ;
+        check_load_1 = 1 ;
+        check_load_2 = 1 ;
+        check_load_3 = 1 ;
+        charge_battery = 0 ;
+        discharge_battery = 1 ;
+      }
+    }
+    else if(current_lack<=3)
+    {
+      /* If we have enough battery */
+      if(battery_lvl>0)
+      {
+        mains_req = current_lack - 1 ;
+        check_load_1 = 1 ;
+        check_load_2 = 1 ;
+        check_load_3 = 1 ;
+        charge_battery = 0 ;
+        discharge_battery = 1 ;
+      }
+      /* If we dont have sufficient battery we turn off load 3 */
+      else
+      {
+        mains_req = max_mains_current - load3_current ;
+        check_load_1 = 1 ;
+        check_load_2 = 1 ;
+        check_load_3 = 0 ; // 250 - 1*t
+        charge_battery = 0 ;
+        discharge_battery = 0 ;
+      }
+    }
+    /* If current lack is too big for both battery and main to supply */
+    else
+    {
+      /* Use battery if we have */
+      if(battery_lvl>0)
+      {
+        mains_req = total_load_current - 1 - load2_current ;
         check_load_1 = 1 ;
         check_load_2 = 0 ;
         check_load_3 = 1 ;
-        total_load_current -= 2.0 ;
+        charge_battery = 0 ;
+        discharge_battery = 1 ;
+      }
+      /* Dont use battery if battery zero */
+      else
+      {
+        mains_req = max_mains_current ; 
+        check_load_1 = 1 ;
+        check_load_2 = 0 ;
+        check_load_3 = 1 ;
+        charge_battery = 0 ;
+        discharge_battery = 0 ;
       }
     }
-    /* Load1 and Load2 calls, cancels load2 calls */
-    else
-    {
-      mains_req = load2_current - total_energy ;
-      charge_battery = 0 ;
-      discharge_battery = 0 ;
-      check_load_1 = 1 ;
-      check_load_2 = 0 ;
-      check_load_3 = 1 ;
-      total_load_current -= 2.0 ;
-    }
-
   }
 
   /* Set Load Switch 1 */
@@ -646,12 +677,12 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
   else 
     LoadSw3 = 0 ;
 
-    /* Calcullate power consumption in kW/h */
+    /* Calculate power consumption in kW/h */
     power_consumption = (busbar_voltage*(400/VREF)*total_load_current)/1000 ;
 }
 
 /* Display double type on screen */
-void display_double(int x_position, int y_position, char* name, double value, char* units , int decimal_places)
+void display_double(int x_position, int y_position, char* name, double value, char* units , int width , int decimal_places)
 {
   /* Set font colour as grey */
   display.foreground = WHITE ;
@@ -665,7 +696,7 @@ void display_double(int x_position, int y_position, char* name, double value, ch
   //int temp ;
   
   /* Converting double to string */
-  dtostrf( value , 4, decimal_places, temp_str );
+  dtostrf( value , width , decimal_places, temp_str );
   //sprintf(temp_str,"%s",temp) ;
   
   /* Print the converted double as string */
@@ -711,10 +742,11 @@ void display_batt(int x_position , int y_position , char* name , bool charging ,
 
   /* start print on the display */
   display_string(name) ;
+  display_double(display.x , display.y , "" , battery_lvl , "% " , 2 , 0) ;//Display battery level
 
   /* New line */
   display.x = x_position ;
-  display.y += 10 ;
+  display.y -= 10 ;
 
   /* Display current state of the battery */
   if(charging==1)
@@ -743,19 +775,19 @@ void display_values()
   display.y = 10;
 
   /* Display all values and states on the screen */
-  display_double(LCDHEIGHT/2 - 10 , 5 , "Elapsed = " , counter/60000 , " m " , 0) ;//Display minutes
-  display_double(display.x , 5 , "" , (counter/1000)%60 , " sec " , 0) ;//Display seconds
-  display_double(10 , (LCDWIDTH/2) - 10 , "Busbar Voltage = " , (busbar_voltage)*(400/VREF) , " V " , 2 ) ;//Display actual value of busbarV
-  display_double(10 , display.y , "Busbar Current = " , (busbar_current)*(10/VREF) , " A " , 2) ;//Display actual value of busbarI
-  display_double(10 , display.y , "Wind Capacity = " , (wind_capacity/VREF)*5 , " A " , 2) ;//Displat actual value of windI
-  display_double(10 , display.y , "Solar Capacity = " , (solar_capacity/VREF)*5 , " A " , 2) ;//Display actual value of SolarI
-  display_double(10 , display.y , "Total Renewable = " , ((wind_capacity + solar_capacity)/VREF) *5 , " A " , 2) ;//Display Total renewable energy
-  display_double(10 , display.y , "Main Request = " , mains_req , " A " , 2) ;//Display Main request
+  display_double(LCDHEIGHT/2 + 45 , (LCDWIDTH/2) - 30 , "Elapsed = " , counter/60000 , "m " , 2 , 0) ;//Display minutes
+  display_double(display.x , (LCDWIDTH/2) - 30 , "" , (counter/1000)%60 , "s " , 2, 0) ;//Display seconds
+  display_double(10 , (LCDWIDTH/2) - 10 , "Busbar Voltage = " , (busbar_voltage)*(400/VREF) , " V " , 4, 2 ) ;//Display actual value of busbarV
+  display_double(10 , display.y , "Busbar Current = " , (busbar_current)*(10/VREF) , " A " , 4 , 2) ;//Display actual value of busbarI
+  display_double(10 , display.y , "Wind Capacity = " , (wind_capacity/VREF)*5 , " A " , 4 , 2) ;//Display actual value of windI
+  display_double(10 , display.y , "Solar Capacity = " , (solar_capacity/VREF)*5 , " A " , 4 , 2) ;//Display actual value of SolarI
+  display_double(10 , display.y , "Total Renewable = " , ((wind_capacity + solar_capacity)/VREF) *5 , " A " , 4 , 2) ;//Display Total renewable energy
+  display_double(10 , display.y , "Main Request = " , mains_req , " A " , 4 , 2) ;//Display Main reque st
   display_loads((LCDHEIGHT/2) + 15 , (LCDWIDTH/2) - 10 , "Load 1 = " , LoadCall1 , LoadSw1) ;//Display load states
   display_loads((LCDHEIGHT/2) + 15 , display.y , "Load 2 = " , LoadCall2 , LoadSw2) ;
   display_loads((LCDHEIGHT/2) + 15 , display.y , "Load 3 = " , LoadCall3 , LoadSw3) ;
   display_batt((LCDHEIGHT/2) + 15 , display.y , "Batt Status : " , charge_battery , discharge_battery) ;// Display battery status
-  display_double((LCDHEIGHT/2) + 15 , display.y += 20, "Power = " , power_consumption , "kW/h " , 2) ;//Display power consumption
+  display_double((LCDHEIGHT/2) + 15 , display.y += 20, "Power = " , power_consumption , "kW/h " , 3 , 2) ;//Display power consumption
 }
 
 void display_pixel_shift(rectangle *shape , int width) 
@@ -773,7 +805,7 @@ void display_team_name()
   int i = 0 ;
   int topmost = 10 ;
   int leftmost = 10 ;
-  int width = 5 ;
+  int width = 10 ;
   /* T */
   display.y = topmost ;
   display.x = leftmost ;
@@ -926,18 +958,12 @@ void update_lines(rectangle *bar, double value , int y_position)
   fill_rectangle(*bar,colour) ;
 }
 
-// void update_battery_lvl()
-// {
-//   if(charge_battery)
-//     battery_counter++ ;
-//   if(discharge_battery)
-//     battery_counter-- ;
-//   if(battery_counter == (100*2000)+1 )
-//     battery_counter  = (100*2000);
-//   if(battery_counter == 0)
-//     battery_counter = 1 ;
-//   battery_lvl = battery_counter/5000 ;
-// }
+void update_battery_lvl()
+{
+  /* Battery need to charge for at least 5 second before increasing the level \
+    %101 so that it will not equal to 0 when at 100%*/
+  battery_lvl = (battery_counter/2000)%101 ;
+}
 
 rectangle shape_make(int y, double value)
 {
