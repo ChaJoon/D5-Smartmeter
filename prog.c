@@ -167,10 +167,10 @@ double power_consumption = 0 ;
 /* Counter can last up until 106751991 days before it overflows */
 volatile uint64_t counter ; 
 /* Battery counter */
-volatile uint32_t battery_counter = 40000 ;
+volatile uint32_t battery_counter = 0 ;
 
 /* Battery level */
-int battery_lvl = 50 ;
+int battery_lvl = 0 ;
 
 /*** Functions Initialisations ***/
 /* Interupt service routine */
@@ -309,7 +309,7 @@ ISR(TIMER1_COMPA_vect)
     counter++;
 
     /* Counter for battery level */
-    if((charge_battery) && (battery_counter < 200000))
+    if((charge_battery) && (battery_counter < 720000))
     battery_counter++ ;
     if((discharge_battery) && (battery_counter > 0))
     battery_counter-- ;
@@ -499,9 +499,9 @@ double check_load_demand(bool call , double current)
 void algorithm(bool load1_call, bool load2_call, bool load3_call)
 {
   int i = 0 ;
-  bool check_load_1 ;
-  bool check_load_2 ;
-  bool check_load_3 ;
+  bool check_load_1  = 1;
+  bool check_load_2  = 1;
+  bool check_load_3  = 1;
 
   /* Maximum mains current */
   double max_mains_current = 2.0 ;
@@ -515,74 +515,37 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
   /* calculate total energy available */
   double total_renewable = wind_capacity + solar_capacity ;
 
-  /* Check if we have enough energy */
-  if(total_renewable >= total_load_current)
+  if(busbar_voltage>1.6)
   {
-    /* Calculate total excess of current */
-    double excess_current = total_renewable - total_load_current ;
-    /* If renewable is enough to charge battery */
-    if(excess_current >= 1)
+    /* Check if we have enough energy */
+    if(total_renewable >= total_load_current)
     {
-      mains_req = 0 ;
-      check_load_1 = 1 ;
-      check_load_2 = 1 ;
-      check_load_3 = 1 ;
-      charge_battery = 1 ;
-      discharge_battery = 0 ;
-    }
-    /* If excess is less than one, and battery is low */
-    else if(battery_lvl < 50)
-    {
-      mains_req = 1 - (excess_current) ;
-      check_load_1 = 1 ;
-      check_load_2 = 1 ;
-      check_load_3 = 1 ;
-      charge_battery = 1 ;
-      discharge_battery = 0 ;
-    }
-    /* If battery is high, we dont use any mains to charge the battery */
-    else
-    {
-      mains_req = 0 ;
-      check_load_1 = 1 ;
-      check_load_2 = 1 ;
-      check_load_3 = 1 ;
-      charge_battery = 0 ;
-      discharge_battery = 0 ;
-    }
-  }
-
-  /* If total renewable energy is less than load demands */
-  else 
-  {
-    double current_lack = total_load_current - total_renewable ;
-    /* If current lack is less than one */
-    if(current_lack <= 1)
-    {
-      /* If battery is low prioritise charging it */
-      if(battery_lvl<50)
+      /* Calculate total excess of current */
+      double excess_current = total_renewable - total_load_current ;
+      /* If renewable is enough to charge battery */
+      if(excess_current >= 1)
       {
-        mains_req = current_lack + 1 ;
+        mains_req = 0 ;
         check_load_1 = 1 ;
         check_load_2 = 1 ;
         check_load_3 = 1 ;
         charge_battery = 1 ;
         discharge_battery = 0 ;
       }
-      /* If battery is high we can use battery to supply */
-      else if(battery_lvl > 50)
+      /* If excess is less than one, and battery is low */
+      else if(battery_lvl < 10)
       {
-        mains_req = 0 ; 
+        mains_req = 1 - (excess_current) ;
         check_load_1 = 1 ;
         check_load_2 = 1 ;
         check_load_3 = 1 ;
-        charge_battery = 0 ;
-        discharge_battery = 1;
+        charge_battery = 1 ;
+        discharge_battery = 0 ;
       }
-      /* if battery is at 50 we maintain it */
+      /* If battery is high, we dont use any mains to charge the battery */
       else
       {
-        mains_req = current_lack ;
+        mains_req = 0 ;
         check_load_1 = 1 ;
         check_load_2 = 1 ;
         check_load_3 = 1 ;
@@ -590,77 +553,116 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
         discharge_battery = 0 ;
       }
     }
-    /* If less then 2 we use battery if battery is high */
-    else if(current_lack <= 2)
-    {
-      if (battery_lvl<=50)
-      {
-        mains_req = current_lack ;
-        check_load_1 = 1 ;
-        check_load_2 = 1 ;
-        check_load_3 = 1 ;
-        charge_battery = 0 ;
-        discharge_battery = 0 ;
-      }
-      else
-      {
-        mains_req = current_lack - 1 ;
-        check_load_1 = 1 ;
-        check_load_2 = 1 ;
-        check_load_3 = 1 ;
-        charge_battery = 0 ;
-        discharge_battery = 1 ;
-      }
-    }
-    else if(current_lack<=3)
-    {
-      /* If we have enough battery */
-      if(battery_lvl>0)
-      {
-        mains_req = current_lack - 1 ;
-        check_load_1 = 1 ;
-        check_load_2 = 1 ;
-        check_load_3 = 1 ;
-        charge_battery = 0 ;
-        discharge_battery = 1 ;
-      }
-      /* If we dont have sufficient battery we turn off load 3 */
-      else
-      {
-        mains_req = max_mains_current - load3_current ;
-        check_load_1 = 1 ;
-        check_load_2 = 1 ;
-        check_load_3 = 0 ; // 250 - 1*t
-        charge_battery = 0 ;
-        discharge_battery = 0 ;
-      }
-    }
-    /* If current lack is too big for both battery and main to supply */
-    else
-    {
-      /* Use battery if we have */
-      if(battery_lvl>0)
-      {
-        mains_req = total_load_current - 1 - load2_current ;
-        check_load_1 = 1 ;
-        check_load_2 = 0 ;
-        check_load_3 = 1 ;
-        charge_battery = 0 ;
-        discharge_battery = 1 ;
-      }
-      /* Dont use battery if battery zero */
-      else
-      {
-        mains_req = max_mains_current ; 
-        check_load_1 = 1 ;
-        check_load_2 = 0 ;
-        check_load_3 = 1 ;
-        charge_battery = 0 ;
-        discharge_battery = 0 ;
-      }
-    }
-  }
 
+    /* If total renewable energy is less than load demands */
+    else 
+    {
+      double current_lack = total_load_current - total_renewable ;
+      /* If current lack is less than one */
+      if(current_lack <= 1)
+      {
+        /* If battery is low prioritise charging it */
+        if(battery_lvl < 10)
+        {
+          mains_req = current_lack + 1 ;
+          check_load_1 = 1 ;
+          check_load_2 = 1 ;
+          check_load_3 = 1 ;
+          charge_battery = 1 ;
+          discharge_battery = 0 ;
+        }
+        /* If battery is high we can use battery to supply */
+        else if(battery_lvl > 10)
+        {
+          mains_req = 0 ; 
+          check_load_1 = 1 ;
+          check_load_2 = 1 ;
+          check_load_3 = 1 ;
+          charge_battery = 0 ;
+          discharge_battery = 1;
+        }
+        /* if battery is at 50 we maintain it */
+        else
+        {
+          mains_req = current_lack ;
+          check_load_1 = 1 ;
+          check_load_2 = 1 ;
+          check_load_3 = 1 ;
+          charge_battery = 0 ;
+          discharge_battery = 0 ;
+        }
+      }
+      /* If less then 2 we use battery if battery is high */
+      else if(current_lack <= 2)
+      {
+        if (battery_lvl <= 10)
+        {
+          mains_req = current_lack ;
+          check_load_1 = 1 ;
+          check_load_2 = 1 ;
+          check_load_3 = 1 ;
+          charge_battery = 0 ;
+          discharge_battery = 0 ;
+        }
+        else
+        {
+          mains_req = current_lack - 1 ;
+          check_load_1 = 1 ;
+          check_load_2 = 1 ;
+          check_load_3 = 1 ;
+          charge_battery = 0 ;
+          discharge_battery = 1 ;
+        }
+      }
+      else if(current_lack<=3)
+      {
+        /* If we have enough battery */
+        if(battery_lvl>0)
+        {
+          mains_req = current_lack - 1 ;
+          check_load_1 = 1 ;
+          check_load_2 = 1 ;
+          check_load_3 = 1 ;
+          charge_battery = 0 ;
+          discharge_battery = 1 ;
+        }
+        /* If we dont have sufficient battery we turn off load 3 */
+        else
+        {
+          mains_req = max_mains_current - load3_current ;
+          check_load_1 = 1 ;
+          check_load_2 = 1 ;
+          check_load_3 = 0 ; // 250 - 1*t
+          charge_battery = 0 ;
+          discharge_battery = 0 ;
+        }
+      }
+      /* If current lack is too big for both battery and main to supply */
+      else
+      {
+        /* Use battery if we have */
+        if(battery_lvl>0)
+        {
+          mains_req = total_load_current - 1 - load2_current ;
+          check_load_1 = 1 ;
+          check_load_2 = 0 ;
+          check_load_3 = 1 ;
+          charge_battery = 0 ;
+          discharge_battery = 1 ;
+        }
+        /* Dont use battery if battery zero */
+        else
+        {
+          mains_req = max_mains_current ; 
+          check_load_1 = 1 ;
+          check_load_2 = 0 ;
+          check_load_3 = 1 ;
+          charge_battery = 0 ;
+          discharge_battery = 0 ;
+        }
+      }
+    }
+  
   /* Set Load Switch 1 */
   if((check_load_1 == 1) && (LoadCall1 ==  1) )
     LoadSw1 = 1 ;
@@ -676,50 +678,42 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
     LoadSw3 = 1 ;
   else 
     LoadSw3 = 0 ;
+  }
 
   /* Check for stability and main availability */
-  if(busbar_voltage < 1.6)
+  while (busbar_voltage < 1.6)
   {
-    mains_req = 2.0 ;
+    mains_req = max_mains_current ;
     charge_battery = 0 ;
-    read_inputs() ;
     send_outputs() ;
-  }
-  if((busbar_voltage < 1.6) && (battery_lvl>0))
-  {
-    discharge_battery = 1 ;
-    charge_battery = 0 ;
     read_inputs() ;
-    send_outputs() ;
-  }
-  if(busbar_voltage < 1.6)
-  {
+    if(busbar_voltage>=1.6){
+      break ;
+    }
+    if(battery_lvl>0){
+      discharge_battery = 1 ;
+      send_outputs() ;
+      read_inputs() ;
+      if(busbar_voltage>=1.6){
+        break ;
+      }
+    }
     LoadSw3 = 0 ;
-    read_inputs() ;
     send_outputs() ;
-  }
-  if(busbar_voltage < 1.6)
-  {
-    LoadCall2 = 0 ;
-    if( (check_load_3 == 1) && (LoadCall3 == 1) )
-    LoadSw3 = 1 ;
     read_inputs() ;
-    send_outputs() ;
-  }
-  if(busbar_voltage < 1.6)
-  {
+    if(busbar_voltage>=1.6){
+      break;
+    }
     LoadSw2 = 0 ;
-    LoadSw3 = 0 ;
-    read_inputs() ;
     send_outputs() ;
-  }
-  if (busbar_voltage < 1.6)
-  {
+    read_inputs() ;
+    if(busbar_voltage>=1.6){
+      break ;
+    }
     LoadSw1 = 0 ;
-    LoadSw2 = 0 ;
-    LoadSw3 = 0 ;
-    send_outputs() ;
+    break ;
   }
+  
     /* Calculate power consumption in kW/h */
     power_consumption = (busbar_voltage*(400/VREF)*total_load_current)/1000 ;
 }
@@ -1005,7 +999,7 @@ void update_battery_lvl()
 {
   /* Battery need to charge for at least 5 second before increasing the level \
     %101 so that it will not equal to 0 when at 100%*/
-  battery_lvl = (battery_counter/2000)%101 ;
+  battery_lvl = (battery_counter/7200)%101 ;
 }
 
 rectangle shape_make(int y, double value)
