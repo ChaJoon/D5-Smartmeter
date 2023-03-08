@@ -998,3 +998,47 @@ void delay_500ms()
   /*Only exit the while loop if counter and integer is the same number */
   while(i-counter) ;
 }
+
+// if(busbar_voltage < 1.6)
+//   {
+//     mains_req = 2.0 ;
+//     charge_battery = 0 ;
+//     temp1 = 1 ;
+//     send_outputs() ;
+//     read_inputs() ;
+//   }
+//   if((busbar_voltage < 1.6) && (battery_lvl>0))
+//   {
+//     discharge_battery = 1 ;
+//     charge_battery = 0 ;
+//     send_outputs() ;
+//     read_inputs() ;
+//   }
+//   if(busbar_voltage < 1.6)
+//   {
+//     LoadSw3 = 0 ;
+//     send_outputs() ;
+//     read_inputs() ;
+//   }
+//   if(busbar_voltage < 1.6)
+//   {
+//     LoadCall2 = 0 ;
+//     if( (check_load_3 == 1) && (LoadCall3 == 1) )
+//     LoadSw3 = 1 ;
+//     send_outputs() ;
+//     read_inputs() ;
+//   }
+//   if(busbar_voltage < 1.6)
+//   {
+//     LoadSw2 = 0 ;
+//     LoadSw3 = 0 ;
+//     send_outputs() ;
+//     read_inputs() ;
+//   }
+//   if (busbar_voltage < 1.6)
+//   {
+//     LoadSw1 = 0 ;
+//     LoadSw2 = 0 ;
+//     LoadSw3 = 0 ;
+//     send_outputs() ;
+//   }
