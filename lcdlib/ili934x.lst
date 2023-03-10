@@ -1,4 +1,4 @@
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 1
 
 
    1               		.file	"ili934x.c"
@@ -58,7 +58,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
   49 0002 88EE      		ldi r24,lo8(1000)
   50 0004 93E0      		ldi r25,hi8(1000)
   51               	.LVL0:
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 2
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 2
 
 
   52               	.LBB49:
@@ -118,7 +118,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  106 0028 2C9A      		sbi 37-32,4
  107               	.LM11:
  108 002a 2B9A      		sbi 37-32,3
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 3
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 3
 
 
  109               	.LM12:
@@ -178,7 +178,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  163               	.LVL7:
  164 0062 88B9      		out 40-32,r24
  165 0064 2B98      		cbi 37-32,3
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 4
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 4
 
 
  166 0066 2B9A      		sbi 37-32,3
@@ -238,7 +238,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  220               	.LBB65:
  221               	.LM25:
  222 00be 2C98      		cbi 37-32,4
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 5
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 5
 
 
  223 00c0 86E3      		ldi r24,lo8(54)
@@ -298,7 +298,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  277 0116 2B9A      		sbi 37-32,3
  278 0118 40E0      		ldi r20,hi8(.LC5+4)
  279 011a E030      		cpi r30,lo8(.LC5+4)
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 6
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 6
 
 
  280 011c F407      		cpc r31,r20
@@ -358,7 +358,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  334 016c 2B98      		cbi 37-32,3
  335 016e 2B9A      		sbi 37-32,3
  336 0170 2C9A      		sbi 37-32,4
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 7
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 7
 
 
  337 0172 81E0      		ldi r24,lo8(1)
@@ -418,7 +418,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  391 01c4 2B9A      		sbi 37-32,3
  392 01c6 80E0      		ldi r24,hi8(.LC2+15)
  393 01c8 E030      		cpi r30,lo8(.LC2+15)
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 8
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 8
 
 
  394 01ca F807      		cpc r31,r24
@@ -478,7 +478,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  448 021a 2C98      		cbi 37-32,4
  449 021c 84EB      		ldi r24,lo8(-76)
  450 021e 88B9      		out 40-32,r24
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 9
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 9
 
 
  451 0220 2B98      		cbi 37-32,3
@@ -538,7 +538,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  505 0274 90E0      		ldi r25,hi8(0)
  506 0276 00C0      		rjmp .L12
  507               	.L13:
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 10
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 10
 
 
  508               	.LM45:
@@ -598,7 +598,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  562 000e 20        		.uleb128 0x20
  563 000f 00        		.uleb128 0x0
  564               		.p2align	2
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 11
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 11
 
 
  565               	.LECIE0:
@@ -658,7 +658,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  619 0053 93        		.byte	0x93
  620 0054 01        		.uleb128 0x1
  621 0055 6F        		.byte	0x6f
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 12
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 12
 
 
  622 0056 93        		.byte	0x93
@@ -718,7 +718,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  676 00c4 4401 0000 		.long	.LVL9-.Ltext0
  677 00c8 0600      		.word	0x6
  678 00ca 6E        		.byte	0x6e
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 13
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 13
 
 
  679 00cb 93        		.byte	0x93
@@ -778,7 +778,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  733 0134 0000 0000 		.long	0x0
  734               	.LLST14:
  735 0138 FE01 0000 		.long	.LVL13-.Ltext0
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 14
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 14
 
 
  736 013c 8E02 0000 		.long	.LVL19-.Ltext0
@@ -838,7 +838,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  790 005f 04        		.byte	0x4
  791 0060 07        		.byte	0x7
  792 0061 0000 0000 		.long	.LASF6
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 15
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 15
 
 
  793 0065 02        		.uleb128 0x2
@@ -898,7 +898,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  847 00cb 0A        		.byte	0xa
  848 00cc 0000 0000 		.long	.LFB6
  849 00d0 0000 0000 		.long	.LFE6
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 16
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 16
 
 
  850 00d4 02        		.byte	0x2
@@ -958,7 +958,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  904 0157 0D        		.uleb128 0xd
  905 0158 0000 0000 		.long	.LBB54
  906 015c 0000 0000 		.long	.LBE54
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 17
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 17
 
 
  907 0160 0E        		.uleb128 0xe
@@ -1018,7 +1018,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  961 01e5 2C00 0000 		.long	0x2c
  962 01e9 13        		.uleb128 0x13
  963 01ea 6400      		.string	"d"
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 18
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 18
 
 
  964 01ec 01        		.byte	0x1
@@ -1078,7 +1078,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1018 0261 6900      		.string	"i"
  1019 0263 01        		.byte	0x1
  1020 0264 1D        		.byte	0x1d
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 19
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 19
 
 
  1021 0265 2C00 0000 		.long	0x2c
@@ -1138,7 +1138,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1075 02d8 0000 0000 		.long	.LBB69
  1076 02dc 0000 0000 		.long	.LBE69
  1077 02e0 F702 0000 		.long	0x2f7
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 20
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 20
 
 
  1078 02e4 13        		.uleb128 0x13
@@ -1198,7 +1198,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1132 0355 24        		.byte	0x24
  1133 0356 9804 0000 		.long	0x498
  1134 035a 00        		.byte	0x0
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 21
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 21
 
 
  1135 035b 12        		.uleb128 0x12
@@ -1258,7 +1258,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1189 03d4 28        		.byte	0x28
  1190 03d5 2C00 0000 		.long	0x2c
  1191 03d9 0A        		.uleb128 0xa
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 22
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 22
 
 
  1192 03da 6400      		.string	"d"
@@ -1318,7 +1318,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1246 0450 0000 0000 		.long	.LBB80
  1247 0454 0000 0000 		.long	.LBE80
  1248 0458 01        		.byte	0x1
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 23
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 23
 
 
  1249 0459 33        		.byte	0x33
@@ -1378,7 +1378,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1303 0009 1B        		.uleb128 0x1b
  1304 000a 0E        		.uleb128 0xe
  1305 000b 11        		.uleb128 0x11
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 24
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 24
 
 
  1306 000c 01        		.uleb128 0x1
@@ -1438,7 +1438,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1360 0042 0B        		.uleb128 0xb
  1361 0043 01        		.uleb128 0x1
  1362 0044 13        		.uleb128 0x13
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 25
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 25
 
 
  1363 0045 00        		.byte	0x0
@@ -1498,7 +1498,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1417 007b 0A        		.uleb128 0xa
  1418 007c 34        		.uleb128 0x34
  1419 007d 00        		.byte	0x0
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 26
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 26
 
 
  1420 007e 03        		.uleb128 0x3
@@ -1558,7 +1558,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1474 00b4 0F        		.uleb128 0xf
  1475 00b5 34        		.uleb128 0x34
  1476 00b6 00        		.byte	0x0
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 27
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 27
 
 
  1477 00b7 31        		.uleb128 0x31
@@ -1618,7 +1618,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1531 00ed 00        		.byte	0x0
  1532 00ee 31        		.uleb128 0x31
  1533 00ef 13        		.uleb128 0x13
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 28
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 28
 
 
  1534 00f0 02        		.uleb128 0x2
@@ -1678,7 +1678,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1584 000b 01        		.byte	0x1
  1585 000c F6        		.byte	0xf6
  1586 000d F5        		.byte	0xf5
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 29
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 29
 
 
  1587 000e 0A        		.byte	0xa
@@ -1738,7 +1738,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1622 00ba 02        		.byte	0x2
  1623 00bb 0000 0000 		.long	.LM1
  1624 00bf 1D        		.byte	0x1d
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 30
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 30
 
 
  1625 00c0 00        		.byte	0x0
@@ -1798,7 +1798,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1679 010f 02        		.byte	0x2
  1680 0110 0000 0000 		.long	.LM10
  1681 0114 04        		.byte	0x4
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 31
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 31
 
 
  1682 0115 01        		.uleb128 0x1
@@ -1858,7 +1858,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1736 0167 05        		.uleb128 0x5
  1737 0168 02        		.byte	0x2
  1738 0169 0000 0000 		.long	.LM20
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 32
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 32
 
 
  1739 016d 10        		.byte	0x10
@@ -1918,7 +1918,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1793 01c2 15        		.byte	0x15
  1794 01c3 00        		.byte	0x0
  1795 01c4 05        		.uleb128 0x5
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 33
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 33
 
 
  1796 01c5 02        		.byte	0x2
@@ -1978,7 +1978,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1850 021c 05        		.uleb128 0x5
  1851 021d 02        		.byte	0x2
  1852 021e 0000 0000 		.long	.LM42
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 34
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 34
 
 
  1853 0222 17        		.byte	0x17
@@ -2038,7 +2038,7 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1907 0274 01        		.uleb128 0x1
  1908 0275 01        		.byte	0x1
  1909               	.LELT0:
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 35
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 35
 
 
  1910 0276 1600 0000 		.section	.debug_str,"MS",@progbits,1
@@ -2077,28 +2077,28 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1923               	.LASF15:
  1924 004e 646F 7562 		.string	"double"
  1924      6C65 00
- 1925               	.LASF19:
- 1926 0055 433A 5C55 		.ascii	"C:\\Users\\Asus\\OneDr"
- 1926      7365 7273 
- 1926      5C41 7375 
- 1926      735C 4F6E 
- 1926      6544 72
- 1927 0068 6976 6520 		.string	"ive - University of Southampton\\Desktop\\Codes\\Embedded\\D5\\lcdlib"
- 1927      2D20 556E 
- 1927      6976 6572 
- 1927      7369 7479 
- 1927      206F 6620 
- 1928               	.LASF14:
- 1929 00a9 5F5F 746D 		.string	"__tmp"
- 1929      7000 
+ 1925               	.LASF14:
+ 1926 0055 5F5F 746D 		.string	"__tmp"
+ 1926      7000 
+ 1927               	.LASF19:
+ 1928 005b 433A 5C55 		.ascii	"C:\\Users\\Asus\\OneDrive - Unive"
+ 1928      7365 7273 
+ 1928      5C41 7375 
+ 1928      735C 4F6E 
+ 1928      6544 7269 
+ 1929 0079 7273 6974 		.string	"rsity of Southampton\\Desktop\\Codes\\Embedded\\D5\\Smartmeter\\lcdlib"
+ 1929      7920 6F66 
+ 1929      2053 6F75 
+ 1929      7468 616D 
+ 1929      7074 6F6E 
  1930               	.LASF4:
- 1931 00af 756E 7369 		.string	"unsigned int"
+ 1931 00ba 756E 7369 		.string	"unsigned int"
  1931      676E 6564 
  1931      2069 6E74 
  1931      00
  1932               	.LASF8:
- 1933 00bc 6C6F 6E67 		.string	"long long unsigned int"
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 36
+ 1933 00c7 6C6F 6E67 		.string	"long long unsigned int"
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 36
 
 
  1933      206C 6F6E 
@@ -2106,56 +2106,56 @@ GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 1
  1933      7369 676E 
  1933      6564 2069 
  1934               	.LASF2:
- 1935 00d3 7569 6E74 		.string	"uint8_t"
+ 1935 00de 7569 6E74 		.string	"uint8_t"
  1935      385F 7400 
  1936               	.LASF7:
- 1937 00db 6C6F 6E67 		.string	"long long int"
+ 1937 00e6 6C6F 6E67 		.string	"long long int"
  1937      206C 6F6E 
  1937      6720 696E 
  1937      7400 
  1938               	.LASF16:
- 1939 00e9 6368 6172 		.string	"char"
+ 1939 00f4 6368 6172 		.string	"char"
  1939      00
  1940               	.LASF11:
- 1941 00ee 5F5F 636F 		.string	"__count"
+ 1941 00f9 5F5F 636F 		.string	"__count"
  1941      756E 7400 
  1942               	.LASF3:
- 1943 00f6 7569 6E74 		.string	"uint16_t"
+ 1943 0101 7569 6E74 		.string	"uint16_t"
  1943      3136 5F74 
  1943      00
  1944               	.LASF13:
- 1945 00ff 5F5F 7469 		.string	"__ticks"
+ 1945 010a 5F5F 7469 		.string	"__ticks"
  1945      636B 7300 
  1946               	.LASF5:
- 1947 0107 6C6F 6E67 		.string	"long int"
+ 1947 0112 6C6F 6E67 		.string	"long int"
  1947      2069 6E74 
  1947      00
  1948               	.LASF0:
- 1949 0110 7369 676E 		.string	"signed char"
+ 1949 011b 7369 676E 		.string	"signed char"
  1949      6564 2063 
  1949      6861 7200 
  1950               	.LASF12:
- 1951 011c 5F5F 6D73 		.string	"__ms"
+ 1951 0127 5F5F 6D73 		.string	"__ms"
  1951      00
  1952               	.LASF20:
- 1953 0121 696E 6974 		.string	"init_display_controller"
+ 1953 012c 696E 6974 		.string	"init_display_controller"
  1953      5F64 6973 
  1953      706C 6179 
  1953      5F63 6F6E 
  1953      7472 6F6C 
  1954               	.global __do_copy_data
-GAS LISTING C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s 			page 37
+GAS LISTING C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s 			page 37
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 ili934x.c
-C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s:2      *ABS*:0000003f __SREG__
-C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s:3      *ABS*:0000003e __SP_H__
-C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s:4      *ABS*:0000003d __SP_L__
-C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s:5      *ABS*:00000034 __CCP__
-C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\Asus\AppData\Local\Temp/ccXowvIL.s:42     .text:00000000 init_display_controller
+C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s:2      *ABS*:0000003f __SREG__
+C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s:5      *ABS*:00000034 __CCP__
+C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Asus\AppData\Local\Temp/cckIsxgc.s:42     .text:00000000 init_display_controller
 
 UNDEFINED SYMBOLS
 __do_copy_data

@@ -263,8 +263,8 @@ int main(void)
   rectangle mains_req_bar = shape_make(display.y , mains_req) ;
 
   /* Default background colour */
-  display.foreground = WHITE ;
-  display.background = BLACK ;
+  display.foreground = BLACK ;
+  display.background = WHITE ;
 
   /* Super Loop */
   for(;;) 
@@ -290,8 +290,8 @@ int main(void)
     /* Updates the line graphics under every data */
     update_lines(&busbar_voltage_bar , busbar_voltage*(sqrt(2)) , (LCDWIDTH/2) ) ;
     update_lines(&busbar_current_bar , busbar_current*(sqrt(2)) , display.y ) ;
-    update_lines(&wind_bar , wind_capacity , display.y ) ;
-    update_lines(&solar_bar , solar_capacity , display.y) ;
+    update_lines(&wind_bar , (wind_capacity*VREF/3) , display.y ) ;
+    update_lines(&solar_bar , (solar_capacity*VREF/1) , display.y) ;
     update_lines(&total_renewable_bar , ((wind_capacity + solar_capacity)/2) , display.y) ;
     update_lines(&mains_req_bar, (mains_req/2)*VREF , display.y) ;
   }
@@ -428,9 +428,9 @@ void input_digital()
 void output_pwm()
 {
   /* set the duty cycle of the PWM */
-  OCR2A = (mains_req/VREF) * 255 ; //from handbook
+  OCR2A = ((mains_req)/VREF) * 255 ; //from handbook
   //OCR2A = 255 ;
-  //printf("test ") ;
+  //printf("test ") ; 
   //printf(" %d\n " , OCR2A ) ;
 }
 
@@ -515,7 +515,7 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
   /* calculate total energy available */
   double total_renewable = wind_capacity + solar_capacity ;
 
-  if(busbar_voltage>1.6)
+  if(busbar_voltage>1)
   {
     /* Check if we have enough energy */
     if(total_renewable >= total_load_current)
@@ -681,33 +681,33 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
   }
 
   /* Check for stability and main availability */
-  while (busbar_voltage < 1.6)
+  while (busbar_voltage < 1.0)
   {
     mains_req = max_mains_current ;
     charge_battery = 0 ;
     send_outputs() ;
     read_inputs() ;
-    if(busbar_voltage>=1.6){
+    if(busbar_voltage>=1.0){
       break ;
     }
     if(battery_lvl>0){
       discharge_battery = 1 ;
       send_outputs() ;
       read_inputs() ;
-      if(busbar_voltage>=1.6){
+      if(busbar_voltage>=1.0){
         break ;
       }
     }
     LoadSw3 = 0 ;
     send_outputs() ;
     read_inputs() ;
-    if(busbar_voltage>=1.6){
+    if(busbar_voltage>=1.0){
       break;
     }
     LoadSw2 = 0 ;
     send_outputs() ;
     read_inputs() ;
-    if(busbar_voltage>=1.6){
+    if(busbar_voltage>=1.0){
       break ;
     }
     LoadSw1 = 0 ;
@@ -722,7 +722,7 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
 void display_double(int x_position, int y_position, char* name, double value, char* units , int width , int decimal_places)
 {
   /* Set font colour as grey */
-  display.foreground = WHITE ;
+  display.foreground = BLACK ;
 
   /* Set the position on the screen */
   display.x = x_position ; 
@@ -747,10 +747,10 @@ void display_double(int x_position, int y_position, char* name, double value, ch
 
 int display_bool_check(bool load)
 {
-  /* Check for boolean. If the logic is high then we set the textx to print in green,
+  /* Check for boolean. If the logic is high then we set the textx to print in 0x14E0,
     if 0 we will print the text in red. */
   if(load==1)
-    return GREEN ;
+    return 0x14E0 ;
   else
     return RED ;
 }
@@ -767,7 +767,7 @@ void display_loads(int x_position , int y_position , char* name , bool load_call
   display_string(" CALL ") ;
   display.foreground = display_bool_check(load_switch) ;
   display_string(" SWITCH ") ;
-  display.foreground = WHITE ;
+  display.foreground = BLACK ;
   display.y += 20 ;
 }
 
@@ -788,7 +788,7 @@ void display_batt(int x_position , int y_position , char* name , bool charging ,
   /* Display current state of the battery */
   if(charging==1)
   {
-    display.foreground = GREEN ;
+    display.foreground = 0x14E0 ;
     display_string(" CHARGING  ") ;
   }
   else if(discharging)
@@ -802,22 +802,24 @@ void display_batt(int x_position , int y_position , char* name , bool charging ,
   }
 
   /* Set the font colour back to grey */
-  display.foreground = WHITE ;
+  display.foreground = BLACK ;
 }
 
 void display_values()
 {
   /* Set the default position on the display */
   display.x = 10; 
-  display.y = 10;
-
+  display.y = 10 ;
+  char temp[10] ;
   /* Display all values and states on the screen */
   display_double(LCDHEIGHT/2 + 45 , (LCDWIDTH/2) - 30 , "Elapsed = " , counter/60000 , "m " , 2 , 0) ;//Display minutes
   display_double(display.x , (LCDWIDTH/2) - 30 , "" , (counter/1000)%60 , "s " , 2, 0) ;//Display seconds
   display_double(10 , (LCDWIDTH/2) - 10 , "BusbarV = " , (busbar_voltage)*(400/VREF) , " Vrms " , 4, 2 ) ;//Display actual value of busbarV
   display_double(10 , display.y , "BusbarI = " , (busbar_current)*(10/VREF) , " Arms " , 4 , 2) ;//Display actual value of busbarI
-  display_double(10 , display.y , "Wind Capacity = " , (wind_capacity/VREF)*5 , " A " , 4 , 2) ;//Display actual value of windI
-  display_double(10 , display.y , "Solar Capacity = " , (solar_capacity/VREF)*5 , " A " , 4 , 2) ;//Display actual value of SolarI
+  display_double(10 , display.y , "Wind Capacity = " , (wind_capacity) , " A " , 4 , 2) ;//Display actual value of windI
+  dtostrf(wind_capacity , 4 , 0, temp) ;
+  printf("%s\n" , temp) ;
+  display_double(10 , display.y , "Solar Capacity = " , (solar_capacity) , " A " , 4 , 2) ;//Display actual value of SolarI
   display_double(10 , display.y , "Total Renewable = " , ((wind_capacity + solar_capacity)/VREF) *5 , " A " , 4 , 2) ;//Display Total renewable energy
   display_double(10 , display.y , "Main Request = " , mains_req , " A " , 4 , 2) ;//Display Main reque st
   display_loads((LCDHEIGHT/2) + 15 , (LCDWIDTH/2) - 10 , "Load 1 = " , LoadCall1 , LoadSw1) ;//Display load states
@@ -833,7 +835,7 @@ void display_pixel_shift(rectangle *shape , int width)
   (*shape).left = display.x ;
   (*shape).bottom = (*shape).top + width ;
   (*shape).right = (*shape).left + width ;
-  fill_rectangle(*shape , WHITE) ;
+  fill_rectangle(*shape , BLACK) ;
 }
 
 void display_team_name()
@@ -974,21 +976,21 @@ void update_lines(rectangle *bar, double value , int y_position)
   /* Update the lines under the values */
 
   /* Default */
-  int colour = WHITE ;
+  int colour = BLACK ;
   double temp = 0 ;
   display.y = y_position ;
   /* Delete previous line for a new one */
-  fill_rectangle(*bar,BLACK) ;
+  fill_rectangle(*bar,WHITE) ;
   temp = (value/VREF) * (LCDHEIGHT/2 - 22) ; 
   (*bar).right = 12 + temp ;
   (*bar).top = y_position ;
   (*bar).bottom = y_position + 1 ;
 
-  /* If line is too short, colour is red. Green otherwise. */
+  /* If line is too short, colour is red. 0x14E0 otherwise. */
   if(temp < LCDHEIGHT/6)
   colour = RED ;
   else
-  colour = GREEN ; 
+  colour = 0x14E0 ; 
 
   display.y += 20 ;
   /* Update a new line */
@@ -997,7 +999,7 @@ void update_lines(rectangle *bar, double value , int y_position)
 
 void update_battery_lvl()
 {
-  /* Battery need to charge for at least 5 second before increasing the level \
+  /* Battery need to charge for at least 7.2 second before increasing the level \
     %101 so that it will not equal to 0 when at 100%*/
   battery_lvl = (battery_counter/7200)%101 ;
 }
