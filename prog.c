@@ -224,7 +224,7 @@ int main(void)
   init_lcd();
 
   /* Setup UART serial comms */
-  init_debug_uart0() ;
+  //init_debug_uart0() ;
 
   /* Setup display orientation */
   orientation o = East ;
@@ -292,7 +292,7 @@ int main(void)
     update_lines(&busbar_current_bar , busbar_current*(sqrt(2)) , display.y ) ;
     update_lines(&wind_bar , (wind_capacity*VREF/3) , display.y ) ;
     update_lines(&solar_bar , (solar_capacity*VREF/1) , display.y) ;
-    update_lines(&total_renewable_bar , ((wind_capacity + solar_capacity)/2) , display.y) ;
+    update_lines(&total_renewable_bar , (((wind_capacity*VREF/3) + (solar_capacity*VREF/1))/2) , display.y) ;
     update_lines(&mains_req_bar, (mains_req/2)*VREF , display.y) ;
   }
 
@@ -347,9 +347,9 @@ void digital_init()
   PORTA &= ~(_BV(LOAD1_CALL) | _BV(LOAD2_CALL) | _BV(LOAD3_CALL));
   
   /* set outputs */ 
-  DDRD |= _BV(LOAD1_SWITCH) | _BV(LOAD2_SWITCH) | _BV(LOAD3_SWITCH);
+  DDRD |= _BV(LOAD1_SWITCH) | _BV(LOAD2_SWITCH) | _BV(LOAD3_SWITCH)  | _BV(CHARGE_BATTERY) | _BV(DISCHARGE_BATTERY);
   
-  PORTD &= ~(_BV(LOAD1_SWITCH) | _BV(LOAD2_SWITCH) | _BV(LOAD3_SWITCH));
+  PORTD &= ~(_BV(LOAD1_SWITCH) | _BV(LOAD2_SWITCH) | _BV(LOAD3_SWITCH) | _BV(CHARGE_BATTERY) | _BV(DISCHARGE_BATTERY) );
 }
 
 void pwm_init()
@@ -428,10 +428,8 @@ void input_digital()
 void output_pwm()
 {
   /* set the duty cycle of the PWM */
-  OCR2A = ((mains_req)/VREF) * 255 ; //from handbook
-  //OCR2A = 255 ;
-  //printf("test ") ; 
-  //printf(" %d\n " , OCR2A ) ;
+  /* Multiyply by 0.8012 to scale it down from 12V max to 10V max*/
+  OCR2A = ((mains_req)/2) * 255 ; //from handbook
 }
 
 void output_digital()
@@ -515,8 +513,8 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
   /* calculate total energy available */
   double total_renewable = wind_capacity + solar_capacity ;
 
-  if(busbar_voltage>1)
-  {
+  //if(busbar_voltage>1)
+  //{
     /* Check if we have enough energy */
     if(total_renewable >= total_load_current)
     {
@@ -678,41 +676,46 @@ void algorithm(bool load1_call, bool load2_call, bool load3_call)
     LoadSw3 = 1 ;
   else 
     LoadSw3 = 0 ;
-  }
+  //}
 
   /* Check for stability and main availability */
-  while (busbar_voltage < 1.0)
-  {
-    mains_req = max_mains_current ;
-    charge_battery = 0 ;
-    send_outputs() ;
-    read_inputs() ;
-    if(busbar_voltage>=1.0){
-      break ;
-    }
-    if(battery_lvl>0){
-      discharge_battery = 1 ;
-      send_outputs() ;
-      read_inputs() ;
-      if(busbar_voltage>=1.0){
-        break ;
-      }
-    }
-    LoadSw3 = 0 ;
-    send_outputs() ;
-    read_inputs() ;
-    if(busbar_voltage>=1.0){
-      break;
-    }
-    LoadSw2 = 0 ;
-    send_outputs() ;
-    read_inputs() ;
-    if(busbar_voltage>=1.0){
-      break ;
-    }
-    LoadSw1 = 0 ;
-    break ;
-  }
+  // while (busbar_voltage < 1.0 && (load1_current	|| load2_current || load3_current))
+  // {
+  //   mains_req = max_mains_current ;
+  //   charge_battery = 0 ;
+  //   send_outputs() ;
+  //   read_inputs() ;
+  //   if(busbar_voltage>=1.0){
+  //     break ;
+  //   }
+  //   if(battery_lvl>0){
+  //     discharge_battery = 1 ;
+  //     send_outputs() ;
+  //     read_inputs() ;
+  //     if(busbar_voltage>=1.0){
+  //       break ;
+
+  //     }
+  //   }
+  //   LoadSw3 = 0 ;
+  //   send_outputs() ;
+  //   read_inputs() ;
+  //   if(busbar_voltage>=1.0){
+  //     break;
+  //   }
+  //   LoadSw2 = 0 ;
+  //   send_outputs() ;
+  //   read_inputs() ;
+  //   if(busbar_voltage>=1.0){
+  //     break ;
+  //   }
+  //   LoadSw1 = 0 ;
+  //   send_outputs() ;
+  //   read_inputs() ;
+  //   if(busbar_voltage>=1.0){
+  //     break ;
+  //   }
+  // }
   
     /* Calculate power consumption in kW/h */
     power_consumption = (busbar_voltage*(400/VREF)*total_load_current)/1000 ;
@@ -817,10 +820,8 @@ void display_values()
   display_double(10 , (LCDWIDTH/2) - 10 , "BusbarV = " , (busbar_voltage)*(400/VREF) , " Vrms " , 4, 2 ) ;//Display actual value of busbarV
   display_double(10 , display.y , "BusbarI = " , (busbar_current)*(10/VREF) , " Arms " , 4 , 2) ;//Display actual value of busbarI
   display_double(10 , display.y , "Wind Capacity = " , (wind_capacity) , " A " , 4 , 2) ;//Display actual value of windI
-  dtostrf(wind_capacity , 4 , 0, temp) ;
-  printf("%s\n" , temp) ;
   display_double(10 , display.y , "Solar Capacity = " , (solar_capacity) , " A " , 4 , 2) ;//Display actual value of SolarI
-  display_double(10 , display.y , "Total Renewable = " , ((wind_capacity + solar_capacity)/VREF) *5 , " A " , 4 , 2) ;//Display Total renewable energy
+  display_double(10 , display.y , "Total Renewable = " , (wind_capacity + solar_capacity) , " A " , 4 , 2) ;//Display Total renewable energy
   display_double(10 , display.y , "Main Request = " , mains_req , " A " , 4 , 2) ;//Display Main reque st
   display_loads((LCDHEIGHT/2) + 15 , (LCDWIDTH/2) - 10 , "Load 1 = " , LoadCall1 , LoadSw1) ;//Display load states
   display_loads((LCDHEIGHT/2) + 15 , display.y , "Load 2 = " , LoadCall2 , LoadSw2) ;
